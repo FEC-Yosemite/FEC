@@ -4,7 +4,9 @@
   "description": "This is the repository for the FEC project by team Yosemite",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack -w",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "chai": "^4.3.4",
+    "express": "^4.17.1",
     "mocha": "^8.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
