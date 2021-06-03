@@ -1,5 +1,5 @@
 import React from 'react';
-import RatingsReviews from '/ratingsReviews/RatingsReviews.jsx';
+import RatingsReviews from './ratingsReviews/RatingsReviews.jsx';
 
 class App extends React.Component {
   constructor(props) {

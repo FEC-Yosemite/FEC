@@ -3,7 +3,7 @@ import ReviewsList from './components/ReviewsList.jsx';
 import ProductBreakdown from './components/ProductBreakdown.jsx';
 import RatingBreakdown from './components/RatingBreakdown.jsx';
 import SortReviews from './components/SortReviews.jsx';
-import WriteReview from '/components/WriteReview.jsx';
+import WriteReview from './components/WriteReview.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
