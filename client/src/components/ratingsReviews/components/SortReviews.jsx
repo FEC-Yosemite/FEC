@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ReviewsList extends React.Component {
+class SortReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,9 +10,9 @@ class ReviewsList extends React.Component {
 
   render() {
     return (
-      <div id='reviews-list'>Reviews List</div>
+      <div id='sort-review'>Sort Reviews</div>
     )
   }
 }
 
-export default ReviewsList;
+export default SortReviews;
