@@ -1,5 +1,5 @@
 import React from 'react';
-import { getProducts } from '../../../requests.js';
+import { getProducts, getProductById, getProductStyles, getRelatedProducts } from '../../../requests.js';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -12,11 +12,20 @@ class ReviewsList extends React.Component {
   componentDidMount() {
     getProducts()
       .then((data) => {
-        this.setState({
-          products: data
-        })
-      })
-      .then(() => console.log(this.state))
+        console.log('getProducts:', data)
+      });
+    getProductById(19089)
+      .then((data) => {
+        console.log('getProductById:', data)
+      });
+    getProductStyles(19089)
+      .then((data) => {
+        console.log('getProductStyles:', data)
+      });
+    getRelatedProducts(19089)
+      .then((data) => {
+        console.log('getRelatedProducts:', data)
+      });
   }
 
   render() {
