@@ -1,6 +1,5 @@
 import React from 'react';
 import Overview from './overview/overview.jsx'
-import RelatedProductsList from './relatedItems/RelatedProductsList.jsx';
 import RatingsReviews from './ratingsReviews/RatingsReviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
 
@@ -8,19 +7,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: null
+      productId: 19089
     }
     this.setCurrentProductId = this.setCurrentProductId.bind(this);
   }
 
-  setCurrentProductId() {
-
+  setCurrentProductId(e) {
+    // TO DO: event listener for click:
+    // when product is clicked, read product_id and setState
   }
 
   render() {
     return (
-      <div>
-      Hello World!
+    <div>
       <Overview productId={this.state.productId} />
       <RelatedItems productId={this.state.productId} />
       <RatingsReviews productId={this.state.productId} />

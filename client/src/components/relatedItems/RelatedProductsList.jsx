@@ -8,14 +8,20 @@ class RelatedProductsList extends Component {
         this.state = {
             productsList: [],
         };
+        this.refreshProductsList = this.refreshProductsList.bind(this);
+    }
+
+    refreshProductsList() {
+        getRelatedProducts(this.props.productId)
+        .then(idsArray => {
+            this.setState({
+                productsList: idsArray
+            });
+        });
     }
 
     componentDidMount() {
-        getRelatedProducts(this.props.product)
-        let products = [`placeholder`] // TODO: result of GET request
-        this.setState({
-            productsList: products
-        });
+        this.refreshProductsList();
     }
 
     render() {
@@ -23,8 +29,8 @@ class RelatedProductsList extends Component {
             <div id="related-products-carousel">
                 <h3>related products list goes here</h3>
                 {
-                    this.state.productsList.map((product, index) => (
-                        <RelatedProductCard product={product} key={index} />
+                    this.state.productsList.map((productId, index) => (
+                        <RelatedProductCard productId={productId} key={index} />
                     ))
                 }
             </div>
