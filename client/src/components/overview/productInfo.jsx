@@ -8,7 +8,7 @@ class ProductInfo extends React.Component {
 
   render() {
     return(
-      <h3>Product Info</h3>
+      <h3>Product info</h3>
     )
   }
 }
