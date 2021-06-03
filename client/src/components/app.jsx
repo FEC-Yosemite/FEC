@@ -1,5 +1,5 @@
 import React from 'react';
-import ReviewsList from './ratingsReviews/ReviewsList.jsx';
+import RatingsReviews from '/ratingsReviews/RatingsReviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class App extends React.Component {
     return (
     <div>
       Hello World! Test
-      <ReviewsList />
+      <RatingsReviews />
     </div>
     )
   }
