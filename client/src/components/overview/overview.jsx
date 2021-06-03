@@ -12,6 +12,7 @@ class Overview extends React.Component {
   render() {
     return(
       <div id="overview">
+        <h4>site-wide announcement message! - sale / discount <strong>offer</strong> - <a href="blank">new product highlight</a></h4>
         <Gallery />
         <ProductInfo />
         <AddToCart />
