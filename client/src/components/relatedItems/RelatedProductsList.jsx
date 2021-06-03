@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
-import axios from 'axios';
 
 class RelatedProductsList extends Component {
-    constructor({ productId }) {
+    constructor(props) {
         super(props);
         this.state = {
             productsList: [],
         };
-        
-
     }
 
     componentDidMount() {
-        axios.get(`/https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${productId}}/related`, {
-            params: {
-                Authorization: API_KEY
-            }
-        })
-        let products = []; // TODO: result of GET request
+        // TODO: use function from requests.js
+        let products = [`placeholder`] // TODO: result of GET request
         this.setState({
             productsList: products
         });

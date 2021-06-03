@@ -10,8 +10,10 @@ export function getProducts(page, count) {
     headers: {
       authorization: api
     },
-    page: page,
-    count: count
+    params: {
+      page: page,
+      count: count
+    }
   }
 
   return axios(options);
@@ -53,3 +55,22 @@ export function getRelatedProducts(id) {
   return axios(options);
 }
 
+// Reviews Api
+
+export function getReviews(id, page, count, sort) {
+  var options = {
+    method: 'get',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews`,
+    headers: {
+      authorization: api
+    },
+    params: {
+      product_id: id,
+      page: page,
+      count: count,
+      sort: sort
+    }
+  }
+
+  return axios(options);
+}
