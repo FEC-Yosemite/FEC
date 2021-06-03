@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RelatedProductsList from './RelatedProductsList';
+import RelatedProductsList from './RelatedProductsList.jsx';
 
 class RelatedItems extends Component {
     constructor(props) {
