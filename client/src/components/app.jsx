@@ -13,12 +13,10 @@ class App extends React.Component {
 
   render() {
     return (
-    <div>
+      <div>
       Hello World!
       <Overview />
-      <ReviewsList />
       <RelatedProductsList />
-      Hello World! Test
       <RatingsReviews />
     </div>
     )
