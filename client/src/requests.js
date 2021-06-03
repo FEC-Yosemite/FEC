@@ -74,3 +74,65 @@ export function getReviews(id, page, count, sort) {
 
   return axios(options);
 }
+
+export function getReviewMeta(id) {
+  var options = {
+    method: 'get',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta`,
+    headers: {
+      authorization: api
+    },
+    params: {
+      product_id: id,
+    }
+  }
+
+  return axios(options);
+}
+
+export function addReview(id, rate, sum, body, rec, name, email, photos, char) {
+  var options = {
+    method: 'post',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews`,
+    headers: {
+      authorization: api
+    },
+    params: {
+      product_id: id,
+      rating: rate,
+      summary: sum,
+      body: body,
+      recommend: rec,
+      name: name,
+      email: email,
+      photos: photos,
+      characteristics: char
+    }
+  }
+
+  return axios(options);
+}
+
+export function markAsHelpful(reviewid) {
+  var options = {
+    method: 'put',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/${reviewid}/helpful`,
+    headers: {
+      authorization: api
+    }
+  }
+
+  return axios(options);
+}
+
+export function reportReview(reviewid) {
+  var options = {
+    method: 'put',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/${reviewid}/report`,
+    headers: {
+      authorization: api
+    }
+  }
+
+  return axios(options);
+}
