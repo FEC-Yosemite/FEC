@@ -1,6 +1,21 @@
 import { api } from '../../config.js';
 const axios = require('axios');
 
+/*
+
+Deconstruct function names that you need to use for that component:
+
+import { getProducts, getProductById, getProductStyles, getRelatedProducts } from '../../../requests.js';
+
+All functions return a promise:
+
+    getProducts()
+      .then((data) => {
+        console.log('getProducts:', data)
+      });
+
+*/
+
 // Products Api
 
 export function getProducts(page, count) {
