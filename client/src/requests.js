@@ -136,3 +136,33 @@ export function reportReview(reviewid) {
 
   return axios(options);
 }
+
+// Cart Api
+
+export function getCart() {
+  var options = {
+    method: 'get',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,
+    headers: {
+      authorization: api
+    }
+  }
+
+  return axios(options);
+}
+
+export function addToCart(id) {
+  var options = {
+    method: 'post',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,
+    headers: {
+      authorization: api
+    },
+    params: {
+      sku_id: id
+    }
+  }
+
+  return axios(options);
+}
+
