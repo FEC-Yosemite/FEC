@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
+import { getRelatedProducts } from  '../../requests.js';
 
 class RelatedProductsList extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class RelatedProductsList extends Component {
     }
 
     componentDidMount() {
-        // TODO: use function from requests.js
+        getRelatedProducts(this.props.product)
         let products = [`placeholder`] // TODO: result of GET request
         this.setState({
             productsList: products
@@ -20,6 +21,7 @@ class RelatedProductsList extends Component {
     render() {
         return (
             <div id="related-products-carousel">
+                <h3>related products list goes here</h3>
                 {
                     this.state.productsList.map((product, index) => (
                         <RelatedProductCard product={product} key={index} />

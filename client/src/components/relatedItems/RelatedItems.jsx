@@ -12,6 +12,7 @@ class RelatedItems extends Component {
     render() {
         return (
             <div>
+                <h3>relateditems goes here!</h3>
                 <RelatedProductsList />
             </div>
         );

@@ -8,18 +8,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      productId: null
     }
+    this.setCurrentProductId = this.setCurrentProductId.bind(this);
+  }
+
+  setCurrentProductId() {
+
   }
 
   render() {
     return (
       <div>
       Hello World!
-      <Overview />
-      <RelatedItems />
-      <RelatedProductsList />
-      <RatingsReviews />
+      <Overview productId={this.state.productId} />
+      <RelatedItems productId={this.state.productId} />
+      <RatingsReviews productId={this.state.productId} />
     </div>
     )
   }
