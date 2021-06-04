@@ -15,9 +15,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Overview />
-        <RelatedItems />
-        <RelatedProductsList />
+        <Overview productId={ this.state.currentProductId } />
+        <RelatedItems productId={ this.state.currentProductId } />
         <RatingsReviews productId={ this.state.currentProductId }/>
       </div>
     )
