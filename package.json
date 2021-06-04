@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack -w",
-    "lint" : "./node_modules/.bin/eslint"
+    "lint": "./node_modules/.bin/eslint"
   },
   "repository": {
     "type": "git",

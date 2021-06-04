@@ -1,0 +1,15 @@
+#related-items #carousel-item {
+  list-style: none;
+  float: left;
+}
+
+#related-items #carousel-item #product-card {
+  text-align: center;
+  padding: 80px;
+  margin: 12px;
+}
+
+#related-items img {
+  height: 210px;
+  width: auto;
+}
