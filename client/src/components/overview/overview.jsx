@@ -3,10 +3,22 @@ import Gallery from './components/Gallery.jsx';
 import ProductInfo from './components/ProductInfo.jsx';
 import AddToCart from './components/AddToCart.jsx';
 
+import { getProductStyles } from '../../requests.js';
+
 class Overview extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      styles: [],
+    }
+  }
+
+  componentDidMount() {
+    getProductStyles(this.props.productId)
+      .then((res) => this.setState({
+        styles: res.data.results
+      }))
+      .catch((err) => console.log('ERROR:', err));
   }
 
   render() {
