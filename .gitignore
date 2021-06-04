@@ -355,3 +355,6 @@ client/dist/bundle.js
 
 # config
 config.js
+
+#package-lock.json
+package-lock.json
