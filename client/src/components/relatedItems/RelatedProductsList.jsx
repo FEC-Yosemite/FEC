@@ -1,38 +1,27 @@
 import React, { Component } from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
-import { getRelatedProducts } from  '../../requests.js';
 
 class RelatedProductsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productsList: [],
         };
-        this.refreshProductsList = this.refreshProductsList.bind(this);
-    }
-
-    refreshProductsList() {
-        getRelatedProducts(this.props.productId)
-        .then(idsArray => {
-            this.setState({
-                productsList: idsArray
-            });
-        });
-    }
-
-    componentDidMount() {
-        this.refreshProductsList();
     }
 
     render() {
         return (
             <div id="related-products-carousel">
-                <h3>related products list goes here</h3>
+                <h3>related products list goes here: {JSON.stringify(this.props.productsList.data)}</h3>
+                <ul>
                 {
-                    this.state.productsList.map((productId, index) => (
-                        <RelatedProductCard productId={productId} key={index} />
+                    Object.keys(this.props.productsList).length > 0 ?
+                    this.props.productsList.data.map((productId, index) => (
+                        <RelatedProductCard key={index} productId={productId} />
                     ))
+                    :
+                    <h3>Loading "Related Cards"...</h3>
                 }
+                </ul>
             </div>
         );
     }
