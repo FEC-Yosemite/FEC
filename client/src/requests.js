@@ -83,7 +83,7 @@ export function getReviews(id, page, count, sort) {
       product_id: id,
       page: page,
       count: count,
-      sort: sort
+      sort: sort || 'newest'
     }
   }
 

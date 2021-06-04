@@ -11,14 +11,48 @@ class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: []
+      reviews: {
+        newest: [],
+        helpful: [],
+        relevant: []
+      },
+      sort: 'relevant'
     }
+    this.handleSort = this.handleSort.bind(this);
+  }
+
+  handleSort(by) {
+    console.log(by);
+    this.setState({
+      sort: by
+    })
   }
 
   componentDidMount() {
     getReviews(this.props.productId)
       .then((res) => this.setState({
-        reviews: res.data.results
+        reviews: {
+          ...this.state.reviews,
+          newest: res.data.results
+        }
+      }))
+      .catch((err) => console.log('ERROR:', err));
+
+    getReviews(this.props.productId, null, null, 'helpful')
+      .then((res) => this.setState({
+        reviews: {
+          ...this.state.reviews,
+          helpful: res.data.results
+        }
+      }))
+      .catch((err) => console.log('ERROR:', err));
+
+    getReviews(this.props.productId, null, null, 'relevant')
+      .then((res) => this.setState({
+        reviews: {
+          ...this.state.reviews,
+          relevant: res.data.results
+        }
       }))
       .catch((err) => console.log('ERROR:', err));
   }
@@ -27,10 +61,10 @@ class RatingsReviews extends React.Component {
     return (
       <div id='ratings-reviews'>
         <p>=========This is the ratings and reviews component!=========</p>
-        <ReviewsList reviews={ this.state.reviews } />
+        <SortReviews reviews={ this.state.reviews } sort={ this.state.sort }handleSort={ this.handleSort }/>
+        <ReviewsList reviews={ this.state.reviews } sort={ this.state.sort }/>
         <ProductBreakdown reviews={ this.state.reviews } />
         <RatingBreakdown reviews={ this.state.reviews } />
-        <SortReviews reviews={ this.state.reviews } />
         <WriteReview reviews={ this.state.reviews } />
         <p>=========End of ratings and reviews component=========</p>
       </div>
