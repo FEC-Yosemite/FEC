@@ -1,9 +1,8 @@
 $img-height: 210px;
 
 #related-items {
-  order: 1px solid black;
+  border: 1px solid black;
   padding: 15px;
-  display: grid;
   grid-column: 2;
   grid-row: 2;
 
