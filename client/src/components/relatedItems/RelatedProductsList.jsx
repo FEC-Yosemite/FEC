@@ -5,26 +5,23 @@ class RelatedProductsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productsList: [],
         };
-    }
-
-    componentDidMount() {
-        // TODO: use function from requests.js
-        let products = [`placeholder`] // TODO: result of GET request
-        this.setState({
-            productsList: products
-        });
     }
 
     render() {
         return (
             <div id="related-products-carousel">
+                <h3>related products list goes here: {JSON.stringify(this.props.productsList.data)}</h3>
+                <ul>
                 {
-                    this.state.productsList.map((product, index) => (
-                        <RelatedProductCard product={product} key={index} />
+                    Object.keys(this.props.productsList).length > 0 ?
+                    this.props.productsList.data.map((productId, index) => (
+                        <RelatedProductCard key={index} productId={productId} />
                     ))
+                    :
+                    <h3>Loading "Related Cards"...</h3>
                 }
+                </ul>
             </div>
         );
     }
