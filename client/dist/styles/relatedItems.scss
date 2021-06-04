@@ -1,0 +1,21 @@
+$img-height: 210px;
+#related-items {
+    #carousel-item {
+        list-style: none;
+        float: left;
+        
+        #product-card {
+            // background-color: #d4d4d4;
+            text-align: center;
+            padding: 80px;
+            margin: 12px;
+            // width: 300px;
+            // height: 300px;
+        }
+    }
+
+    img {
+        height: $img-height;
+        width: auto;
+    }
+}

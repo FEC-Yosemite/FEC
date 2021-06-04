@@ -47,12 +47,12 @@ class RelatedProductCard extends Component {
 
     render() {
         return (
-            <li>
+            <li id="carousel-item">
                 {
                     this.state.styles === null || this.state.product === null ?
                     <h3>Loading...</h3>
                     :
-                    <span>
+                    <span id="product-card">
                         {/* <h1>Item no. {JSON.stringify(this.state.product.productId)}</h1> */}
                         {
                         this.state.styles[0].photos[0].thumbnail_url !== null ?

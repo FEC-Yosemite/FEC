@@ -28,7 +28,7 @@ class RelatedItems extends Component {
 
     render() {
         return (
-            <div>
+            <div id="related-items">
                 <h3>relateditems goes here!</h3>
                 <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} />
             </div>

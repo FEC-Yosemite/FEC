@@ -11,7 +11,6 @@ class RelatedProductsList extends Component {
     render() {
         return (
             <div id="related-products-carousel">
-                <h3>related products list goes here: {JSON.stringify(this.props.productsList.data)}</h3>
                 <ul>
                 {
                     Object.keys(this.props.productsList).length > 0 ?
