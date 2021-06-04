@@ -8,18 +8,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: 19089
+      currentProductId: 19089,
     }
   }
 
   render() {
     return (
       <div>
-      <Overview />
-      <RelatedItems />
-      <RelatedProductsList />
-      <RatingsReviews productId={ this.state.currentProductId }/>
-    </div>
+        <Overview />
+        <RelatedItems />
+        <RelatedProductsList />
+        <RatingsReviews productId={ this.state.currentProductId }/>
+      </div>
     )
   }
 }
