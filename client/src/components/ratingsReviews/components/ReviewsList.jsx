@@ -1,36 +1,44 @@
 import React from 'react';
-import { getProducts, getProductById, getProductStyles, getRelatedProducts } from '../../../requests.js';
+import Review from './Review.jsx';
+import {  } from '../../../requests.js';
 
 class ReviewsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      renderedReviews: 2,
+      remainingReviews: this.props.reviews.length
     }
   }
 
   componentDidMount() {
-    getProducts()
-      .then((data) => {
-        console.log('getProducts:', data)
-      });
-    getProductById(19089)
-      .then((data) => {
-        console.log('getProductById:', data)
-      });
-    getProductStyles(19089)
-      .then((data) => {
-        console.log('getProductStyles:', data)
-      });
-    getRelatedProducts(19089)
-      .then((data) => {
-        console.log('getRelatedProducts:', data)
-      });
+    console.log(this.props.reviews)
+    this.setState({
+      remainingReviews: this.props.reviews.length - this.state.renderedReviews
+    })
   }
 
   render() {
-    return (
-      <div id='reviews-list'>Reviews List</div>
+    var reviewArray = []
+    for (var i = 0; i < this.state.renderedReviews; i++) {
+      reviewArray.push(
+        <Review review={ this.props.reviews[i] } />
+      )
+    }
+
+    return this.props.reviews.length > 0
+    ? (
+      <div id='reviews-list'>
+        Reviews List
+        { reviewArray.map((review) => {
+          return review;
+        }) }
+      </div>
+    )
+    : (
+      <div>
+        loading...
+      </div>
     )
   }
 }
