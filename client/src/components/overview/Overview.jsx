@@ -25,7 +25,7 @@ class Overview extends React.Component {
     return(
       <div id="overview">
         <h4>site-wide announcement message! - sale / discount <strong>offer</strong> - <a href="blank">new product highlight</a></h4>
-        <Gallery />
+        <Gallery currentStyles = { this.state.styles } />
         <ProductInfo />
         <AddToCart />
       </div>

@@ -11,7 +11,7 @@ class Gallery extends React.Component {
       <div id="Gallery">
         <img src="" alt="" />
       </div>
-    )
+    );
   }
 }
 
