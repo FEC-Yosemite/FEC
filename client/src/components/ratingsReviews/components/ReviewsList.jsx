@@ -41,12 +41,14 @@ class ReviewsList extends React.Component {
     return this.props.reviews.length > 0
     ? (
       <div id='reviews-list'>
-        Reviews List
+        <p>-----Reviews List-----</p>
         { reviewArray.map((review) => {
           return review;
         }) }
 
-        { remainingReviews > 0 ? <button id='more-reviews' onClick={ () => {this.handleMore(remainingReviews)} }>More Reviews</button> : null }
+        { remainingReviews > 0 ? <button id='more-reviews' onClick={ () => {this.handleMore(remainingReviews)} }>MORE REVIEWS</button> : null }
+        <button id='write-review'>ADD A REVIEW</button>
+        <p>-----End Reviews List-----</p>
       </div>
     )
     : (

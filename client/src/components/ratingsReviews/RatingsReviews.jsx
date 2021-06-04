@@ -26,12 +26,13 @@ class RatingsReviews extends React.Component {
   render() {
     return (
       <div id='ratings-reviews'>
-        This is the ratings and reviews component!
+        <p>=========This is the ratings and reviews component!=========</p>
         <ReviewsList reviews={ this.state.reviews } />
         <ProductBreakdown reviews={ this.state.reviews } />
         <RatingBreakdown reviews={ this.state.reviews } />
         <SortReviews reviews={ this.state.reviews } />
         <WriteReview reviews={ this.state.reviews } />
+        <p>=========End of ratings and reviews component=========</p>
       </div>
     )
   }
