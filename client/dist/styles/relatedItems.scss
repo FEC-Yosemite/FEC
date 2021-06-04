@@ -1,7 +1,28 @@
+$img-height: 210px;
+
 #related-items {
-  border: 1px solid black;
+  order: 1px solid black;
   padding: 15px;
   display: grid;
   grid-column: 2;
-  grid-row: 2
+  grid-row: 2;
+
+    #carousel-item {
+        list-style: none;
+        float: left;
+
+        #product-card {
+            // background-color: #d4d4d4;
+            text-align: center;
+            padding: 80px;
+            margin: 12px;
+            // width: 300px;
+            // height: 300px;
+        }
+    }
+
+    img {
+        height: $img-height;
+        width: auto;
+    }
 }

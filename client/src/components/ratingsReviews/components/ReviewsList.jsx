@@ -6,7 +6,7 @@ class ReviewsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      renderedReviews: 2,
+      renderedReviews: 2
     }
 
     this.handleMore = this.handleMore.bind(this);
@@ -24,21 +24,25 @@ class ReviewsList extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log(this.props)
+  }
+
   componentDidMount() {
-    console.log(this.props.reviews)
+    console.log(this.props)
   }
 
   render() {
     var reviewArray = []
     for (var i = 0; i < this.state.renderedReviews; i++) {
       reviewArray.push(
-        <Review review={ this.props.reviews[i] } />
+        <Review review={ this.props.reviews[this.props.sort][i] } />
       )
     }
 
-    var remainingReviews = this.props.reviews.length - this.state.renderedReviews;
+    var remainingReviews = this.props.reviews[this.props.sort].length - this.state.renderedReviews;
 
-    return this.props.reviews.length > 0
+    return this.props.reviews[this.props.sort].length > 0
     ? (
       <div id='reviews-list'>
         <p>-----Reviews List-----</p>
