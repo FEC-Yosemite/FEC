@@ -14,7 +14,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="app-div">
         <Overview productId={ this.state.currentProductId } />
         <RelatedItems productId={ this.state.currentProductId } />
         <RatingsReviews productId={ this.state.currentProductId }/>
