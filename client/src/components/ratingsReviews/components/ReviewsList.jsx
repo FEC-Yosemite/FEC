@@ -7,15 +7,25 @@ class ReviewsList extends React.Component {
     super(props);
     this.state = {
       renderedReviews: 2,
-      remainingReviews: this.props.reviews.length
+    }
+
+    this.handleMore = this.handleMore.bind(this);
+  }
+
+  handleMore(rem) {
+    if (rem === 1) {
+      this.setState({
+        renderedReviews: this.state.renderedReviews + 1
+      })
+    } else {
+      this.setState({
+        renderedReviews: this.state.renderedReviews + 2
+      })
     }
   }
 
   componentDidMount() {
     console.log(this.props.reviews)
-    this.setState({
-      remainingReviews: this.props.reviews.length - this.state.renderedReviews
-    })
   }
 
   render() {
@@ -26,6 +36,8 @@ class ReviewsList extends React.Component {
       )
     }
 
+    var remainingReviews = this.props.reviews.length - this.state.renderedReviews;
+
     return this.props.reviews.length > 0
     ? (
       <div id='reviews-list'>
@@ -33,6 +45,8 @@ class ReviewsList extends React.Component {
         { reviewArray.map((review) => {
           return review;
         }) }
+
+        { remainingReviews > 0 ? <button id='more-reviews' onClick={ () => {this.handleMore(remainingReviews)} }>More Reviews</button> : null }
       </div>
     )
     : (
