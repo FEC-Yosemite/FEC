@@ -22,7 +22,6 @@ class RatingsReviews extends React.Component {
   }
 
   handleSort(by) {
-    console.log(by);
     this.setState({
       sort: by
     })
