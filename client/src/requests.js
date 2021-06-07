@@ -1,4 +1,3 @@
-import { api } from '../../config.js';
 const axios = require('axios');
 
 /*
@@ -21,10 +20,7 @@ All functions return a promise:
 export function getProducts(page, count) {
   var options = {
     method: 'get',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products',
-    headers: {
-      authorization: api
-    },
+    url: 'http://localhost:3000/products',
     params: {
       page: page,
       count: count
@@ -37,10 +33,7 @@ export function getProducts(page, count) {
 export function getProductById(id) {
   var options = {
     method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}`,
-    headers: {
-      authorization: api
-    }
+    url: `http://localhost:3000/products/${id}`,
   }
 
   return axios(options);
@@ -49,10 +42,7 @@ export function getProductById(id) {
 export function getProductStyles(id) {
   var options = {
     method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}/styles`,
-    headers: {
-      authorization: api
-    }
+    url: `http://localhost:3000/products/${id}/styles`,
   }
 
   return axios(options);
@@ -61,10 +51,7 @@ export function getProductStyles(id) {
 export function getRelatedProducts(id) {
   var options = {
     method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}/related`,
-    headers: {
-      authorization: api
-    }
+    url: `http://localhost:3000/products/${id}/related`,
   }
 
   return axios(options);
@@ -75,10 +62,7 @@ export function getRelatedProducts(id) {
 export function getReviews(id, page, count, sort) {
   var options = {
     method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews`,
-    headers: {
-      authorization: api
-    },
+    url: `http://localhost:3000/reviews`,
     params: {
       product_id: id,
       page: page,
@@ -93,10 +77,7 @@ export function getReviews(id, page, count, sort) {
 export function getReviewMeta(id) {
   var options = {
     method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta`,
-    headers: {
-      authorization: api
-    },
+    url: `http://localhost:3000/reviews/meta`,
     params: {
       product_id: id,
     }
@@ -105,13 +86,12 @@ export function getReviewMeta(id) {
   return axios(options);
 }
 
+// addReview must pass in an object
+
 export function addReview(id, rate, sum, body, rec, name, email, photos, char) {
   var options = {
     method: 'post',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews`,
-    headers: {
-      authorization: api
-    },
+    url: `http://localhost:3000/reviews`,
     params: {
       product_id: id,
       rating: rate,
@@ -131,10 +111,7 @@ export function addReview(id, rate, sum, body, rec, name, email, photos, char) {
 export function markAsHelpful(reviewid) {
   var options = {
     method: 'put',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/${reviewid}/helpful`,
-    headers: {
-      authorization: api
-    }
+    url: `http://localhost:3000/reviews/${reviewid}/helpful`,
   }
 
   return axios(options);
@@ -143,10 +120,7 @@ export function markAsHelpful(reviewid) {
 export function reportReview(reviewid) {
   var options = {
     method: 'put',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/${reviewid}/report`,
-    headers: {
-      authorization: api
-    }
+    url: `http://localhost:3000/reviews/${reviewid}/report`,
   }
 
   return axios(options);
@@ -157,22 +131,18 @@ export function reportReview(reviewid) {
 export function getCart() {
   var options = {
     method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,
-    headers: {
-      authorization: api
-    }
+    url: `http://localhost:3000/cart`,
   }
 
   return axios(options);
 }
 
+// must pass in an object
+
 export function addToCart(id) {
   var options = {
     method: 'post',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,
-    headers: {
-      authorization: api
-    },
+    url: `http://localhost:3000/cart`,
     params: {
       sku_id: id
     }

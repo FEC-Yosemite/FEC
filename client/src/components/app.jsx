@@ -20,7 +20,8 @@ class App extends React.Component {
 
   componentDidMount() {
     getProducts()
-      .then((data) => console.log('Products:', data));
+      .then((data) => console.log('Products:', data))
+      .catch((err) => console.log('ERROR:', err));
   }
 
   render() {
