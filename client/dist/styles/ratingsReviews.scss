@@ -3,7 +3,9 @@
   padding: 15px;
   grid-column: 2;
   grid-row: 3;
+  height: 80vh;
   max-height: 80vh;
+  overflow: hidden;
 
   .review {
 
@@ -49,6 +51,29 @@
       &#report {
         color: rgb(165, 46, 46);
       }
+    }
+  }
+
+
+
+  #reviews {
+    position: relative;
+    max-height: 100%;
+
+    #reviews-list {
+      max-height: 60vh;
+      overflow: scroll;
+      margin: auto;
+    }
+
+    #more-reviews {
+      margin: 10px;
+      padding: 10px;
+    }
+
+    #write-review {
+      margin: 10px;
+      padding: 10px;
     }
   }
 
