@@ -9,6 +9,7 @@ class Gallery extends React.Component {
       styles: [],
       currentImages: [],
       currentImage: '',
+      currentThumb: '',
       currentIndex: 0,
     };
   }
@@ -21,38 +22,56 @@ class Gallery extends React.Component {
       .then(() => this.setState({
         currentImages: this.state.styles[0].photos,
         currentImage: this.state.styles[0].photos[0].url,
+        currentThumb: this.state.styles[0].photos[0].thumbnail_url,
       }))
-      .then(() => console.log(this.state.currentImages) )
+      .then(() => this.handleThumbnailHighlight(0) )
       .catch((err) => console.log('ERROR:', err));
+  }
+
+  handleImageChange(index) {
+    this.setState({
+      currentIndex: index,
+      currentImage: this.state.currentImages[index].url,
+      currentThumb: this.state.currentImages[index].thumbnail_url,
+    });
   }
 
   handleNextImageClick() {
     let index = this.state.currentIndex;
     if (index !== this.state.currentImages.length - 1) {
       index++;
-      this.setState({
-        currentIndex: index,
-        currentImage: this.state.currentImages[index].url,
-      });
+      this.handleImageChange(index);
     }
+    this.handleThumbnailHighlight(index);
   };
 
   handlePrevImageClick() {
     let index = this.state.currentIndex;
     if (index !== 0) {
       index--;
-      this.setState({
-        currentIndex: index,
-        currentImage: this.state.currentImages[index].url,
-      });
-    }
+      this.handleImageChange(index);
+    };
+    this.handleThumbnailHighlight(index);
   };
 
-  handleThumbClick(e) {
+  handleThumbnailHighlight(index) {
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach((thumbnail) => {
+      if (Number(thumbnail.dataset.index) === index) {
+        thumbnail.classList.add('current-thumb');
+      } else {
+        thumbnail.classList.remove('current-thumb');
+      }
+    });
+  }
+
+  handleThumbnailClick(e) {
+    let index = Number(e.target.getAttribute('data-index'));
     this.setState({
       currentImage: e.target.getAttribute('data-url'),
-      currentIndex: e.target.getAttribute('data-index'),
+      currentIndex: index,
     });
+    this.handleThumbnailHighlight(index);
   }
 
   render() {
@@ -64,7 +83,7 @@ class Gallery extends React.Component {
         <div>
           {this.state.currentImages.map((photo) => {
             let index = this.state.currentImages.indexOf(photo);
-            return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbClick.bind(this) } class="thumbnail" src={photo.thumbnail_url} alt="" ></img>)
+            return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } class="thumbnail" src={photo.thumbnail_url} alt=""></img>)
           })}
         </div>
       </div>
