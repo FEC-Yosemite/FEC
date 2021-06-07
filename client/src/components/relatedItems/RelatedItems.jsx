@@ -10,7 +10,7 @@ class RelatedItems extends Component {
         };
         this.refreshProductsList = this.refreshProductsList.bind(this);
     }
-    
+
     refreshProductsList() {
         getRelatedProducts(this.props.productId)
         .then(idsArray => {
