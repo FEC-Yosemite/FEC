@@ -63,16 +63,16 @@ class ReviewsList extends React.Component {
 
     return this.props.reviews[this.props.sort].length > 0
     ? (
-      <div id='reviews-list'>
-        <p>-----Reviews List-----</p>
-        { reviewArray.map((review) => {
-          return review;
-        }) }
+      <div id='reviews'>
+        <div id='reviews-list'>
+          { reviewArray.map((review) => {
+            return review;
+          }) }
 
-        { remainingReviews > 0 ? <button id='more-reviews' onClick={ () => {this.handleMore(remainingReviews)} }>MORE REVIEWS</button> : null }
-        <button id='write-review' onClick={ this.handleWrite }>ADD A REVIEW</button>
-        <WriteReview show={ this.state.write } product={ this.state.product } close={ this.handleClose }/>
-        <p>-----End Reviews List-----</p>
+        </div>
+          { remainingReviews > 0 ? <button id='more-reviews' onClick={ () => {this.handleMore(remainingReviews)} }>MORE REVIEWS</button> : null }
+          <button id='write-review' onClick={ this.handleWrite }>ADD A REVIEW</button>
+          <WriteReview show={ this.state.write } product={ this.state.product } close={ this.handleClose }/>
       </div>
     )
     : (
