@@ -57,7 +57,6 @@ app.get('/products/:id/related', (req, res) => {
 // /reviews routers
 
 app.get('/reviews', (req, res) => {
-  console.log(req.query);
   api.getReviews(req.query)
     .then(result => res.status(200).send(result.data))
     .catch(err => {
