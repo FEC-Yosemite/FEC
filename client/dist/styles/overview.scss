@@ -14,24 +14,35 @@
   #container {
     grid-row: 2;
     display: grid;
-    grid-template-columns: 2fr 1fr;
 
     #gallery {
       grid-column: 1;
+      overflow: hidden;
 
       #jumbotron {
         border: 1px dotted black;
         display: grid;
         grid-template-columns: 5% 90% 5%;
+        overflow: hidden;
 
         img {
+          cursor: zoom-in;
           grid-column: 2;
           grid-row: 1;
           display: inline;
-          height: 500px;
-          width: 100%;
+          max-width:100%;
+          max-height:auto;
           object-fit: contain;
           // object-position: 0 50%;
+        }
+
+        .zoomed {
+          cursor: zoom-out;
+          transform:scale(2.5);
+          -ms-transform:scale(2.5); /* IE 9 */
+          -moz-transform:scale(2.5); /* Firefox */
+          -webkit-transform:scale(2.5); /* Safari and Chrome */
+          -o-transform:scale(2.5); /* Opera */
         }
 
         p {
@@ -71,6 +82,10 @@
         .hidden {
           visibility: hidden;
         }
+
+        span {
+          position: absolute;
+        }
       }
 
     }
@@ -89,9 +104,21 @@
         grid-row: 2;
         border: 1px dotted black;
       }
+
     }
 
+    .collapsed {
+      display: none;
+    }
 
+  }
+
+  .extended {
+    grid-template-columns: 1 !important;
+  }
+
+  .collapsed {
+    grid-template-columns: 2fr 1fr;
   }
 
 

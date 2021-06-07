@@ -11,6 +11,8 @@ class Gallery extends React.Component {
       currentImage: '',
       currentThumb: '',
       currentIndex: 0,
+      collapsed: true,
+      zoomed: false,
     };
   }
 
@@ -91,13 +93,48 @@ class Gallery extends React.Component {
     this.handleThumbnailHighlight(index);
   }
 
+  handleZoom(prodImage) {
+    if (this.state.collapsed === false) {
+      if (this.state.zoomed === false) {
+        prodImage.classList.add('zoomed');
+        this.setState({ zoomed: true });
+      } else {
+        prodImage.classList.remove('zoomed');
+        this.setState({ zoomed: false });
+      }
+    }
+  }
+
+  handleImageClick(e) {
+    let prodImage = e.target;
+    if (this.state.collapsed === true) {
+      document.getElementById('info-aside').classList.add('collapsed');
+      document.getElementById('container').classList.remove('collapsed');
+      document.getElementById('container').classList.add('extended');
+      prodImage.style.width = '100%';
+      this.setState({ collapsed: false });
+    }
+    this.handleZoom(prodImage);
+  };
+
+  handleCollapse() {
+    let prodImage = document.getElementById('product-image');
+    if (this.state.collapsed === false) {
+      document.getElementById('info-aside').classList.remove('collapsed');
+      document.getElementById('container').classList.add('collapsed');
+      document.getElementById('container').classList.remove('extended');
+      prodImage.style.width = 'auto';
+      this.setState({ collapsed: true });
+    }
+  }
+
   render() {
     return(
       <div id="gallery">
 
         <div id="jumbotron">
           <p className="hidden prev-arrow" onClick={ this.handlePrevImageClick.bind(this) } >←</p>
-          <img  src={ this.state.currentImage } alt=""></img>
+          <img id="product-image" onClick={ this.handleImageClick.bind(this) } src={ this.state.currentImage } alt=""></img>
           <p className="next-arrow" onClick={ this.handleNextImageClick.bind(this) } >→</p>
 
           <div id="thumbnails">
@@ -106,6 +143,8 @@ class Gallery extends React.Component {
               return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail" src={photo.thumbnail_url} alt=""></img>)
             })}
           </div>
+
+          <span onClick={ this.handleCollapse.bind(this) }>X</span>
 
         </div>
 
