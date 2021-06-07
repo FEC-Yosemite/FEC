@@ -3,4 +3,52 @@
   padding: 15px;
   grid-column: 2;
   grid-row: 3;
+  max-height: 80vh;
+
+  .review {
+
+    #helpful {
+      background: none;
+      border: none;
+      &:hover {
+        color: lightblue;
+        cursor: pointer;
+      }
+    }
+
+    #unhelpful {
+      background: none;
+      border: none;
+
+      &:hover {
+        color: lightblue;
+        cursor: pointer;
+      }
+    }
+
+    #report {
+      background: none;
+      border: none;
+
+      &:hover {
+        color: lightcoral;
+        cursor: pointer;
+      }
+    }
+
+    .clicked {
+
+      &#helpful {
+        color: rgb(45, 45, 192);
+      }
+
+      &#unhelpful {
+        color: rgb(45, 45, 192);
+      }
+
+      &#report {
+        color: rgb(165, 46, 46);
+      }
+    }
+  }
 }
