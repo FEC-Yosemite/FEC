@@ -1,15 +1,20 @@
 import React from 'react';
 import Review from './Review.jsx';
-import {  } from '../../../requests.js';
+import WriteReview from './WriteReview.jsx';
+import { getProductById } from '../../../requests.js';
 
 class ReviewsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      renderedReviews: 2
+      renderedReviews: 2,
+      product: '',
+      write: false
     }
 
     this.handleMore = this.handleMore.bind(this);
+    this.handleWrite = this.handleWrite.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleMore(rem) {
@@ -24,12 +29,26 @@ class ReviewsList extends React.Component {
     }
   }
 
+  handleWrite() {
+    this.setState({
+      write: true
+    })
+  }
+
+  handleClose() {
+    this.setState({
+      write: false
+    })
+  }
+
   componentDidUpdate() {
-    console.log(this.props)
   }
 
   componentDidMount() {
-    console.log(this.props)
+    getProductById(this.props.productId)
+      .then(res => this.setState({
+        product: res.data.name
+      }));
   }
 
   render() {
@@ -51,7 +70,8 @@ class ReviewsList extends React.Component {
         }) }
 
         { remainingReviews > 0 ? <button id='more-reviews' onClick={ () => {this.handleMore(remainingReviews)} }>MORE REVIEWS</button> : null }
-        <button id='write-review'>ADD A REVIEW</button>
+        <button id='write-review' onClick={ this.handleWrite }>ADD A REVIEW</button>
+        <WriteReview show={ this.state.write } product={ this.state.product } close={ this.handleClose }/>
         <p>-----End Reviews List-----</p>
       </div>
     )
