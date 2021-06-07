@@ -11,8 +11,22 @@
   #gallery {
 
     img {
+      display: inline;
+      height: 500px;
+      width: 750px;
+      object-fit: cover;
+    }
+
+    p {
+      cursor: pointer;
+      display: inline;
+      position: relative;
+      bottom: 250px;
+    }
+
+    .thumbnail {
       height: auto;
-      width: 500px;
+      width: 50px;
     }
   }
 

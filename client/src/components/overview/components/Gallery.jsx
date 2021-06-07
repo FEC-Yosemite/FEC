@@ -48,12 +48,25 @@ class Gallery extends React.Component {
     }
   };
 
+  handleThumbClick(e) {
+    this.setState({
+      currentImage: e.target.getAttribute('data-url'),
+      currentIndex: e.target.getAttribute('data-index'),
+    });
+  }
+
   render() {
     return(
       <div id="gallery">
         <p onClick={ this.handlePrevImageClick.bind(this) } >←</p>
         <img  src={ this.state.currentImage } alt=""></img>
         <p onClick={ this.handleNextImageClick.bind(this) } >→</p>
+        <div>
+          {this.state.currentImages.map((photo) => {
+            let index = this.state.currentImages.indexOf(photo);
+            return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbClick.bind(this) } class="thumbnail" src={photo.thumbnail_url} alt="" ></img>)
+          })}
+        </div>
       </div>
     );
   }
