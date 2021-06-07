@@ -1,70 +1,99 @@
 #overview {
-  border: 1px solid black;
-  padding: 15px;
   grid-column: 2;
   grid-row: 1;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+  border: 1px solid black;
+  padding: 15px;
 
   h4 {
     text-align: center;
+    grid-row: 1;
   }
 
-  #gallery {
+  #container {
+    grid-row: 2;
     display: grid;
+    grid-template-columns: 2fr 1fr;
 
-    #jumbotron {
-      display: grid;
-      grid-template-columns: 5% 90% 5%;
-      grid-row: 1;
+    #gallery {
+      grid-column: 1;
 
+      #jumbotron {
+        border: 1px dotted black;
+        display: grid;
+        grid-template-columns: 5% 90% 5%;
 
-      img {
-        grid-column: 2;
-        display: inline;
-        height: 500px;
-        width: 100%;
-        object-fit: contain;
-        // object-position: 0 50%;
+        img {
+          grid-column: 2;
+          grid-row: 1;
+          display: inline;
+          height: 500px;
+          width: 100%;
+          object-fit: contain;
+          // object-position: 0 50%;
+        }
+
+        p {
+          cursor: pointer;
+          margin: auto;
+          bottom: 250px;
+        }
+
+        .prev-arrow {
+          grid-column: 1;
+        }
+
+        .next-arrow {
+          grid-column: 3;
+        }
+
+        #thumbnails {
+          display: flex;
+          grid-column: 2;
+          grid-row: 1;
+          flex-direction: column;
+          justify-content: space-between;
+
+          .thumbnail {
+            height: auto;
+            width: 50px;
+            cursor: pointer;
+            margin-bottom: 5px;
+          }
+
+          .current-thumb {
+            border-bottom: 5px solid red;
+          }
+
+        }
+
+        .hidden {
+          visibility: hidden;
+        }
       }
 
-      p {
-        cursor: pointer;
-        margin: auto;
-        bottom: 250px;
-      }
-
-      .prev-arrow {
-        grid-column: 1;
-      }
-
-      .next-arrow {
-        grid-column: 3;
-      }
     }
 
+    aside {
+      display: grid;
+      grid-column: 2;
+      text-align: center;
 
-    #thumbnails {
-      grid-row: 2;
-      grid-template-columns: 1fr;
-      display: flex;
-      justify-content: space-between;
-
-      .thumbnail {
-        height: auto;
-        width: 50px;
-        cursor: pointer;
+      #product-info {
+        grid-row: 1;
+        border: 1px dotted black;
       }
 
-      .current-thumb {
-        border: 5px solid red;
-      }
-
-      .hidden {
-        visibility: hidden;
+      #add-to-cart {
+        grid-row: 2;
+        border: 1px dotted black;
       }
     }
 
 
   }
+
 
 }
 

@@ -57,6 +57,7 @@ class Gallery extends React.Component {
   handleArrowHide(index) {
     let prevArrow = document.getElementsByClassName('prev-arrow')[0];
     let nextArrow = document.getElementsByClassName('next-arrow')[0];
+    console.log(prevArrow);
     if (index === 0) {
       prevArrow.classList.add('hidden');
       nextArrow.classList.remove('hidden');
@@ -98,14 +99,17 @@ class Gallery extends React.Component {
           <p className="hidden prev-arrow" onClick={ this.handlePrevImageClick.bind(this) } >←</p>
           <img  src={ this.state.currentImage } alt=""></img>
           <p className="next-arrow" onClick={ this.handleNextImageClick.bind(this) } >→</p>
+
+          <div id="thumbnails">
+            {this.state.currentImages.map((photo) => {
+              let index = this.state.currentImages.indexOf(photo);
+              return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail" src={photo.thumbnail_url} alt=""></img>)
+            })}
+          </div>
+
         </div>
 
-        <div id="thumbnails">
-          {this.state.currentImages.map((photo) => {
-            let index = this.state.currentImages.indexOf(photo);
-            return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail" src={photo.thumbnail_url} alt=""></img>)
-          })}
-        </div>
+
       </div>
     );
   }
