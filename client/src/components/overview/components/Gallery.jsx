@@ -93,10 +93,14 @@ class Gallery extends React.Component {
   render() {
     return(
       <div id="gallery">
-        <p className="hidden prev-arrow" onClick={ this.handlePrevImageClick.bind(this) } >←</p>
-        <img  src={ this.state.currentImage } alt=""></img>
-        <p className="next-arrow" onClick={ this.handleNextImageClick.bind(this) } >→</p>
-        <div>
+
+        <div id="jumbotron">
+          <p className="hidden prev-arrow" onClick={ this.handlePrevImageClick.bind(this) } >←</p>
+          <img  src={ this.state.currentImage } alt=""></img>
+          <p className="next-arrow" onClick={ this.handleNextImageClick.bind(this) } >→</p>
+        </div>
+
+        <div id="thumbnails">
           {this.state.currentImages.map((photo) => {
             let index = this.state.currentImages.indexOf(photo);
             return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail" src={photo.thumbnail_url} alt=""></img>)
