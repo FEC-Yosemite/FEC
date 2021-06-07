@@ -54,6 +54,21 @@ class Gallery extends React.Component {
     this.handleThumbnailHighlight(index);
   };
 
+  handleArrowHide(index) {
+    let prevArrow = document.getElementsByClassName('prev-arrow')[0];
+    let nextArrow = document.getElementsByClassName('next-arrow')[0];
+    if (index === 0) {
+      prevArrow.classList.add('hidden');
+      nextArrow.classList.remove('hidden');
+    } else if (index === this.state.currentImages.length - 1) {
+      prevArrow.classList.remove('hidden');
+      nextArrow.classList.add('hidden');
+    } else {
+      prevArrow.classList.remove('hidden');
+      nextArrow.classList.remove('hidden');
+    }
+  }
+
   handleThumbnailHighlight(index) {
     const thumbnails = document.querySelectorAll('.thumbnail');
     thumbnails.forEach((thumbnail) => {
@@ -63,6 +78,7 @@ class Gallery extends React.Component {
         thumbnail.classList.remove('current-thumb');
       }
     });
+    this.handleArrowHide(index);
   }
 
   handleThumbnailClick(e) {
@@ -77,13 +93,13 @@ class Gallery extends React.Component {
   render() {
     return(
       <div id="gallery">
-        <p onClick={ this.handlePrevImageClick.bind(this) } >←</p>
+        <p className="hidden prev-arrow" onClick={ this.handlePrevImageClick.bind(this) } >←</p>
         <img  src={ this.state.currentImage } alt=""></img>
-        <p onClick={ this.handleNextImageClick.bind(this) } >→</p>
+        <p className="next-arrow" onClick={ this.handleNextImageClick.bind(this) } >→</p>
         <div>
           {this.state.currentImages.map((photo) => {
             let index = this.state.currentImages.indexOf(photo);
-            return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } class="thumbnail" src={photo.thumbnail_url} alt=""></img>)
+            return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail" src={photo.thumbnail_url} alt=""></img>)
           })}
         </div>
       </div>
