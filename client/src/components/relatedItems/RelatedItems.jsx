@@ -6,7 +6,9 @@ class RelatedItems extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productsList: {}
+            productsList: { data: [] }
+            // window_size: 3,
+            // related_products: 
         };
         this.refreshProductsList = this.refreshProductsList.bind(this);
     }
