@@ -2,6 +2,7 @@ import React from 'react';
 import Overview from './overview/Overview.jsx'
 import RatingsReviews from './ratingsReviews/RatingsReviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
+import { getProducts } from '../requests.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,11 @@ class App extends React.Component {
   setCurrentProductId(e) {
     // TO DO: event listener for click:
     // when product is clicked, read product_id and setState
+  }
+
+  componentDidMount() {
+    getProducts()
+      .then((data) => console.log('Products:', data));
   }
 
   render() {
