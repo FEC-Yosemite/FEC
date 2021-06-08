@@ -22,9 +22,10 @@ class RelatedProductsList extends Component {
 
     refreshCarousel() {
         let products_window = [];
-        for (let i = this.state.page; i < this.state.window_size * this.state.page; i++) {
+        for (let i = this.state.page * this.state.window_size; i <= this.state.window_size * this.state.page + 1; i++) { // change this, multiplying by 0
             if (i < this.props.productsList.data.length) {
                 console.log(`i: ${i}`);
+                console.log(`DATA [i]: ${this.props.productsList.data[i]}`);
                 products_window.push(this.props.productsList.data[i]);
             }
         }
@@ -71,7 +72,7 @@ class RelatedProductsList extends Component {
                 this.state.page === 0 ?
                 <div id="left-button-placeholder"> </div>
                 :
-                <img id="left-button" src="../pix/left-button.jpg" onClick={this.buttonClick} />
+                <img id="left-button" src="client/pix/left-button.jpg" onClick={this.buttonClick} />
             }
             {
                 this.state.related_products.length > 0 ?
@@ -82,22 +83,22 @@ class RelatedProductsList extends Component {
                 <h3>Loading "Related Cards"...</h3>
             }
             {
-                this.state.page + this.state.window_size >= this.props.productsList.data.length ?
+                this.state.page + this.state.window_size + 1 >= this.props.productsList.data.length ?
                 <div id="right-button-placeholder"> </div>
                 :
-                <img id="right-button" src="../pix/right-button.jpg" onClick={this.buttonClick} />
+                <img id="right-button" src="client/pix/right-button.jpg" onClick={this.buttonClick} />
             }
             <div></div>
-            <h1>BELOW IS WHOLE LIST</h1>
+            {/* <h1>BELOW IS WHOLE LIST</h1>
             <br/>
             {
-                Object.keys(this.props.productsList).length > 0 ?
-                this.props.productsList.data.map((productId, index) => (
+                this.state.related_products.length > 0 ?
+                this.state.related_products.map((productId, index) => (
                     <RelatedProductCard key={index} productId={productId} />
                 ))
                 :
                 <h3>Loading "Related Cards"...</h3>
-            }
+            } */}
             </div>
         );
     }
