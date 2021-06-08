@@ -20,6 +20,17 @@
     #gallery {
       grid-column: 1;
       overflow: hidden;
+      position: relative;
+
+      .expand {
+        cursor: pointer;
+        top: 2%;
+        position: absolute;
+        right: 6%;
+        z-index: 1;
+        font-size: 50px;
+        opacity: 50%;
+      }
 
       #jumbotron {
         border: 1px dotted black;
@@ -86,10 +97,6 @@
             border-bottom: 5px solid red;
           }
 
-        }
-
-        span {
-          position: absolute;
         }
 
       }

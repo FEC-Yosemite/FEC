@@ -17,6 +17,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as fasFaCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farFaCircle } from '@fortawesome/free-regular-svg-icons';
+import { faExpand } from '@fortawesome/free-solid-svg-icons';
 
 class Gallery extends React.Component {
   constructor(props) {
@@ -116,6 +117,9 @@ class Gallery extends React.Component {
   handleCollapse() {
     const prodImage = document.getElementById('product-image');
     if (this.state.collapsed === false) {
+      if (this.state.zoomed === true) {
+        this.handleZoom(prodImage);
+      }
       document.getElementById('info-aside').classList.remove('collapsed');
       document.getElementById('container').classList.add('collapsed');
       document.getElementById('container').classList.remove('extended');
@@ -128,17 +132,17 @@ class Gallery extends React.Component {
       return this.state.currentImages.map((photo) => {
         const index = this.state.currentImages.indexOf(photo);
         if (index === this.state.currentIndex) {
-          return (<img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />);
+          return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
         }
-        return (<img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />);
+        return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
       });
     }
     return this.state.currentImages.map((photo) => {
       const index = this.state.currentImages.indexOf(photo);
       if (index === this.state.currentIndex) {
-        return (<FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={fasFaCircle} />);
+        return <FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={fasFaCircle} />;
       }
-      return (<FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={farFaCircle} />);
+      return <FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={farFaCircle} />;
     });
   }
 
@@ -158,6 +162,7 @@ class Gallery extends React.Component {
     return (
       <div id="gallery">
 
+        <FontAwesomeIcon className="expand" onClick={this.handleCollapse.bind(this)} icon={ faExpand } />
         <div id="jumbotron">
           {this.renderPrevArrow()}
 
@@ -167,7 +172,7 @@ class Gallery extends React.Component {
             {this.renderThumbnails()}
           </div>
 
-          <span onClick={this.handleCollapse.bind(this)}>X</span>
+
 
         </div>
 
