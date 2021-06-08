@@ -3,8 +3,6 @@ import Gallery from './components/Gallery.jsx';
 import ProductInfo from './components/ProductInfo.jsx';
 import AddToCart from './components/AddToCart.jsx';
 
-import { getProductStyles } from '../../requests.js';
-
 class Overview extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +18,7 @@ class Overview extends React.Component {
         <div id="container" className="collapsed">
           <Gallery productId = { this.state.currentProduct } />
           <aside id="info-aside">
-            <ProductInfo />
+            <ProductInfo productId = { this.state.currentProduct } />
             <AddToCart />
           </aside>
         </div>
