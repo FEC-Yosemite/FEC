@@ -28,7 +28,7 @@ class RatingsReviews extends React.Component {
   }
 
   componentDidMount() {
-    getReviews(this.props.productId)
+    getReviews(this.props.productId, null, 10, 'newest')
       .then((res) => this.setState({
         reviews: {
           ...this.state.reviews,
@@ -37,7 +37,7 @@ class RatingsReviews extends React.Component {
       }))
       .catch((err) => console.log('ERROR:', err));
 
-    getReviews(this.props.productId, null, null, 'helpful')
+    getReviews(this.props.productId, null, 10, 'helpful')
       .then((res) => this.setState({
         reviews: {
           ...this.state.reviews,
@@ -46,7 +46,7 @@ class RatingsReviews extends React.Component {
       }))
       .catch((err) => console.log('ERROR:', err));
 
-    getReviews(this.props.productId, null, null, 'relevant')
+    getReviews(this.props.productId, null, 10, 'relevant')
       .then((res) => this.setState({
         reviews: {
           ...this.state.reviews,
