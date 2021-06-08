@@ -7,10 +7,10 @@ class RelatedProductsList extends Component {
         this.state = {
             page: 0,
             window: [],
-            window_size: 2,
+            window_size: 2, //changing this will offer valuable insight into debugging later
             left_arrow: false,
             right_arrow: false,
-            related_products: []
+            related_products: this.props.productsList.data
         };
         this.refreshCarousel = this.refreshCarousel.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
@@ -18,38 +18,25 @@ class RelatedProductsList extends Component {
 
     componentDidMount() {
         this.refreshCarousel()
+        this.setState({ state: this.state });
     }
 
     refreshCarousel() {
         let products_window = [];
-        for (let i = this.state.page * this.state.window_size; i <= this.state.window_size * this.state.page + 1; i++) { // change this, multiplying by 0
+        for (let i = this.state.page * this.state.window_size; i <= this.state.window_size * this.state.page + 1; i++) {
             if (i < this.props.productsList.data.length) {
                 console.log(`i: ${i}`);
-                console.log(`DATA [i]: ${this.props.productsList.data[i]}`);
+                console.log(`Product IDs in carousel: ${this.props.productsList.data[i]}`);
                 products_window.push(this.props.productsList.data[i]);
             }
         }
         this.setState({
-            related_products: products_window
+            related_products: JSON.parse(JSON.stringify(products_window))
         });
-        //if page + n - 1 >= this.props.productsList.data.length
-            //remove right arrow
-        //if page <= 0
-            //remove left arrow
-        //let tempWindow = [];
-        //for (let i = page; i < this.props.productsList.data.length; i++) {
-            //tempWindow.push(this.props.productsList.data[i]);
-        //}
-        //this.setState({
-            //window: tempWindow
-        //});
-        // this.state.page + this.state.window_size >= this.props.productsList.data.length
-        // this.state.page === 0
     }
 
     buttonClick(e) {
       e.preventDefault();
-      // page * n = first index of window that is n big
       let pageModifier = this.state.page;
       if (e.target.id === 'left-button') {
         this.setState({
@@ -68,27 +55,31 @@ class RelatedProductsList extends Component {
     render() {
         return (
             <div id="related-products-carousel">
+            <div id="left-button-container">
             {
                 this.state.page === 0 ?
                 <div id="left-button-placeholder"> </div>
                 :
-                <img id="left-button" src="client/pix/left-button.jpg" onClick={this.buttonClick} />
+                <img id="left-button" src="client/pix/left-button.jpg" alt="left carousel arrow" onClick={this.buttonClick} />
             }
+            </div>
             {
                 this.state.related_products.length > 0 ?
                 this.state.related_products.map((productId, index) => (
-                    <RelatedProductCard key={index} productId={productId} />
+                    <RelatedProductCard key={productId} productId={productId} />
                 ))
                 :
                 <h3>Loading "Related Cards"...</h3>
             }
+            <div id="right-button-container">
             {
                 this.state.page + this.state.window_size + 1 >= this.props.productsList.data.length ?
                 <div id="right-button-placeholder"> </div>
                 :
-                <img id="right-button" src="client/pix/right-button.jpg" onClick={this.buttonClick} />
+                <img id="right-button" src="client/pix/right-button.jpg" alt="right carousel arrow" onClick={this.buttonClick} />
             }
-            <div></div>
+            </div>
+            {/* <div></div> */}
             {/* <h1>BELOW IS WHOLE LIST</h1>
             <br/>
             {

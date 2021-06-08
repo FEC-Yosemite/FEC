@@ -11,6 +11,7 @@ class RelatedItems extends Component {
             // related_products: 
         };
         this.refreshProductsList = this.refreshProductsList.bind(this);
+        this.clickedProduct = this.clickedProduct.bind(this);
     }
 
     refreshProductsList() {
@@ -21,6 +22,10 @@ class RelatedItems extends Component {
             });
             console.log(`state: ${this.state.productsList}`);
         });
+    }
+
+    clickedProduct(e) {
+
     }
 
     componentDidMount() {

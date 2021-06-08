@@ -1,4 +1,5 @@
 $img-height: 210px;
+$carousel-height: 550px;
 
 #related-items {
   font-family: sans-serif;
@@ -8,32 +9,50 @@ $img-height: 210px;
   grid-row: 2;
   background-color: #e5e5e5;
   
-  #left-button-placeholder {
-   float: left;
-   height: 80px;
-   width: 80px; 
-  }
-
-  #right-button-placeholder {
-   float: right;
-   height: 80px;
-   width: 80px; 
-  }
-
-  #left-button {
+  #left-button-container {
     float: left;
-    height: 80px;
-    width: auto;
+    height: $carousel-height;
+    width: 80px;
+
+    #left-button-placeholder {
+      float: left;
+      height: 80px;
+      width: 80px; 
+    }
+    
+    #left-button {
+      float: left;
+      height: 80px;
+      width: auto;
+      // position: absolute;
+      // top: 50%;
+      // transform: translateY(-50%);
+    }
   }
 
-  #right-button {
-    float: right;
-    height: 80px;
-    width: auto;
+  #right-button-container {
+    float: left;
+    height: $carousel-height;
+    width: 80px;
+
+    #right-button-placeholder {
+      float: right;
+      height: 80px;
+      width: 80px; 
+    }
+
+    #right-button {
+      float: right;
+      height: 80px;
+      width: auto;
+      // position: absolute;
+      // top: 50%;
+      // transform: translateY(-50%);
+    }
   }
 
   #related-products-carousel {
-      height: 550px;
+      height: $carousel-height;
       width: auto;
   }
     #carousel-item {
