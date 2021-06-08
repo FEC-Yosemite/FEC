@@ -105,5 +105,20 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
+
+    #modal-stars{
+      min-height: 75px;
+      margin: 10px;
+
+      .fa-star {
+        padding: 10px;
+        margin: 5px;
+      }
+
+      .fa-star:hover {
+        transform: scale(1.5);
+      }
+    }
+
   }
 }

@@ -100,3 +100,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+#ratings-reviews #modal #modal-stars {
+  min-height: 75px;
+  margin: 10px;
+}
+
+#ratings-reviews #modal #modal-stars .fa-star {
+  padding: 10px;
+  margin: 5px;
+}
+
+#ratings-reviews #modal #modal-stars .fa-star:hover {
+  transform: scale(1.5);
+}
