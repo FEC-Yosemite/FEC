@@ -17,9 +17,13 @@ class Overview extends React.Component {
     return(
       <div id="overview">
         <h4>site-wide announcement message! - sale / discount <strong>offer</strong> - <a href="blank">new product highlight</a></h4>
-        <Gallery productId = { this.state.currentProduct } />
-        <ProductInfo />
-        <AddToCart />
+        <div id="container" className="collapsed">
+          <Gallery productId = { this.state.currentProduct } />
+          <aside id="info-aside">
+            <ProductInfo />
+            <AddToCart />
+          </aside>
+        </div>
       </div>
     )
   }
