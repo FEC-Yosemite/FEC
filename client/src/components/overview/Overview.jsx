@@ -7,25 +7,17 @@ import { getProductStyles } from '../../requests.js';
 
 class Overview extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      styles: [],
-    }
-  }
-
-  componentDidMount() {
-    getProductStyles(this.props.productId)
-      .then((res) => this.setState({
-        styles: res.data.results
-      }))
-      .catch((err) => console.log('ERROR:', err));
+      currentProduct: this.props.productId,
+    };
   }
 
   render() {
     return(
       <div id="overview">
         <h4>site-wide announcement message! - sale / discount <strong>offer</strong> - <a href="blank">new product highlight</a></h4>
-        <Gallery currentStyles = { this.state.styles } />
+        <Gallery productId = { this.state.currentProduct } />
         <ProductInfo />
         <AddToCart />
       </div>

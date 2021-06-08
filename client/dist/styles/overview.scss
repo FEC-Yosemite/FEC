@@ -7,4 +7,33 @@
   h4 {
     text-align: center;
   }
+
+  #gallery {
+
+    img {
+      display: inline;
+      height: 500px;
+      width: 750px;
+      object-fit: cover;
+    }
+
+    p {
+      cursor: pointer;
+      display: inline;
+      position: relative;
+      bottom: 250px;
+    }
+
+    .thumbnail {
+      height: auto;
+      width: 50px;
+      cursor: pointer;
+    }
+
+    .current-thumb {
+      border: 5px solid red;
+    }
+  }
+
 }
+

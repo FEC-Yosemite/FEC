@@ -28,11 +28,9 @@ class SortReviews extends React.Component {
   render() {
     return (
       <div id='sort-review'>
-        <p>-----Sort Reviews-----</p>
 
         <h3>{ this.props.reviews[this.props.sort].length } reviews, sorted by { this.renderSelect() }</h3>
 
-        <p>-----End Sort Reviews-----</p>
         </div>
     )
   }
