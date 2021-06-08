@@ -93,14 +93,27 @@ class Gallery extends React.Component {
     this.handleThumbnailHighlight(index);
   }
 
+  handleMouseMove(e) {
+    let prodImage = e.target;
+    // console.log(e);
+    let left = Math.abs(e.offsetX/e.target.width)*100;
+    let top = Math.abs(e.offsetY/e.target.height)*100;
+    console.log("LEFT: ",left)
+    console.log("TOP: ",top)
+    prodImage.style.objectPosition = `${left}px ${top}px`;
+  }
+
   handleZoom(prodImage) {
     if (this.state.collapsed === false) {
       if (this.state.zoomed === false) {
         prodImage.classList.add('zoomed');
+        prodImage.addEventListener('mousemove', this.handleMouseMove);
         this.setState({ zoomed: true });
       } else {
         prodImage.classList.remove('zoomed');
+        prodImage.removeEventListener('mousemove', this.handleMouseMove);
         this.setState({ zoomed: false });
+        prodImage.style.objectPosition = 'center center';
       }
     }
   }
@@ -111,7 +124,6 @@ class Gallery extends React.Component {
       document.getElementById('info-aside').classList.add('collapsed');
       document.getElementById('container').classList.remove('collapsed');
       document.getElementById('container').classList.add('extended');
-      prodImage.style.width = '100%';
       this.setState({ collapsed: false });
     }
     this.handleZoom(prodImage);
@@ -123,7 +135,6 @@ class Gallery extends React.Component {
       document.getElementById('info-aside').classList.remove('collapsed');
       document.getElementById('container').classList.add('collapsed');
       document.getElementById('container').classList.remove('extended');
-      prodImage.style.width = 'auto';
       this.setState({ collapsed: true });
     }
   }
