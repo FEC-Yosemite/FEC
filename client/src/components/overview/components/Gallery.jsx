@@ -11,7 +11,6 @@
 /* eslint-disable-next-line class-methods-use-this */
 import React from 'react';
 
-import { getProductStyles } from '../../../requests.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +22,8 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: [],
+      productId: this.props.productId,
+      styles: this.props.styles,
       currentImages: [],
       currentImage: '',
       currentThumb: '',
@@ -34,16 +34,11 @@ class Gallery extends React.Component {
   }
 
   componentDidMount() {
-    getProductStyles(this.props.productId)
-      .then((res) => this.setState({
-        styles: res.data.results,
-      }))
-      .then(() => this.setState({
-        currentImages: this.state.styles[0].photos,
-        currentImage: this.state.styles[0].photos[0].url,
-        currentThumb: this.state.styles[0].photos[0].thumbnail_url,
-      }))
-      .catch((err) => console.log('ERROR:', err));
+    this.setState({
+      currentImages: this.state.styles[0].photos,
+      currentImage: this.state.styles[0].photos[0].url,
+      currentThumb: this.state.styles[0].photos[0].thumbnail_url,
+    })
   }
 
   handleImageChange(index) {

@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { getProductById } from '../../../requests.js';
+import { getProductById, getProductStyles } from '../../../requests.js';
 
 class ProductInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       product: {},
+      styles: [],
     };
   }
 
@@ -17,11 +18,21 @@ class ProductInfo extends React.Component {
     }))
     .then(() => console.log("PRODUCT: ", this.state.product) )
     .catch((err) => console.log('ERROR:', err));
+
+    getProductStyles(this.props.productId)
+      .then((res) => this.setState({
+        styles: res.data.results,
+      }))
   }
 
   render() {
     return(
-      <div id="product-info">Product Info</div>
+      <div id="product-info">
+        <p>star rating</p>
+        <p>{ this.state.product.category }</p>
+        <h3>{ this.state.product.name }</h3>
+        <p>price</p>
+      </div>
     )
   }
 }

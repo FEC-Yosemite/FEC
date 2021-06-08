@@ -1,0 +1,53 @@
+#overview {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+  border: 1px solid black;
+  padding: 15px;
+
+  h4 {
+    text-align: center;
+    grid-row: 1;
+  }
+
+  #container {
+    grid-row: 2;
+    display: grid;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    aside {
+      display: grid;
+      grid-column: 2;
+      text-align: center;
+
+      #product-info {
+        grid-row: 1;
+        border: 1px dotted black;
+      }
+
+      #add-to-cart {
+        grid-row: 2;
+        border: 1px dotted black;
+      }
+
+    }
+
+    .collapsed {
+      display: none;
+    }
+
+  }
+
+  .extended {
+    grid-template-columns: 1 !important;
+  }
+
+  .collapsed {
+    grid-template-columns: 2fr 1fr;
+  }
+
+
+}
+
