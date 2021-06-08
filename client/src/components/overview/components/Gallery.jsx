@@ -23,10 +23,10 @@ class Gallery extends React.Component {
       }))
       .then(() => this.setState({
         currentImages: this.state.styles[0].photos,
-        currentImage: this.state.styles[0].photos[0].url,
-        currentThumb: this.state.styles[0].photos[0].thumbnail_url,
+        currentImage: this.state.styles[0].photos[1].url,
+        currentThumb: this.state.styles[0].photos[1].thumbnail_url,
       }))
-      .then(() => this.handleThumbnailHighlight(0) )
+      .then(() => this.handleThumbnailHighlight(1) )
       .catch((err) => console.log('ERROR:', err));
   }
 
@@ -96,8 +96,8 @@ class Gallery extends React.Component {
   handleMouseMove(e) {
     let prodImage = e.target;
     // console.log(e);
-    let left = Math.abs(e.offsetX/e.target.width)*100;
-    let top = Math.abs(e.offsetY/e.target.height)*100;
+    let left = -(e.offsetX/e.target.width)*100;
+    let top = (-(e.offsetY/e.target.height)*100)*10;
     console.log("LEFT: ",left)
     console.log("TOP: ",top)
     prodImage.style.objectPosition = `${left}px ${top}px`;
