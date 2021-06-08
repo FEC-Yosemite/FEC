@@ -10,7 +10,7 @@ class Gallery extends React.Component {
       currentImages: [],
       currentImage: '',
       currentThumb: '',
-      currentIndex: 0,
+      currentIndex: 1,
       collapsed: true,
       zoomed: false,
     };
@@ -26,7 +26,6 @@ class Gallery extends React.Component {
         currentImage: this.state.styles[0].photos[1].url,
         currentThumb: this.state.styles[0].photos[1].thumbnail_url,
       }))
-      .then(() => this.handleThumbnailHighlight(1) )
       .catch((err) => console.log('ERROR:', err));
   }
 
@@ -44,7 +43,6 @@ class Gallery extends React.Component {
       index++;
       this.handleImageChange(index);
     }
-    this.handleThumbnailHighlight(index);
   };
 
   handlePrevImageClick() {
@@ -56,51 +54,21 @@ class Gallery extends React.Component {
     this.handleThumbnailHighlight(index);
   };
 
-  handleArrowHide(index) {
-    let prevArrow = document.getElementsByClassName('prev-arrow')[0];
-    let nextArrow = document.getElementsByClassName('next-arrow')[0];
-    console.log(prevArrow);
-    if (index === 0) {
-      prevArrow.classList.add('hidden');
-      nextArrow.classList.remove('hidden');
-    } else if (index === this.state.currentImages.length - 1) {
-      prevArrow.classList.remove('hidden');
-      nextArrow.classList.add('hidden');
-    } else {
-      prevArrow.classList.remove('hidden');
-      nextArrow.classList.remove('hidden');
-    }
-  }
-
-  handleThumbnailHighlight(index) {
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach((thumbnail) => {
-      if (Number(thumbnail.dataset.index) === index) {
-        thumbnail.classList.add('current-thumb');
-      } else {
-        thumbnail.classList.remove('current-thumb');
-      }
-    });
-    this.handleArrowHide(index);
-  }
-
   handleThumbnailClick(e) {
     let index = Number(e.target.getAttribute('data-index'));
     this.setState({
       currentImage: e.target.getAttribute('data-url'),
       currentIndex: index,
     });
-    this.handleThumbnailHighlight(index);
   }
 
   handleMouseMove(e) {
     let prodImage = e.target;
-    // console.log(e);
-    let left = -(e.offsetX/e.target.width)*100;
-    let top = (-(e.offsetY/e.target.height)*100)*10;
+    let left = -(e.offsetX/e.target.width*100);
+    let top = e.offsetY/e.target.height*100;
     console.log("LEFT: ",left)
     console.log("TOP: ",top)
-    prodImage.style.objectPosition = `${left}px ${top}px`;
+    prodImage.style.objectPosition = `${left}px ${top}%`;
   }
 
   handleZoom(prodImage) {
@@ -127,7 +95,7 @@ class Gallery extends React.Component {
       this.setState({ collapsed: false });
     }
     this.handleZoom(prodImage);
-  };
+  }
 
   handleCollapse() {
     let prodImage = document.getElementById('product-image');
@@ -139,20 +107,49 @@ class Gallery extends React.Component {
     }
   }
 
+  renderThumbnails() {
+    if (this.state.collapsed === true) {
+      return this.state.currentImages.map((photo) => {
+        let index = this.state.currentImages.indexOf(photo);
+        if (index === this.state.currentIndex) {
+          return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail current-thumb" src={photo.thumbnail_url} alt=""></img>);
+        }
+          return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail" src={photo.thumbnail_url} alt=""></img>);
+      });
+    } else {
+      return this.state.currentImages.map((photo) => {
+        let index = this.state.currentImages.indexOf(photo);
+        if (index === this.state.currentIndex) {
+          return (<p data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail-icon current-thumb-icon">*</p>);
+        }
+          return (<p data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail-icon">*</p>);
+      });
+    }
+  }
+
+  renderPrevArrow() {
+    if (this.state.currentIndex !== 0) {
+      return <p className="prev-arrow" onClick={ this.handlePrevImageClick.bind(this) } >←</p>
+    }
+  }
+
+  renderNextArrow() {
+    if (this.state.currentIndex !== this.state.styles.length - 1) {
+      return <p className="next-arrow" onClick={ this.handleNextImageClick.bind(this) } >→</p>
+    }
+  }
+
   render() {
     return(
       <div id="gallery">
 
         <div id="jumbotron">
-          <p className="hidden prev-arrow" onClick={ this.handlePrevImageClick.bind(this) } >←</p>
+          {this.renderPrevArrow()}
           <img id="product-image" onClick={ this.handleImageClick.bind(this) } src={ this.state.currentImage } alt=""></img>
-          <p className="next-arrow" onClick={ this.handleNextImageClick.bind(this) } >→</p>
+          {this.renderNextArrow()}
 
           <div id="thumbnails">
-            {this.state.currentImages.map((photo) => {
-              let index = this.state.currentImages.indexOf(photo);
-              return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail" src={photo.thumbnail_url} alt=""></img>)
-            })}
+            {this.renderThumbnails()}
           </div>
 
           <span onClick={ this.handleCollapse.bind(this) }>X</span>
