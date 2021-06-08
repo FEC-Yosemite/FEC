@@ -6,9 +6,12 @@ class RelatedItems extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productsList: {}
+            productsList: { data: [] }
+            // window_size: 3,
+            // related_products: 
         };
         this.refreshProductsList = this.refreshProductsList.bind(this);
+        this.clickedProduct = this.clickedProduct.bind(this);
     }
 
     refreshProductsList() {
@@ -19,6 +22,10 @@ class RelatedItems extends Component {
             });
             console.log(`state: ${this.state.productsList}`);
         });
+    }
+
+    clickedProduct(e) {
+
     }
 
     componentDidMount() {
