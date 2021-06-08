@@ -102,8 +102,8 @@
     #close-modal {
       position: absolute;
       margin: auto;
-      bottom: 5%;
-      left: 50%;
+      top: 5%;
+      right: 2%;
       transform: translate(-50%, -50%);
     }
 
@@ -129,12 +129,13 @@
 
     #review-form {
 
+      input {
+        margin: 10px;
+      }
 
       #form-recommend {
 
-        input {
-          margin: 10px;
-        }
+
       }
 
       .row {
@@ -151,9 +152,33 @@
           margin: 0;
           padding: 0;
         }
+      }
 
-        input {
-          margin: 10px;
+      #form-content {
+
+        p {
+
+          label {
+            min-width: 25%;
+            clear: both;
+          }
+
+          input {
+            min-width: 75%;
+            clear: both;
+          }
+        }
+
+        #textarea-p * {
+          vertical-align: middle;
+
+          #form-body {
+            margin: 10px;
+            resize: none;
+            min-width: 75%;
+            width: 75%;
+            height: 5em;
+          }
         }
       }
     }
