@@ -1,6 +1,22 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-undef */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable-next-line class-methods-use-this */
 import React from 'react';
 
 import { getProductStyles } from '../../../requests.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faCircle as fasFaCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircle as farFaCircle } from '@fortawesome/free-regular-svg-icons';
 
 class Gallery extends React.Component {
   constructor(props) {
@@ -23,8 +39,8 @@ class Gallery extends React.Component {
       }))
       .then(() => this.setState({
         currentImages: this.state.styles[0].photos,
-        currentImage: this.state.styles[0].photos[1].url,
-        currentThumb: this.state.styles[0].photos[1].thumbnail_url,
+        currentImage: this.state.styles[0].photos[0].url,
+        currentThumb: this.state.styles[0].photos[0].thumbnail_url,
       }))
       .catch((err) => console.log('ERROR:', err));
   }
@@ -43,19 +59,19 @@ class Gallery extends React.Component {
       index++;
       this.handleImageChange(index);
     }
-  };
+  }
 
   handlePrevImageClick() {
     let index = this.state.currentIndex;
     if (index !== 0) {
       index--;
       this.handleImageChange(index);
-    };
+    }
     this.handleThumbnailHighlight(index);
-  };
+  }
 
   handleThumbnailClick(e) {
-    let index = Number(e.target.getAttribute('data-index'));
+    const index = Number(e.target.getAttribute('data-index'));
     this.setState({
       currentImage: e.target.getAttribute('data-url'),
       currentIndex: index,
@@ -63,11 +79,11 @@ class Gallery extends React.Component {
   }
 
   handleMouseMove(e) {
-    let prodImage = e.target;
-    let left = -(e.offsetX/e.target.width*100);
-    let top = e.offsetY/e.target.height*100;
-    console.log("LEFT: ",left)
-    console.log("TOP: ",top)
+    const prodImage = e.target;
+    const left = -(e.offsetX / e.target.width * 100);
+    const top = e.offsetY / e.target.height * 100;
+    console.log('LEFT: ', left);
+    console.log('TOP: ', top);
     prodImage.style.objectPosition = `${left}px ${top}%`;
   }
 
@@ -87,7 +103,7 @@ class Gallery extends React.Component {
   }
 
   handleImageClick(e) {
-    let prodImage = e.target;
+    const prodImage = e.target;
     if (this.state.collapsed === true) {
       document.getElementById('info-aside').classList.add('collapsed');
       document.getElementById('container').classList.remove('collapsed');
@@ -98,7 +114,7 @@ class Gallery extends React.Component {
   }
 
   handleCollapse() {
-    let prodImage = document.getElementById('product-image');
+    const prodImage = document.getElementById('product-image');
     if (this.state.collapsed === false) {
       document.getElementById('info-aside').classList.remove('collapsed');
       document.getElementById('container').classList.add('collapsed');
@@ -110,52 +126,50 @@ class Gallery extends React.Component {
   renderThumbnails() {
     if (this.state.collapsed === true) {
       return this.state.currentImages.map((photo) => {
-        let index = this.state.currentImages.indexOf(photo);
+        const index = this.state.currentImages.indexOf(photo);
         if (index === this.state.currentIndex) {
-          return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail current-thumb" src={photo.thumbnail_url} alt=""></img>);
+          return (<img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />);
         }
-          return (<img data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail" src={photo.thumbnail_url} alt=""></img>);
-      });
-    } else {
-      return this.state.currentImages.map((photo) => {
-        let index = this.state.currentImages.indexOf(photo);
-        if (index === this.state.currentIndex) {
-          return (<p data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail-icon current-thumb-icon">*</p>);
-        }
-          return (<p data-url={photo.url} data-index={index} onClick={ this.handleThumbnailClick.bind(this) } className="thumbnail-icon">*</p>);
+        return (<img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />);
       });
     }
+    return this.state.currentImages.map((photo) => {
+      const index = this.state.currentImages.indexOf(photo);
+      if (index === this.state.currentIndex) {
+        return (<FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={fasFaCircle} />);
+      }
+      return (<FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={farFaCircle} />);
+    });
   }
 
   renderPrevArrow() {
     if (this.state.currentIndex !== 0) {
-      return <p className="prev-arrow" onClick={ this.handlePrevImageClick.bind(this) } >←</p>
+      return <FontAwesomeIcon className="prev-arrow" onClick={this.handlePrevImageClick.bind(this)} icon={faArrowLeft} />;
     }
   }
 
   renderNextArrow() {
     if (this.state.currentIndex !== this.state.styles.length - 1) {
-      return <p className="next-arrow" onClick={ this.handleNextImageClick.bind(this) } >→</p>
+      return <FontAwesomeIcon className="next-arrow" onClick={this.handleNextImageClick.bind(this)} icon={faArrowRight} />;
     }
   }
 
   render() {
-    return(
+    return (
       <div id="gallery">
 
         <div id="jumbotron">
           {this.renderPrevArrow()}
-          <img id="product-image" onClick={ this.handleImageClick.bind(this) } src={ this.state.currentImage } alt=""></img>
-          {this.renderNextArrow()}
 
+          <img id="product-image" onClick={this.handleImageClick.bind(this)} src={this.state.currentImage} alt="" />
+          {this.renderNextArrow()}
           <div id="thumbnails">
             {this.renderThumbnails()}
           </div>
 
-          <span onClick={ this.handleCollapse.bind(this) }>X</span>
+          <span onClick={this.handleCollapse.bind(this)}>X</span>
 
         </div>
-
 
       </div>
     );
