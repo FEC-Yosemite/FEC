@@ -6,23 +6,9 @@ class ProductInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      product: {},
-      styles: [],
+      product: this.props.product,
+      styles: this.props.styles,
     };
-  }
-
-  componentDidMount() {
-    getProductById(this.props.productId)
-    .then((res) => this.setState({
-      product: res.data,
-    }))
-    .then(() => console.log("PRODUCT: ", this.state.product) )
-    .catch((err) => console.log('ERROR:', err));
-
-    getProductStyles(this.props.productId)
-      .then((res) => this.setState({
-        styles: res.data.results,
-      }))
   }
 
   render() {
