@@ -273,99 +273,126 @@ class WriteReview extends React.Component {
                   <p>{ this.state.size }</p>
                   Size:
                   <input onChange={ this.handleSize } type='radio' id='size-1' name='size' value='1'></input>
-                  <label for='size-1'>1</label>
+                  <label>1</label>
                   <input onChange={ this.handleSize } type='radio' id='size-2' name='size' value='2'></input>
-                  <label for='size-2'>2</label>
+                  <label>2</label>
                   <input onChange={ this.handleSize } type='radio' id='size-3' name='size' value='3'></input>
-                  <label for='size-3'>3</label>
+                  <label>3</label>
                   <input onChange={ this.handleSize } type='radio' id='size-4' name='size' value='4'></input>
-                  <label for='size-4'>4</label>
+                  <label>4</label>
                   <input onChange={ this.handleSize } type='radio' id='size-5' name='size' value='5'></input>
-                  <label for='size-5'>5</label>
+                  <label>5</label>
                 </div>
 
                 <div id='chars-width'>
                   <p>{ this.state.width }</p>
                   Width:
                   <input onChange={ this.handleWidth } type='radio' id='width-1' name='width' value='1'></input>
-                  <label for='width-1'>1</label>
+                  <label>1</label>
                   <input onChange={ this.handleWidth } type='radio' id='width-2' name='width' value='2'></input>
-                  <label for='width-2'>2</label>
+                  <label>2</label>
                   <input onChange={ this.handleWidth } type='radio' id='width-3' name='width' value='3'></input>
-                  <label for='width-3'>3</label>
+                  <label>3</label>
                   <input onChange={ this.handleWidth } type='radio' id='width-4' name='width' value='4'></input>
-                  <label for='width-4'>4</label>
+                  <label>4</label>
                   <input onChange={ this.handleWidth } type='radio' id='width-5' name='width' value='5'></input>
-                  <label for='width-5'>5</label>
+                  <label>5</label>
                 </div>
 
                 <div id='chars-comfort'>
                   <p>{ this.state.comfort }</p>
                   Comfort:
                   <input onChange={ this.handleComfort } type='radio' id='comfort-1' name='comfort' value='1'></input>
-                  <label for='comfort-1'>1</label>
+                  <label>1</label>
                   <input onChange={ this.handleComfort } type='radio' id='comfort-2' name='comfort' value='2'></input>
-                  <label for='comfort-2'>2</label>
+                  <label>2</label>
                   <input onChange={ this.handleComfort } type='radio' id='comfort-3' name='comfort' value='3'></input>
-                  <label for='comfort-3'>3</label>
+                  <label>3</label>
                   <input onChange={ this.handleComfort } type='radio' id='comfort-4' name='comfort' value='4'></input>
-                  <label for='comfort-4'>4</label>
+                  <label>4</label>
                   <input onChange={ this.handleComfort } type='radio' id='comfort-5' name='comfort' value='5'></input>
-                  <label for='comfort-5'>5</label>
+                  <label>5</label>
                 </div>
 
                 <div id='chars-quality'>
                   <p>{ this.state.quality }</p>
                   Quality:
                   <input onChange={ this.handleQuality } type='radio' id='quality-1' name='quality' value='1'></input>
-                  <label for='quality-1'>1</label>
+                  <label>1</label>
                   <input onChange={ this.handleQuality } type='radio' id='quality-2' name='quality' value='2'></input>
-                  <label for='quality-2'>2</label>
+                  <label>2</label>
                   <input onChange={ this.handleQuality } type='radio' id='quality-3' name='quality' value='3'></input>
-                  <label for='quality-3'>3</label>
+                  <label>3</label>
                   <input onChange={ this.handleQuality } type='radio' id='quality-4' name='quality' value='4'></input>
-                  <label for='quality-4'>4</label>
+                  <label>4</label>
                   <input onChange={ this.handleQuality } type='radio' id='quality-5' name='quality' value='5'></input>
-                  <label for='quality-5'>5</label>
+                  <label>5</label>
                 </div>
 
                 <div id='chars-length'>
                   <p>{ this.state.length }</p>
                   Length:
                   <input onChange={ this.handleLength } type='radio' id='length-1' name='length' value='1'></input>
-                  <label for='length-1'>1</label>
+                  <label>1</label>
                   <input onChange={ this.handleLength } type='radio' id='length-2' name='length' value='2'></input>
-                  <label for='length-2'>2</label>
+                  <label>2</label>
                   <input onChange={ this.handleLength } type='radio' id='length-3' name='length' value='3'></input>
-                  <label for='length-3'>3</label>
+                  <label>3</label>
                   <input onChange={ this.handleLength } type='radio' id='length-4' name='length' value='4'></input>
-                  <label for='length-4'>4</label>
+                  <label>4</label>
                   <input onChange={ this.handleLength } type='radio' id='length-5' name='length' value='5'></input>
-                  <label for='length-5'>5</label>
+                  <label>5</label>
                 </div>
 
                 <div id='chars-fit'>
                   <p>{ this.state.fit }</p>
                   Fit:
                   <input onChange={ this.handleFit } type='radio' id='fit-1' name='fit' value='1'></input>
-                  <label for='fit-1'>1</label>
+                  <label>1</label>
                   <input onChange={ this.handleFit } type='radio' id='fit-2' name='fit' value='2'></input>
-                  <label for='fit-2'>2</label>
+                  <label>2</label>
                   <input onChange={ this.handleFit } type='radio' id='fit-3' name='fit' value='3'></input>
-                  <label for='fit-3'>3</label>
+                  <label>3</label>
                   <input onChange={ this.handleFit } type='radio' id='fit-4' name='fit' value='4'></input>
-                  <label for='fit-4'>4</label>
+                  <label>4</label>
                   <input onChange={ this.handleFit } type='radio' id='fit-5' name='fit' value='5'></input>
-                  <label for='fit-5'>5</label>
+                  <label>5</label>
                 </div>
               </div>
-              <div>
-                <input></input> <br></br>
-                <input></input> <br></br>
+              <div id='form-content'>
+                <h3>Review</h3>
+                <p>
+                <label>
+                  Name:
+                  <input id='form-name' type='text'></input>
+                </label>
+                </p>
+
+                <p>
+                <label>
+                  Email:
+                  <input id='form-email' type='email'></input>
+                </label>
+                </p>
+
+                <p>
+                <label>
+                  Summary:
+                  <input id='form-summary' type='text'></input>
+                </label>
+                </p>
+
+                <p id='textarea-p'>
+                  <label>
+                    Body:
+                    <textarea id='form-body' type='text'></textarea>
+                  </label>
+                </p>
               </div>
             </div>
+          <button id='form-submit' onClick={ this.handleSubmit }>Submit</button>
           </form>
-          <button id='close-modal' onClick={ this.props.close }>Close</button>
+          <button id='close-modal' onClick={ this.props.close }>X</button>
         </div>
       )
     } else {
