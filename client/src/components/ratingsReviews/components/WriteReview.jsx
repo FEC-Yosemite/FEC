@@ -10,12 +10,14 @@ class WriteReview extends React.Component {
       hovered: 0,
       stars: null,
       form: {
-        size: null,
-        width: null,
-        comfort: null,
-        quality: null,
-        length: null,
-        fit: null,
+        characteristics: {
+          size: null,
+          width: null,
+          comfort: null,
+          quality: null,
+          length: null,
+          fit: null
+        },
         recommend: null,
         name: '',
         email: '',
@@ -37,42 +39,47 @@ class WriteReview extends React.Component {
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.fileInput = React.createRef();
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    let form = this.state.form;
+
+    console.log(`Selected file - ${this.fileInput.current.files[0].name}`);
   }
 
   handleInputChange(e) {
     let val = e.target.value;
     let name = e.target.name;
 
-    this.setState({
+    this.setState(prevState => ({
       form: {
-        ...this.state.form,
+        ...prevState.form,
         [name]: val
       }
-    })
-
-    console.log(this.state);
+    }))
   }
 
   handleRadioChange(e) {
     let num = parseInt(e.target.value);
     let name = e.target.name;
 
-    console.log(num, name);
-
-    this.setState({
+    this.setState(prevState => ({
       form: {
-        ...this.state.form,
-        [name]: num
+        ...prevState.form,
+        characteristics: {
+          ...prevState.form.characteristics,
+          [name]: num
+        }
       }
-    })
+    }))
   }
 
   getFit() {
-    let fit = this.state.form.fit;
+    let fit = this.state.form.characteristics.fit;
 
     if (fit === 1) {
       return 'Runs tight'
@@ -94,7 +101,7 @@ class WriteReview extends React.Component {
   }
 
   getLength() {
-    let length = this.state.form.length
+    let length = this.state.form.characteristics.length
 
     if (length === 1) {
       return 'Runs short'
@@ -116,7 +123,7 @@ class WriteReview extends React.Component {
   }
 
   getQuality() {
-    let quality = this.state.form.quality;
+    let quality = this.state.form.characteristics.quality;
 
     if (quality === 1) {
       return 'Poor'
@@ -138,7 +145,7 @@ class WriteReview extends React.Component {
   }
 
   getComfort() {
-    let comfort = this.state.form.comfort;
+    let comfort = this.state.form.characteristics.comfort;
 
     if (comfort === 1) {
       return 'Uncomfortable'
@@ -160,7 +167,7 @@ class WriteReview extends React.Component {
   }
 
   getWidth() {
-    let width = this.state.form.width;
+    let width = this.state.form.characteristics.width;
 
     if (width === 1) {
       return 'Too narrow'
@@ -182,7 +189,7 @@ class WriteReview extends React.Component {
   }
 
   getSize() {
-    let size = this.state.form.size
+    let size = this.state.form.characteristics.size
 
     if (size === 1) {
       return 'A size too small'
@@ -244,6 +251,29 @@ class WriteReview extends React.Component {
         hovered: 0
       })
     }
+  }
+
+  handleClose() {
+    this.setState({
+      hovered: 0,
+      stars: null,
+      form: {
+        characteristics: {
+          size: null,
+          width: null,
+          comfort: null,
+          quality: null,
+          length: null,
+          fit: null
+        },
+        recommend: null,
+        name: '',
+        email: '',
+        summary: '',
+        body: ''
+      }
+    })
+    this.props.close();
   }
 
   renderStars() {
@@ -412,11 +442,18 @@ class WriteReview extends React.Component {
                     <textarea id='form-body' type='text' name='body' onChange={ this.handleInputChange }></textarea>
                   </label>
                 </p>
+
+                <p id='file-p'>
+                  <label>
+                    Photos:
+                    <input id='form-file' type='file' name='photos' ref={ this.fileInput }></input>
+                  </label>
+                </p>
               </div>
             </div>
           <button id='form-submit' onClick={ this.handleSubmit }>Submit</button>
           </form>
-          <button id='close-modal' onClick={ this.props.close }>X</button>
+          <button id='close-modal' onClick={ this.handleClose }>X</button>
         </div>
       )
     } else {
