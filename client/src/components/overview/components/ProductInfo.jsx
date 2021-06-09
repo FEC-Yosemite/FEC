@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { getProductById, getProductStyles } from '../../../requests.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar as farFaStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar as fasFaStar } from '@fortawesome/free-solid-svg-icons';
 
 class ProductInfo extends React.Component {
   constructor(props) {
@@ -10,11 +12,16 @@ class ProductInfo extends React.Component {
       styles: this.props.styles,
       currentStyle: this.props.styles[0],
       reviews: this.props.reviews,
+      avgRating: 0,
     };
   }
 
   componentDidMount() {
+    this.setState({ avgRating: this.calcReviewAvg() })
+  }
 
+  renderStars() {
+    return <FontAwesomeIcon icon={fasFaStar} />
   }
 
   calcReviewAvg() {
@@ -33,7 +40,8 @@ class ProductInfo extends React.Component {
   render() {
     return(
       <div id="product-info">
-         { <p>Average rating: { this.calcReviewAvg() }</p> }
+         { <p>Average rating: { this.state.avgRating }</p>}
+         { this.renderStars() }
         <p>{ this.state.product.category }</p>
         <h3>{ this.state.product.name }</h3>
 
