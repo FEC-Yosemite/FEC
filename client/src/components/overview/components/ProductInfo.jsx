@@ -3,6 +3,9 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as farFaStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasFaStar } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+import { faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
+import { faPinterestSquare } from '@fortawesome/free-brands-svg-icons';
 
 class ProductInfo extends React.Component {
   constructor(props) {
@@ -51,7 +54,9 @@ class ProductInfo extends React.Component {
         <p className="sale-price" >{ this.state.currentStyle.sale_price }</p>
         </> :
         <p className="regular-price">{ this.state.currentStyle.original_price }</p> }
-
+        <a href="/" className="brand"><FontAwesomeIcon icon={faFacebookSquare} /></a>
+        <a href="/" className="brand"><FontAwesomeIcon icon={faTwitterSquare} /></a>
+        <a href="/" className="brand"><FontAwesomeIcon icon={faPinterestSquare} /></a>
       </div>
     )
   }
