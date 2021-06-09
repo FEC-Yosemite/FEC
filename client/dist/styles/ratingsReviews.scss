@@ -169,6 +169,10 @@
           }
         }
 
+        #file-p {
+          float: right;
+        }
+
         #textarea-p * {
           vertical-align: middle;
 
@@ -180,6 +184,14 @@
             height: 5em;
           }
         }
+
+      }
+
+      #form-submit {
+        position: absolute;
+        margin: auto;
+        bottom: 3%;
+        transform: translate(-50%, -50%);
       }
     }
 

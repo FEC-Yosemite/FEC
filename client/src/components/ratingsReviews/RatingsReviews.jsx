@@ -29,30 +29,30 @@ class RatingsReviews extends React.Component {
 
   componentDidMount() {
     getReviews(this.props.productId, null, 10, 'newest')
-      .then((res) => this.setState({
+      .then((res) => this.setState(prevState => ({
         reviews: {
-          ...this.state.reviews,
+          ...prevState.reviews,
           newest: res.data.results
         }
-      }))
+      })))
       .catch((err) => console.log('ERROR:', err));
 
     getReviews(this.props.productId, null, 10, 'helpful')
-      .then((res) => this.setState({
+      .then((res) => this.setState(prevState => ({
         reviews: {
-          ...this.state.reviews,
+          ...prevState.reviews,
           helpful: res.data.results
         }
-      }))
+      })))
       .catch((err) => console.log('ERROR:', err));
 
     getReviews(this.props.productId, null, 10, 'relevant')
-      .then((res) => this.setState({
+      .then((res) => this.setState(prevState => ({
         reviews: {
-          ...this.state.reviews,
+          ...prevState.reviews,
           relevant: res.data.results
         }
-      }))
+      })))
       .catch((err) => console.log('ERROR:', err));
   }
 
