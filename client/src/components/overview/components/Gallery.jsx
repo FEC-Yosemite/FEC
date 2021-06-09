@@ -31,14 +31,15 @@ class Gallery extends React.Component {
       currentIndex: 0,
       collapsed: true,
       zoomed: false,
+      currentStyle: this.props.currentStyle,
     };
   }
 
   componentDidMount() {
     this.setState({
-      currentImages: this.state.styles[0].photos,
-      currentImage: this.state.styles[0].photos[0].url,
-      currentThumb: this.state.styles[0].photos[0].thumbnail_url,
+      currentImages: this.state.styles[this.state.currentStyle].photos,
+      currentImage: this.state.styles[this.state.currentStyle].photos[0].url,
+      currentThumb: this.state.styles[this.state.currentStyle].photos[0].thumbnail_url,
     })
   }
 

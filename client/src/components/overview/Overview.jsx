@@ -22,6 +22,7 @@ class Overview extends React.Component {
       syncedRatings: false,
       reviewCount: 0,
       syncedReviewCount: false,
+      currentStyle: 0,
     };
   }
 
@@ -51,8 +52,11 @@ class Overview extends React.Component {
         reviewCount: res.data.count,
         syncedReviewCount: true,
       }))
+  }
 
-
+  handleStyleChange(e) {
+    const index = Number(e.target.getAttribute('data-index'));
+    this.setState({ currentStyle: index });
   }
 
   render() {
@@ -61,12 +65,13 @@ class Overview extends React.Component {
         <h4>site-wide announcement message! - sale / discount <strong>offer</strong> - <a href="blank">new product highlight</a></h4>
         <div id="container" className="collapsed">
           { this.state.syncedStyles ?
-          <Gallery productId={ this.state.currentProduct } styles={ this.state.styles } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+          <Gallery productId={ this.state.currentProduct } styles={ this.state.styles } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
           <aside id="info-aside">
             { this.state.syncedStyles && this.state.syncedProduct && this.state.syncedRatings && this.state.syncedReviewCount ?
             <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
-            <StylePicker />
+
+            { this.state.syncedStyles ? <StylePicker styles={ this.state.styles } changeStyle={ this.handleStyleChange.bind(this) } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
             <AddToCart />
           </aside>
         </div>
