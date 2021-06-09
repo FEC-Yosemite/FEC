@@ -14,8 +14,9 @@ class ProductInfo extends React.Component {
       product: this.props.product,
       styles: this.props.styles,
       currentStyle: this.props.styles[0],
-      reviews: this.props.reviews,
+      ratings: this.props.ratings,
       avgRating: 0,
+      reviewCount: this.props.reviewCount,
     };
   }
 
@@ -24,17 +25,17 @@ class ProductInfo extends React.Component {
   }
 
   renderStars() {
-    return <FontAwesomeIcon icon={fasFaStar} />
+    return <><FontAwesomeIcon icon={farFaStar} /><FontAwesomeIcon icon={farFaStar} /><FontAwesomeIcon icon={farFaStar} /><FontAwesomeIcon icon={farFaStar} /><FontAwesomeIcon icon={farFaStar} /></>
   }
 
   calcReviewAvg() {
-    const keys = Object.keys(this.state.reviews.ratings);
+    const keys = Object.keys(this.state.ratings);
     if (keys.length === 0) return 'No reviews yet';
     let total = 0;
     let count = 0;
     keys.map((key) => {
-      total += Number(key) * Number(this.state.reviews.ratings[key]);
-      count += Number(this.state.reviews.ratings[key]);
+      total += Number(key) * Number(this.state.ratings[key]);
+      count += Number(this.state.ratings[key]);
     })
     let avg = (total / count).toFixed(1);
     return avg;
@@ -44,6 +45,7 @@ class ProductInfo extends React.Component {
     return(
       <div id="product-info">
          { <p>Average rating: { this.state.avgRating }</p>}
+         { <a href="#reviews" >See all { this.state.reviewCount } reviews</a>}
          { this.renderStars() }
         <p>{ this.state.product.category }</p>
         <h3>{ this.state.product.name }</h3>

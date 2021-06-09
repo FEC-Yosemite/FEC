@@ -4,7 +4,7 @@ import ProductInfo from './components/ProductInfo.jsx';
 import StylePicker from './components/StylePicker.jsx';
 import AddToCart from './components/AddToCart.jsx';
 
-import { getProductById, getProductStyles, getReviewMeta } from '../../requests.js';
+import { getProductById, getProductStyles, getReviewMeta, getReviews } from '../../requests.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
@@ -17,8 +17,10 @@ class Overview extends React.Component {
       syncedProduct: false,
       styles: [],
       syncedStyles: false,
-      reviewMeta: {},
-      syncedReview: false,
+      ratings: {},
+      syncedRatings: false,
+      reviewCount: 0,
+      syncedReviewCount: false,
     };
   }
 
@@ -39,9 +41,17 @@ class Overview extends React.Component {
 
     getReviewMeta(this.state.currentProduct)
       .then((res) => this.setState({
-        reviewMeta: res.data,
-        syncedReview: true,
+        ratings: res.data.ratings,
+        syncedRatings: true,
       }))
+
+    getReviews(this.state.currentProduct)
+      .then((res) => this.setState({
+        reviewCount: res.data.count,
+        syncedReviewCount: true,
+      }))
+
+
   }
 
   render() {
@@ -53,8 +63,8 @@ class Overview extends React.Component {
           <Gallery productId={ this.state.currentProduct } styles={ this.state.styles } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin />}
 
           <aside id="info-aside">
-            {this.state.syncedStyles && this.state.syncedProduct && this.state.syncedReview ?
-            <ProductInfo product={ this.state.product } styles={ this.state.styles } reviews={ this.state.reviewMeta } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin />}
+            {this.state.syncedStyles && this.state.syncedProduct && this.state.syncedRatings && this.state.syncedReviewCount ?
+            <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin />}
             <StylePicker />
             <AddToCart />
           </aside>
