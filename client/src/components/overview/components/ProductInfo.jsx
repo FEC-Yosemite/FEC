@@ -19,6 +19,7 @@ class ProductInfo extends React.Component {
 
   calcReviewAvg() {
     const keys = Object.keys(this.state.reviews.ratings);
+    if (keys.length === 0) return 'No reviews yet';
     let total = 0;
     let count = 0;
     keys.map((key) => {
@@ -32,7 +33,7 @@ class ProductInfo extends React.Component {
   render() {
     return(
       <div id="product-info">
-         { this.state.reviews.ratings.length !== 0 ? <p>Average rating: { this.calcReviewAvg() }</p> : <p>No reviews yet</p> }
+         { <p>Average rating: { this.calcReviewAvg() }</p> }
         <p>{ this.state.product.category }</p>
         <h3>{ this.state.product.name }</h3>
 
