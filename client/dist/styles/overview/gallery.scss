@@ -34,12 +34,18 @@
       transform:scale(2.5);
     }
 
-    svg {
+    svg:not(.chevron-down) {
       color: black;
       font-size: 50px;
       cursor: pointer;
       margin: auto;
       bottom: 250px;
+    }
+
+    .chevron-down {
+      color: white;
+      cursor: pointer;
+      font-size: 50px;
     }
 
     .prev-arrow {

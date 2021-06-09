@@ -17,6 +17,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as fasFaCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farFaCircle } from '@fortawesome/free-regular-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 class Gallery extends React.Component {
   constructor(props) {
@@ -122,16 +123,32 @@ class Gallery extends React.Component {
     }
   }
 
+  scrollThumbnailsDown() {
+
+  }
+
+  renderThumbnailCarousel() {
+    return <h1>TBD</h1>
+  }
+
   renderThumbnails() {
-    if (this.state.collapsed === true) {
-      return this.state.currentImages.map((photo) => {
-        const index = this.state.currentImages.indexOf(photo);
-        if (index === this.state.currentIndex) {
-          return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
-        }
-        return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
-      });
+    if (this.state.currentImages.length > 7 && this.state.collapsed === true) {
+      return this.renderThumbnailCarousel();
+    } else {
+      if (this.state.collapsed === true) {
+        return this.state.currentImages.map((photo) => {
+          const index = this.state.currentImages.indexOf(photo);
+          if (index === this.state.currentIndex) {
+            return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+          }
+          return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+        });
+      }
+      return this.renderThumbnailIcons();
     }
+  }
+
+  renderThumbnailIcons() {
     return this.state.currentImages.map((photo) => {
       const index = this.state.currentImages.indexOf(photo);
       if (index === this.state.currentIndex) {
@@ -165,9 +182,8 @@ class Gallery extends React.Component {
           {this.renderNextArrow()}
           <div id="thumbnails">
             {this.renderThumbnails()}
+            {this.state.currentImages.length > 7 && <FontAwesomeIcon onClick={ this.scrollThumbnailsDown } className="chevron-down" icon={ faChevronDown } />}
           </div>
-
-
 
         </div>
 
