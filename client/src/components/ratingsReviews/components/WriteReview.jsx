@@ -9,174 +9,205 @@ class WriteReview extends React.Component {
     this.state = {
       hovered: 0,
       stars: null,
-      size: 'None Selected',
-      width: 'None Selected',
-      comfort: 'None Selected',
-      quality: 'None Selected',
-      length: 'None Selected',
-      fit: 'None Selected'
+      form: {
+        characteristics: {
+          size: null,
+          width: null,
+          comfort: null,
+          quality: null,
+          length: null,
+          fit: null
+        },
+        recommend: null,
+        name: '',
+        email: '',
+        summary: '',
+        body: ''
+      }
     }
 
     this.renderStars = this.renderStars.bind(this);
     this.hoverStar = this.hoverStar.bind(this);
     this.unhoverStar = this.unhoverStar.bind(this);
     this.selectStar = this.selectStar.bind(this);
-    this.handleSize = this.handleSize.bind(this);
-    this.handleWidth = this.handleWidth.bind(this);
-    this.handleComfort = this.handleComfort.bind(this);
-    this.handleQuality = this.handleQuality.bind(this);
-    this.handleLength = this.handleLength.bind(this);
-    this.handleFit = this.handleFit.bind(this);
+    this.getSize = this.getSize.bind(this);
+    this.getWidth = this.getWidth.bind(this);
+    this.getComfort = this.getComfort.bind(this);
+    this.getQuality = this.getQuality.bind(this);
+    this.getLength = this.getLength.bind(this);
+    this.getFit = this.getFit.bind(this);
+    this.handleRadioChange = this.handleRadioChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.fileInput = React.createRef();
   }
 
-  handleFit(e) {
-    let text = '';
-    let num = parseInt(e.target.value);
+  handleSubmit(e) {
+    e.preventDefault();
+    let form = this.state.form;
 
-    if (num === 1) {
-      text = 'Runs tight'
-    }
-    if (num === 2) {
-      text = 'Runs slightly tight'
-    }
-    if (num === 3) {
-      text = 'Perfect'
-    }
-    if (num === 4) {
-      text = 'Runs slightly long'
-    }
-    if (num === 5) {
-      text = 'Runs long'
-    }
-
-    this.setState({
-      fit: text
-    })
+    console.log(`Selected file - ${this.fileInput.current.files[0].name}`);
   }
 
-  handleLength(e) {
-    let text = '';
-    let num = parseInt(e.target.value);
+  handleInputChange(e) {
+    let val = e.target.value;
+    let name = e.target.name;
 
-    if (num === 1) {
-      text = 'Runs short'
-    }
-    if (num === 2) {
-      text = 'Runs slightly short'
-    }
-    if (num === 3) {
-      text = 'Perfect'
-    }
-    if (num === 4) {
-      text = 'Runs slightly long'
-    }
-    if (num === 5) {
-      text = 'Runs long'
-    }
-
-    this.setState({
-      length: text
-    })
+    this.setState(prevState => ({
+      form: {
+        ...prevState.form,
+        [name]: val
+      }
+    }))
   }
 
-  handleQuality(e) {
-    let text = '';
+  handleRadioChange(e) {
     let num = parseInt(e.target.value);
+    let name = e.target.name;
 
-    if (num === 1) {
-      text = 'Poor'
-    }
-    if (num === 2) {
-      text = 'Below average'
-    }
-    if (num === 3) {
-      text = 'What I expected'
-    }
-    if (num === 4) {
-      text = 'Pretty great'
-    }
-    if (num === 5) {
-      text = 'Perfect'
-    }
-
-    this.setState({
-      quality: text
-    })
+    this.setState(prevState => ({
+      form: {
+        ...prevState.form,
+        characteristics: {
+          ...prevState.form.characteristics,
+          [name]: num
+        }
+      }
+    }))
   }
 
-  handleComfort(e) {
-    let text = '';
-    let num = parseInt(e.target.value);
+  getFit() {
+    let fit = this.state.form.characteristics.fit;
 
-    if (num === 1) {
-      text = 'Uncomfortable'
+    if (fit === 1) {
+      return 'Runs tight'
     }
-    if (num === 2) {
-      text = 'Slightly uncomfortable'
+    if (fit === 2) {
+      return 'Runs slightly tight'
     }
-    if (num === 3) {
-      text = 'Ok'
+    if (fit === 3) {
+      return 'Perfect'
     }
-    if (num === 4) {
-      text = 'Comfortable'
+    if (fit === 4) {
+      return 'Runs slightly long'
     }
-    if (num === 5) {
-      text = 'Perfect'
+    if (fit === 5) {
+      return 'Runs long'
+    } else {
+      return 'None selected'
     }
-
-    this.setState({
-      comfort: text
-    })
   }
 
-  handleWidth(e) {
-    let text = '';
-    let num = parseInt(e.target.value);
+  getLength() {
+    let length = this.state.form.characteristics.length
 
-    if (num === 1) {
-      text = 'Too narrow'
+    if (length === 1) {
+      return 'Runs short'
     }
-    if (num === 2) {
-      text = 'Slightly narrow'
+    if (length === 2) {
+      return 'Runs slightly short'
     }
-    if (num === 3) {
-      text = 'Perfect'
+    if (length === 3) {
+      return 'Perfect'
     }
-    if (num === 4) {
-      text = 'Slightly wide'
+    if (length === 4) {
+      return 'Runs slightly long'
     }
-    if (num === 5) {
-      text = 'Too wide'
+    if (length === 5) {
+      return 'Runs long'
+    } else {
+      return 'None selected'
     }
-
-    this.setState({
-      width: text
-    })
   }
 
-  handleSize(e) {
-    let text = '';
-    let num = parseInt(e.target.value);
+  getQuality() {
+    let quality = this.state.form.characteristics.quality;
 
-    if (num === 1) {
-      text = 'A size too small'
+    if (quality === 1) {
+      return 'Poor'
     }
-    if (num === 2) {
-      text = 'Half a size too small'
+    if (quality === 2) {
+      return 'Below average'
     }
-    if (num === 3) {
-      text = 'Perfect'
+    if (quality === 3) {
+      return 'What I expected'
     }
-    if (num === 4) {
-      text = 'Half a size too big'
+    if (quality === 4) {
+      return 'Pretty great'
     }
-    if (num === 5) {
-      text = 'A size too big'
+    if (quality === 5) {
+      return 'Perfect'
+    } else {
+      return 'None selected'
     }
+  }
 
-    this.setState({
-      size: text
-    })
+  getComfort() {
+    let comfort = this.state.form.characteristics.comfort;
+
+    if (comfort === 1) {
+      return 'Uncomfortable'
+    }
+    if (comfort === 2) {
+      return 'Slightly uncomfortable'
+    }
+    if (comfort === 3) {
+      return 'Ok'
+    }
+    if (comfort === 4) {
+      return 'Comfortable'
+    }
+    if (comfort === 5) {
+      return 'Perfect'
+    } else {
+      return 'None selected'
+    }
+  }
+
+  getWidth() {
+    let width = this.state.form.characteristics.width;
+
+    if (width === 1) {
+      return 'Too narrow'
+    }
+    if (width === 2) {
+      return 'Slightly narrow'
+    }
+    if (width === 3) {
+      return 'Perfect'
+    }
+    if (width === 4) {
+      return 'Slightly wide'
+    }
+    if (width === 5) {
+      return 'Too wide'
+    } else {
+      return 'None selected'
+    }
+  }
+
+  getSize() {
+    let size = this.state.form.characteristics.size
+
+    if (size === 1) {
+      return 'A size too small'
+    }
+    if (size === 2) {
+      return 'Half a size too small'
+    }
+    if (size === 3) {
+      return 'Perfect'
+    }
+    if (size === 4) {
+      return 'Half a size too big'
+    }
+    if (size === 5) {
+      return 'A size too big'
+    } else {
+      return 'None selected'
+    }
   }
 
   getRating(num) {
@@ -222,6 +253,29 @@ class WriteReview extends React.Component {
     }
   }
 
+  handleClose() {
+    this.setState({
+      hovered: 0,
+      stars: null,
+      form: {
+        characteristics: {
+          size: null,
+          width: null,
+          comfort: null,
+          quality: null,
+          length: null,
+          fit: null
+        },
+        recommend: null,
+        name: '',
+        email: '',
+        summary: '',
+        body: ''
+      }
+    })
+    this.props.close();
+  }
+
   renderStars() {
     let count = 1;
     let stars = [];
@@ -259,103 +313,103 @@ class WriteReview extends React.Component {
               <h3>Do you recommend this product?</h3>
                 <label>
                   Yes
-                  <input type='radio' id='recommend-yes' name='recommend' value='yes'></input>
+                  <input type='radio' id='recommend-yes' name='recommend' value='yes' onChange={ this.handleInputChange }></input>
                 </label>
                 <label>
                   No
-                  <input type='radio' id='recommend-no' name='recommend' value='no'></input>
+                  <input type='radio' id='recommend-no' name='recommend' value='no' onChange={ this.handleInputChange }></input>
                 </label>
             </div>
             <div className='row'>
               <div id='form-characteristics'>
                 <h3>Characteristics</h3>
                 <div id='chars-size'>
-                  <p>{ this.state.size }</p>
+                  <p>{ this.getSize() }</p>
                   Size:
-                  <input onChange={ this.handleSize } type='radio' id='size-1' name='size' value='1'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='size-1' name='size' value='1'></input>
                   <label>1</label>
-                  <input onChange={ this.handleSize } type='radio' id='size-2' name='size' value='2'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='size-2' name='size' value='2'></input>
                   <label>2</label>
-                  <input onChange={ this.handleSize } type='radio' id='size-3' name='size' value='3'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='size-3' name='size' value='3'></input>
                   <label>3</label>
-                  <input onChange={ this.handleSize } type='radio' id='size-4' name='size' value='4'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='size-4' name='size' value='4'></input>
                   <label>4</label>
-                  <input onChange={ this.handleSize } type='radio' id='size-5' name='size' value='5'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='size-5' name='size' value='5'></input>
                   <label>5</label>
                 </div>
 
                 <div id='chars-width'>
-                  <p>{ this.state.width }</p>
+                  <p>{ this.getWidth() }</p>
                   Width:
-                  <input onChange={ this.handleWidth } type='radio' id='width-1' name='width' value='1'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='width-1' name='width' value='1'></input>
                   <label>1</label>
-                  <input onChange={ this.handleWidth } type='radio' id='width-2' name='width' value='2'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='width-2' name='width' value='2'></input>
                   <label>2</label>
-                  <input onChange={ this.handleWidth } type='radio' id='width-3' name='width' value='3'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='width-3' name='width' value='3'></input>
                   <label>3</label>
-                  <input onChange={ this.handleWidth } type='radio' id='width-4' name='width' value='4'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='width-4' name='width' value='4'></input>
                   <label>4</label>
-                  <input onChange={ this.handleWidth } type='radio' id='width-5' name='width' value='5'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='width-5' name='width' value='5'></input>
                   <label>5</label>
                 </div>
 
                 <div id='chars-comfort'>
-                  <p>{ this.state.comfort }</p>
+                  <p>{ this.getComfort() }</p>
                   Comfort:
-                  <input onChange={ this.handleComfort } type='radio' id='comfort-1' name='comfort' value='1'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-1' name='comfort' value='1'></input>
                   <label>1</label>
-                  <input onChange={ this.handleComfort } type='radio' id='comfort-2' name='comfort' value='2'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-2' name='comfort' value='2'></input>
                   <label>2</label>
-                  <input onChange={ this.handleComfort } type='radio' id='comfort-3' name='comfort' value='3'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-3' name='comfort' value='3'></input>
                   <label>3</label>
-                  <input onChange={ this.handleComfort } type='radio' id='comfort-4' name='comfort' value='4'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-4' name='comfort' value='4'></input>
                   <label>4</label>
-                  <input onChange={ this.handleComfort } type='radio' id='comfort-5' name='comfort' value='5'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-5' name='comfort' value='5'></input>
                   <label>5</label>
                 </div>
 
                 <div id='chars-quality'>
-                  <p>{ this.state.quality }</p>
+                  <p>{ this.getQuality() }</p>
                   Quality:
-                  <input onChange={ this.handleQuality } type='radio' id='quality-1' name='quality' value='1'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='quality-1' name='quality' value='1'></input>
                   <label>1</label>
-                  <input onChange={ this.handleQuality } type='radio' id='quality-2' name='quality' value='2'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='quality-2' name='quality' value='2'></input>
                   <label>2</label>
-                  <input onChange={ this.handleQuality } type='radio' id='quality-3' name='quality' value='3'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='quality-3' name='quality' value='3'></input>
                   <label>3</label>
-                  <input onChange={ this.handleQuality } type='radio' id='quality-4' name='quality' value='4'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='quality-4' name='quality' value='4'></input>
                   <label>4</label>
-                  <input onChange={ this.handleQuality } type='radio' id='quality-5' name='quality' value='5'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='quality-5' name='quality' value='5'></input>
                   <label>5</label>
                 </div>
 
                 <div id='chars-length'>
-                  <p>{ this.state.length }</p>
+                  <p>{ this.getLength() }</p>
                   Length:
-                  <input onChange={ this.handleLength } type='radio' id='length-1' name='length' value='1'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='length-1' name='length' value='1'></input>
                   <label>1</label>
-                  <input onChange={ this.handleLength } type='radio' id='length-2' name='length' value='2'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='length-2' name='length' value='2'></input>
                   <label>2</label>
-                  <input onChange={ this.handleLength } type='radio' id='length-3' name='length' value='3'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='length-3' name='length' value='3'></input>
                   <label>3</label>
-                  <input onChange={ this.handleLength } type='radio' id='length-4' name='length' value='4'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='length-4' name='length' value='4'></input>
                   <label>4</label>
-                  <input onChange={ this.handleLength } type='radio' id='length-5' name='length' value='5'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='length-5' name='length' value='5'></input>
                   <label>5</label>
                 </div>
 
                 <div id='chars-fit'>
-                  <p>{ this.state.fit }</p>
+                  <p>{ this.getFit() }</p>
                   Fit:
-                  <input onChange={ this.handleFit } type='radio' id='fit-1' name='fit' value='1'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='fit-1' name='fit' value='1'></input>
                   <label>1</label>
-                  <input onChange={ this.handleFit } type='radio' id='fit-2' name='fit' value='2'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='fit-2' name='fit' value='2'></input>
                   <label>2</label>
-                  <input onChange={ this.handleFit } type='radio' id='fit-3' name='fit' value='3'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='fit-3' name='fit' value='3'></input>
                   <label>3</label>
-                  <input onChange={ this.handleFit } type='radio' id='fit-4' name='fit' value='4'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='fit-4' name='fit' value='4'></input>
                   <label>4</label>
-                  <input onChange={ this.handleFit } type='radio' id='fit-5' name='fit' value='5'></input>
+                  <input onChange={ this.handleRadioChange } type='radio' id='fit-5' name='fit' value='5'></input>
                   <label>5</label>
                 </div>
               </div>
@@ -364,35 +418,42 @@ class WriteReview extends React.Component {
                 <p>
                 <label>
                   Name:
-                  <input id='form-name' type='text'></input>
+                  <input id='form-name' type='text' name='name' onChange={ this.handleInputChange }></input>
                 </label>
                 </p>
 
                 <p>
                 <label>
                   Email:
-                  <input id='form-email' type='email'></input>
+                  <input id='form-email' type='email' name='email' onChange={ this.handleInputChange }></input>
                 </label>
                 </p>
 
                 <p>
                 <label>
                   Summary:
-                  <input id='form-summary' type='text'></input>
+                  <input id='form-summary' type='text' name='summary' onChange={ this.handleInputChange }></input>
                 </label>
                 </p>
 
                 <p id='textarea-p'>
                   <label>
                     Body:
-                    <textarea id='form-body' type='text'></textarea>
+                    <textarea id='form-body' type='text' name='body' onChange={ this.handleInputChange }></textarea>
+                  </label>
+                </p>
+
+                <p id='file-p'>
+                  <label>
+                    Photos:
+                    <input id='form-file' type='file' name='photos' ref={ this.fileInput }></input>
                   </label>
                 </p>
               </div>
             </div>
           <button id='form-submit' onClick={ this.handleSubmit }>Submit</button>
           </form>
-          <button id='close-modal' onClick={ this.props.close }>X</button>
+          <button id='close-modal' onClick={ this.handleClose }>X</button>
         </div>
       )
     } else {

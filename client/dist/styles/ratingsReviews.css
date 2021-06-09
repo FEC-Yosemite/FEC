@@ -148,6 +148,10 @@
   clear: both;
 }
 
+#ratings-reviews #modal #review-form #form-content #file-p {
+  float: right;
+}
+
 #ratings-reviews #modal #review-form #form-content #textarea-p * {
   vertical-align: middle;
 }
@@ -158,4 +162,11 @@
   min-width: 75%;
   width: 75%;
   height: 5em;
+}
+
+#ratings-reviews #modal #review-form #form-submit {
+  position: absolute;
+  margin: auto;
+  bottom: 3%;
+  transform: translate(-50%, -50%);
 }
