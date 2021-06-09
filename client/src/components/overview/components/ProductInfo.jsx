@@ -45,7 +45,7 @@ class ProductInfo extends React.Component {
     return(
       <div id="product-info">
          { <p>Average rating: { this.state.avgRating }</p>}
-         { <a href="#reviews" >See all { this.state.reviewCount } reviews</a>}
+         { (this.state.reviewCount !== 0) && <a href="#reviews" >See all { this.state.reviewCount } reviews</a>}
          { this.renderStars() }
         <p>{ this.state.product.category }</p>
         <h3>{ this.state.product.name }</h3>
