@@ -27,7 +27,7 @@ class Gallery extends React.Component {
       currentImages: [],
       currentImage: '',
       currentThumb: '',
-      currentIndex: 1,
+      currentIndex: 0,
       collapsed: true,
       zoomed: false,
     };

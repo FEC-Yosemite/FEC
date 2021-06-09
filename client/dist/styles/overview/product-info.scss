@@ -1,4 +1,15 @@
 #product-info {
   text-align: left;
   padding-left: 5%;
+
+  .original-price {
+    text-decoration: line-through;
+    display: inline;
+    color: red;
+  }
+
+  .sale-price {
+    margin-left: 2%;
+    display: inline;
+  }
 }
