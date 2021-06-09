@@ -32,7 +32,7 @@ class ProductInfo extends React.Component {
   render() {
     return(
       <div id="product-info">
-         { this.props.reviews.ratings ? <p>Average rating: { this.calcReviewAvg() }</p> : <p>No reviews yet</p> }
+         { this.state.reviews.ratings.length !== 0 ? <p>Average rating: { this.calcReviewAvg() }</p> : <p>No reviews yet</p> }
         <p>{ this.state.product.category }</p>
         <h3>{ this.state.product.name }</h3>
 
