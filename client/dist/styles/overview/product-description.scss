@@ -1,0 +1,13 @@
+#product-description {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  #description {
+    grid-column: 1;
+  }
+
+  #features {
+    grid-column: 2;
+  }
+
+}

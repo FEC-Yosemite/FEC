@@ -11,39 +11,49 @@
 /* eslint-disable-next-line class-methods-use-this */
 import React from 'react';
 
-import { getProductStyles } from '../../../requests.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as fasFaCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farFaCircle } from '@fortawesome/free-regular-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: [],
+      productId: this.props.productId,
+      styles: this.props.styles,
       currentImages: [],
       currentImage: '',
       currentThumb: '',
-      currentIndex: 1,
+      currentIndex: 0,
       collapsed: true,
       zoomed: false,
+      currentStyle: 0,
     };
+
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentStyle !== prevProps.currentStyle) {
+      this.setState({
+        currentStyle: this.props.currentStyle,
+        currentImages: this.state.styles[this.props.currentStyle].photos,
+        currentImage: this.state.styles[this.props.currentStyle].photos[0].url,
+        currentThumb: this.state.styles[this.props.currentStyle].photos[0].thumbnail_url,
+        currentIndex: 0,
+      })
+    }
   }
 
   componentDidMount() {
-    getProductStyles(this.props.productId)
-      .then((res) => this.setState({
-        styles: res.data.results,
-      }))
-      .then(() => this.setState({
-        currentImages: this.state.styles[0].photos,
-        currentImage: this.state.styles[0].photos[0].url,
-        currentThumb: this.state.styles[0].photos[0].thumbnail_url,
-      }))
-      .catch((err) => console.log('ERROR:', err));
+    this.setState({
+      currentImages: this.state.styles[this.state.currentStyle].photos,
+      currentImage: this.state.styles[this.state.currentStyle].photos[0].url,
+      currentThumb: this.state.styles[this.state.currentStyle].photos[0].thumbnail_url,
+    })
   }
 
   handleImageChange(index) {
@@ -127,16 +137,42 @@ class Gallery extends React.Component {
     }
   }
 
-  renderThumbnails() {
-    if (this.state.collapsed === true) {
-      return this.state.currentImages.map((photo) => {
-        const index = this.state.currentImages.indexOf(photo);
+  scrollThumbnailsDown() {
+
+  }
+
+  renderThumbnailCarousel() {
+    let count = 0;
+    return this.state.currentImages.map((photo) => {
+      count++;
+      const index = this.state.currentImages.indexOf(photo);
+      // if (count <= 7) {
         if (index === this.state.currentIndex) {
           return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
         }
         return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
-      });
+      // }
+    });
+  }
+
+  renderThumbnails() {
+    if (this.state.currentImages.length > 7 && this.state.collapsed === true) {
+      return this.renderThumbnailCarousel();
+    } else {
+      if (this.state.collapsed === true) {
+        return this.state.currentImages.map((photo) => {
+          const index = this.state.currentImages.indexOf(photo);
+          if (index === this.state.currentIndex) {
+            return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+          }
+          return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+        });
+      }
+      return this.renderThumbnailIcons();
     }
+  }
+
+  renderThumbnailIcons() {
     return this.state.currentImages.map((photo) => {
       const index = this.state.currentImages.indexOf(photo);
       if (index === this.state.currentIndex) {
@@ -153,7 +189,7 @@ class Gallery extends React.Component {
   }
 
   renderNextArrow() {
-    if (this.state.currentIndex !== this.state.styles.length - 1) {
+    if (this.state.currentIndex !== this.state.currentImages.length - 1) {
       return <FontAwesomeIcon className="next-arrow" onClick={this.handleNextImageClick.bind(this)} icon={faArrowRight} />;
     }
   }
@@ -170,9 +206,8 @@ class Gallery extends React.Component {
           {this.renderNextArrow()}
           <div id="thumbnails">
             {this.renderThumbnails()}
+            {this.state.currentImages.length > 7 && <FontAwesomeIcon onClick={ this.scrollThumbnailsDown } className="chevron-down" icon={ faChevronDown } />}
           </div>
-
-
 
         </div>
 

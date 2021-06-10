@@ -1,0 +1,28 @@
+#style-picker {
+  display: grid;
+  margin: auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+
+  .style-thumbnail {
+    cursor: pointer;
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin: 5px;
+  }
+
+  .selected-style {
+    position: relative;
+  }
+
+  .checked {
+    font-size: 25px;
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    z-index: 1;
+  }
+
+}

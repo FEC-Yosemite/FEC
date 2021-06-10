@@ -1,6 +1,14 @@
 @import 'general';
 
-@import 'overview';
+@import 'overview/overview';
+
+@import 'overview/gallery';
+
+@import 'overview/product-info';
+
+@import 'overview/style-picker';
+
+@import 'overview/product-description';
 
 @import 'relatedItems';
 
