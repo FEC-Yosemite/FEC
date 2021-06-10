@@ -146,12 +146,12 @@ class Gallery extends React.Component {
     return this.state.currentImages.map((photo) => {
       count++;
       const index = this.state.currentImages.indexOf(photo);
-      if (count <= 7) {
+      // if (count <= 7) {
         if (index === this.state.currentIndex) {
           return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
         }
         return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
-      }
+      // }
     });
   }
 
@@ -189,7 +189,7 @@ class Gallery extends React.Component {
   }
 
   renderNextArrow() {
-    if (this.state.currentIndex !== this.state.styles.length - 1) {
+    if (this.state.currentIndex !== this.state.currentImages.length - 1) {
       return <FontAwesomeIcon className="next-arrow" onClick={this.handleNextImageClick.bind(this)} icon={faArrowRight} />;
     }
   }
