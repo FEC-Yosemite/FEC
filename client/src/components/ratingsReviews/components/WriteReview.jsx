@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { addReview, getReviewMeta } from '../../../requests.js';
 
 class WriteReview extends React.Component {
   constructor(props) {
@@ -23,32 +24,115 @@ class WriteReview extends React.Component {
         email: '',
         summary: '',
         body: ''
-      }
+      },
+      incomplete: false,
+      badEmail: false
     }
 
     this.renderStars = this.renderStars.bind(this);
     this.hoverStar = this.hoverStar.bind(this);
     this.unhoverStar = this.unhoverStar.bind(this);
     this.selectStar = this.selectStar.bind(this);
-    this.getSize = this.getSize.bind(this);
-    this.getWidth = this.getWidth.bind(this);
-    this.getComfort = this.getComfort.bind(this);
-    this.getQuality = this.getQuality.bind(this);
-    this.getLength = this.getLength.bind(this);
-    this.getFit = this.getFit.bind(this);
+    this.describeSize = this.describeSize.bind(this);
+    this.describeWidth = this.describeWidth.bind(this);
+    this.describeComfort = this.describeComfort.bind(this);
+    this.describeQuality = this.describeQuality.bind(this);
+    this.describeLength = this.describeLength.bind(this);
+    this.describeFit = this.describeFit.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleRecommendChange = this.handleRecommendChange.bind(this);
+    this.getCharIds = this.getCharIds.bind(this);
+    this.completeCheck = this.completeCheck.bind(this);
+    this.emailCheck = this.emailCheck.bind(this);
 
     this.fileInput = React.createRef();
+  }
+
+  getCharIds() {
+    let result = {};
+    let chars = this.props.chars;
+    for (let key in chars) {
+      result[chars[key].id] = this.state.form.characteristics[key.toLowerCase()]
+    }
+    return result;
+  }
+
+  validateEmail(email) {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+      return (true)
+    }
+    return (false)
   }
 
   handleSubmit(e) {
     e.preventDefault();
     let form = this.state.form;
+    let files = this.fileInput.current.files
+    let complete = true;
 
-    console.log(`Selected file - ${this.fileInput.current.files[0].name}`);
+    let data = {
+      ...form,
+      characteristics: this.getCharIds(),
+      rating: this.state.stars,
+      product_id: this.props.productId,
+      photos: files.length > 0 ? files : []
+    }
+
+    for (let key in data) {
+      if (!data[key] && key !== 'recommend') {
+        complete = false;
+      }
+      if (key === 'recommend' && data[key] === null) {
+        complete = false;
+      }
+    }
+
+    for (let key in data.characteristics) {
+      if (!data.characteristics[key]) {
+        complete = false;
+      }
+    }
+
+    if (!this.validateEmail(data.email)) {
+      complete = false;
+      this.setState({
+        badEmail: true
+      })
+    }
+
+    if (complete) {
+      this.setState({
+        incomplete: false,
+        badEmail: false
+      })
+
+      addReview(data)
+        .then(res => console.log('Posted!'))
+        .then(() => this.props.requests())
+        .then(() => this.handleClose())
+        .catch(err => {
+          console.log('ERROR:', err)
+        });
+    } else {
+      this.setState({
+        incomplete: true
+      })
+    }
+  }
+
+  handleRecommendChange(e) {
+    let val;
+    e.target.value === 'yes' ? val = true : val = false;
+
+    this.setState(prevState => ({
+      form: {
+        ...prevState.form,
+        recommend: val
+      }
+    }))
   }
 
   handleInputChange(e) {
@@ -78,7 +162,7 @@ class WriteReview extends React.Component {
     }))
   }
 
-  getFit() {
+  describeFit() {
     let fit = this.state.form.characteristics.fit;
 
     if (fit === 1) {
@@ -100,7 +184,7 @@ class WriteReview extends React.Component {
     }
   }
 
-  getLength() {
+  describeLength() {
     let length = this.state.form.characteristics.length
 
     if (length === 1) {
@@ -122,7 +206,7 @@ class WriteReview extends React.Component {
     }
   }
 
-  getQuality() {
+  describeQuality() {
     let quality = this.state.form.characteristics.quality;
 
     if (quality === 1) {
@@ -144,7 +228,7 @@ class WriteReview extends React.Component {
     }
   }
 
-  getComfort() {
+  describeComfort() {
     let comfort = this.state.form.characteristics.comfort;
 
     if (comfort === 1) {
@@ -166,7 +250,7 @@ class WriteReview extends React.Component {
     }
   }
 
-  getWidth() {
+  describeWidth() {
     let width = this.state.form.characteristics.width;
 
     if (width === 1) {
@@ -188,7 +272,7 @@ class WriteReview extends React.Component {
     }
   }
 
-  getSize() {
+  describeSize() {
     let size = this.state.form.characteristics.size
 
     if (size === 1) {
@@ -271,7 +355,9 @@ class WriteReview extends React.Component {
         email: '',
         summary: '',
         body: ''
-      }
+      },
+      incomplete: false,
+      badEmail: false
     })
     this.props.close();
   }
@@ -294,6 +380,164 @@ class WriteReview extends React.Component {
     });
   }
 
+  renderSize() {
+    return (
+      <div id='chars-size'>
+        <p>{ this.describeSize() }</p>
+        Size:
+        <input onChange={ this.handleRadioChange } type='radio' id='size-1' name='size' value='1'></input>
+        <label>1</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='size-2' name='size' value='2'></input>
+        <label>2</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='size-3' name='size' value='3'></input>
+        <label>3</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='size-4' name='size' value='4'></input>
+        <label>4</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='size-5' name='size' value='5'></input>
+        <label>5</label>
+      </div>
+    )
+  }
+
+  renderWidth() {
+    return (
+      <div id='chars-width'>
+        <p>{ this.describeWidth() }</p>
+        Width:
+        <input onChange={ this.handleRadioChange } type='radio' id='width-1' name='width' value='1'></input>
+        <label>1</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='width-2' name='width' value='2'></input>
+        <label>2</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='width-3' name='width' value='3'></input>
+        <label>3</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='width-4' name='width' value='4'></input>
+        <label>4</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='width-5' name='width' value='5'></input>
+        <label>5</label>
+      </div>
+    )
+  }
+
+  renderComfort() {
+    return (
+      <div id='chars-comfort'>
+        <p>{ this.describeComfort() }</p>
+        Comfort:
+        <input onChange={ this.handleRadioChange } type='radio' id='comfort-1' name='comfort' value='1'></input>
+        <label>1</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='comfort-2' name='comfort' value='2'></input>
+        <label>2</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='comfort-3' name='comfort' value='3'></input>
+        <label>3</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='comfort-4' name='comfort' value='4'></input>
+        <label>4</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='comfort-5' name='comfort' value='5'></input>
+        <label>5</label>
+      </div>
+    )
+  }
+
+  renderQuality() {
+    return (
+      <div id='chars-quality'>
+        <p>{ this.describeQuality() }</p>
+        Quality:
+        <input onChange={ this.handleRadioChange } type='radio' id='quality-1' name='quality' value='1'></input>
+        <label>1</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='quality-2' name='quality' value='2'></input>
+        <label>2</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='quality-3' name='quality' value='3'></input>
+        <label>3</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='quality-4' name='quality' value='4'></input>
+        <label>4</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='quality-5' name='quality' value='5'></input>
+        <label>5</label>
+      </div>
+    )
+  }
+
+  renderLength() {
+    return (
+      <div id='chars-length'>
+        <p>{ this.describeLength() }</p>
+        Length:
+        <input onChange={ this.handleRadioChange } type='radio' id='length-1' name='length' value='1'></input>
+        <label>1</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='length-2' name='length' value='2'></input>
+        <label>2</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='length-3' name='length' value='3'></input>
+        <label>3</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='length-4' name='length' value='4'></input>
+        <label>4</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='length-5' name='length' value='5'></input>
+        <label>5</label>
+      </div>
+    )
+  }
+
+  renderFit() {
+    return(
+      <div id='chars-fit'>
+        <p>{ this.describeFit() }</p>
+        Fit:
+        <input onChange={ this.handleRadioChange } type='radio' id='fit-1' name='fit' value='1'></input>
+        <label>1</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='fit-2' name='fit' value='2'></input>
+        <label>2</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='fit-3' name='fit' value='3'></input>
+        <label>3</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='fit-4' name='fit' value='4'></input>
+        <label>4</label>
+        <input onChange={ this.handleRadioChange } type='radio' id='fit-5' name='fit' value='5'></input>
+        <label>5</label>
+      </div>
+    )
+  }
+
+  renderCharacteristics() {
+    let items = [];
+    let chars = Object.keys(this.props.chars)
+
+    if (chars.includes('Size')) {
+      items.push(this.renderSize())
+    }
+    if (chars.includes('Width')) {
+      items.push(this.renderWidth())
+    }
+    if (chars.includes('Comfort')) {
+      items.push(this.renderComfort())
+    }
+    if (chars.includes('Quality')) {
+      items.push(this.renderQuality())
+    }
+    if (chars.includes('Length')) {
+      items.push(this.renderLength())
+    }
+    if (chars.includes('Fit')) {
+      items.push(this.renderFit())
+    }
+
+    return items.map(item => {
+      return item
+    })
+  }
+
+  completeCheck() {
+    if (this.state.incomplete) {
+      return <p id='form-incomplete'>Please fill out all required fields</p>
+    } else {
+      return null;
+    }
+  }
+
+  emailCheck() {
+    if (this.state.badEmail) {
+      return <p id='form-bad-email'>Please enter a valid email address</p>
+    } else {
+      return null;
+    }
+  }
+
   render() {
     if (this.props.show) {
       return (
@@ -313,105 +557,19 @@ class WriteReview extends React.Component {
               <h3>Do you recommend this product?</h3>
                 <label>
                   Yes
-                  <input type='radio' id='recommend-yes' name='recommend' value='yes' onChange={ this.handleInputChange }></input>
+                  <input type='radio' id='recommend-yes' name='recommend' value='yes' onChange={ this.handleRecommendChange }></input>
                 </label>
                 <label>
                   No
-                  <input type='radio' id='recommend-no' name='recommend' value='no' onChange={ this.handleInputChange }></input>
+                  <input type='radio' id='recommend-no' name='recommend' value='no' onChange={ this.handleRecommendChange }></input>
                 </label>
             </div>
             <div className='row'>
               <div id='form-characteristics'>
                 <h3>Characteristics</h3>
-                <div id='chars-size'>
-                  <p>{ this.getSize() }</p>
-                  Size:
-                  <input onChange={ this.handleRadioChange } type='radio' id='size-1' name='size' value='1'></input>
-                  <label>1</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='size-2' name='size' value='2'></input>
-                  <label>2</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='size-3' name='size' value='3'></input>
-                  <label>3</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='size-4' name='size' value='4'></input>
-                  <label>4</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='size-5' name='size' value='5'></input>
-                  <label>5</label>
-                </div>
 
-                <div id='chars-width'>
-                  <p>{ this.getWidth() }</p>
-                  Width:
-                  <input onChange={ this.handleRadioChange } type='radio' id='width-1' name='width' value='1'></input>
-                  <label>1</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='width-2' name='width' value='2'></input>
-                  <label>2</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='width-3' name='width' value='3'></input>
-                  <label>3</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='width-4' name='width' value='4'></input>
-                  <label>4</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='width-5' name='width' value='5'></input>
-                  <label>5</label>
-                </div>
+                { this.renderCharacteristics() }
 
-                <div id='chars-comfort'>
-                  <p>{ this.getComfort() }</p>
-                  Comfort:
-                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-1' name='comfort' value='1'></input>
-                  <label>1</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-2' name='comfort' value='2'></input>
-                  <label>2</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-3' name='comfort' value='3'></input>
-                  <label>3</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-4' name='comfort' value='4'></input>
-                  <label>4</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='comfort-5' name='comfort' value='5'></input>
-                  <label>5</label>
-                </div>
-
-                <div id='chars-quality'>
-                  <p>{ this.getQuality() }</p>
-                  Quality:
-                  <input onChange={ this.handleRadioChange } type='radio' id='quality-1' name='quality' value='1'></input>
-                  <label>1</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='quality-2' name='quality' value='2'></input>
-                  <label>2</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='quality-3' name='quality' value='3'></input>
-                  <label>3</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='quality-4' name='quality' value='4'></input>
-                  <label>4</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='quality-5' name='quality' value='5'></input>
-                  <label>5</label>
-                </div>
-
-                <div id='chars-length'>
-                  <p>{ this.getLength() }</p>
-                  Length:
-                  <input onChange={ this.handleRadioChange } type='radio' id='length-1' name='length' value='1'></input>
-                  <label>1</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='length-2' name='length' value='2'></input>
-                  <label>2</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='length-3' name='length' value='3'></input>
-                  <label>3</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='length-4' name='length' value='4'></input>
-                  <label>4</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='length-5' name='length' value='5'></input>
-                  <label>5</label>
-                </div>
-
-                <div id='chars-fit'>
-                  <p>{ this.getFit() }</p>
-                  Fit:
-                  <input onChange={ this.handleRadioChange } type='radio' id='fit-1' name='fit' value='1'></input>
-                  <label>1</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='fit-2' name='fit' value='2'></input>
-                  <label>2</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='fit-3' name='fit' value='3'></input>
-                  <label>3</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='fit-4' name='fit' value='4'></input>
-                  <label>4</label>
-                  <input onChange={ this.handleRadioChange } type='radio' id='fit-5' name='fit' value='5'></input>
-                  <label>5</label>
-                </div>
               </div>
               <div id='form-content'>
                 <h3>Review</h3>
@@ -451,6 +609,8 @@ class WriteReview extends React.Component {
                 </p>
               </div>
             </div>
+            { this.emailCheck() }
+            { this.completeCheck() }
           <button id='form-submit' onClick={ this.handleSubmit }>Submit</button>
           </form>
           <button id='close-modal' onClick={ this.handleClose }>X</button>

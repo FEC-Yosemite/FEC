@@ -88,21 +88,11 @@ export function getReviewMeta(id) {
 
 // addReview must pass in an object
 
-export function addReview(id, rate, sum, body, rec, name, email, photos, char) {
+export function addReview(data) {
   var options = {
     method: 'post',
     url: `http://localhost:3000/reviews`,
-    params: {
-      product_id: id,
-      rating: rate,
-      summary: sum,
-      body: body,
-      recommend: rec,
-      name: name,
-      email: email,
-      photos: photos,
-      characteristics: char
-    }
+    data: data
   }
 
   return axios(options);
