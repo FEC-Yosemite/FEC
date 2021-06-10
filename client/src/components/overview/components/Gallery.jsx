@@ -142,7 +142,17 @@ class Gallery extends React.Component {
   }
 
   renderThumbnailCarousel() {
-    return <h1>TBD</h1>
+    let count = 0;
+    return this.state.currentImages.map((photo) => {
+      count++;
+      const index = this.state.currentImages.indexOf(photo);
+      if (count <= 7) {
+        if (index === this.state.currentIndex) {
+          return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+        }
+        return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+      }
+    });
   }
 
   renderThumbnails() {
