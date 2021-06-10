@@ -31,8 +31,21 @@ class Gallery extends React.Component {
       currentIndex: 0,
       collapsed: true,
       zoomed: false,
-      currentStyle: this.props.currentStyle,
+      currentStyle: 0,
     };
+
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentStyle !== prevProps.currentStyle) {
+      this.setState({
+        currentStyle: this.props.currentStyle,
+        currentImages: this.state.styles[this.props.currentStyle].photos,
+        currentImage: this.state.styles[this.props.currentStyle].photos[0].url,
+        currentThumb: this.state.styles[this.props.currentStyle].photos[0].thumbnail_url,
+        currentIndex: 0,
+      })
+    }
   }
 
   componentDidMount() {
