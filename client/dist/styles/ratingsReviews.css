@@ -61,6 +61,37 @@
   margin: auto;
 }
 
+#ratings-reviews #reviews #reviews-list .review #review-photos img {
+  cursor: pointer;
+}
+
+#ratings-reviews #reviews #reviews-list .review #photo-view {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#ratings-reviews #reviews #reviews-list .review #photo-view img {
+  position: fixed;
+  width: 80vw;
+  height: 80vh;
+  top: 10vh;
+  left: 10vw;
+}
+
+#ratings-reviews #reviews #reviews-list .review #photo-view button {
+  position: fixed;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: white;
+  top: 3vh;
+  left: 3vh;
+}
+
 #ratings-reviews #reviews #reviews-list .review img {
   width: 100px;
   height: 100px;
@@ -177,7 +208,7 @@
 }
 
 #ratings-reviews #modal #review-form #form-content #file-p #form-file-preview {
-  border: dotted;
+  border: 1px solid;
   width: 500px;
   height: 75px;
   margin: 10px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PhotoView from './PhotoView.jsx';
 import { markAsHelpful, reportReview } from '../../../requests.js';
 
 class Review extends React.Component {
@@ -6,7 +7,8 @@ class Review extends React.Component {
     super(props);
     this.state = {
       helpful: false,
-      report: false
+      report: false,
+      expanded: ''
     }
     this.renderStars = this.renderStars.bind(this);
     this.renderRecommend = this.renderRecommend.bind(this);
@@ -14,6 +16,9 @@ class Review extends React.Component {
     this.handleHelpful = this.handleHelpful.bind(this);
     this.handleUnhelpful = this.handleUnhelpful.bind(this);
     this.handleReport = this.handleReport.bind(this);
+    this.handleExpand = this.handleExpand.bind(this);
+    this.closeExpanded = this.closeExpanded.bind(this);
+    this.renderExpanded = this.renderExpanded.bind(this);
   }
 
   handleHelpful(e) {
@@ -79,6 +84,24 @@ class Review extends React.Component {
     }
   }
 
+  handleExpand(e) {
+    this.setState({
+      expanded: e.target.src
+    })
+  }
+
+  closeExpanded() {
+    this.setState({
+      expanded: ''
+    })
+  }
+
+  renderExpanded() {
+    if (this.state.expanded) {
+      return <PhotoView url={ this.state.expanded } close={ this.closeExpanded } />
+    }
+  }
+
   render() {
     var review = this.props.review;
 
@@ -94,8 +117,10 @@ class Review extends React.Component {
 
         { this.renderResponse() }
 
+        { this.renderExpanded() }
+
         <div id='review-photos'>{ review.photos.map((photo) => {
-          return <img src={photo.url}></img>
+          return <img onClick={ this.handleExpand } src={ photo.url }></img>
         })} </div><br/>
 
         <p id='review-helpful'>Was this review helpful?
