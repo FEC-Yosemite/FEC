@@ -13,11 +13,19 @@ class ProductInfo extends React.Component {
     this.state = {
       product: this.props.product,
       styles: this.props.styles,
-      currentStyle: this.props.styles[0],
+      currentStyle: this.props.currentStyle,
       ratings: this.props.ratings,
       avgRating: 0,
       reviewCount: this.props.reviewCount,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentStyle !== prevProps.currentStyle) {
+      this.setState({
+        currentStyle: this.props.currentStyle,
+      })
+    }
   }
 
   componentDidMount() {
@@ -50,12 +58,12 @@ class ProductInfo extends React.Component {
         <p>{ this.state.product.category }</p>
         <h3>{ this.state.product.name }</h3>
 
-        { this.state.currentStyle.sale_price ?
+        { this.state.styles[this.state.currentStyle].sale_price ?
         <>
-        <p className="original-price">{ this.state.currentStyle.original_price }</p>
-        <p className="sale-price" >{ this.state.currentStyle.sale_price }</p>
+        <p className="original-price">{ this.state.styles[this.state.currentStyle].original_price }</p>
+        <p className="sale-price" >{ this.state.styles[this.state.currentStyle].sale_price }</p>
         </> :
-        <p className="regular-price">{ this.state.currentStyle.original_price }</p> }
+        <p className="regular-price">{ this.state.styles[this.state.currentStyle].original_price }</p> }
         <a href="/" className="brand"><FontAwesomeIcon icon={faFacebookSquare} /></a>
         <a href="/" className="brand"><FontAwesomeIcon icon={faTwitterSquare} /></a>
         <a href="/" className="brand"><FontAwesomeIcon icon={faPinterestSquare} /></a>

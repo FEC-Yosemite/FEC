@@ -69,7 +69,7 @@ class Overview extends React.Component {
 
           <aside id="info-aside">
             { this.state.syncedStyles && this.state.syncedProduct && this.state.syncedRatings && this.state.syncedReviewCount ?
-            <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+            <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
             { this.state.syncedStyles ? <StylePicker styles={ this.state.styles } changeStyle={ this.handleStyleChange.bind(this) } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
             <AddToCart />
