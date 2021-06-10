@@ -11,6 +11,7 @@ class WriteReview extends React.Component {
       hovered: 0,
       stars: null,
       photoUrls: [],
+      maxPhotos: false,
       form: {
         characteristics: {
           size: null,
@@ -77,6 +78,7 @@ class WriteReview extends React.Component {
       return url.props.src;
     })
     let complete = true;
+    let photoLimit = true
 
     let data = {
       ...form,
@@ -101,6 +103,11 @@ class WriteReview extends React.Component {
       }
     }
 
+    if (data.photos.length > 5) {
+      console.log('Too many Photos!')
+      photoLimit = false
+    }
+
     if (!this.validateEmail(data.email) && data.email.length > 0) {
       complete = false;
       this.setState({
@@ -114,6 +121,12 @@ class WriteReview extends React.Component {
 
     if (complete) {
       this.setState({
+        incomplete: false
+      })
+    }
+
+    if (complete && photoLimit) {
+      this.setState({
         incomplete: false,
         badEmail: false
       })
@@ -126,9 +139,16 @@ class WriteReview extends React.Component {
           console.log('ERROR:', err)
         });
     } else {
-      this.setState({
-        incomplete: true
-      })
+      if (!complete) {
+        this.setState({
+          incomplete: true
+        })
+      }
+      if (!photoLimit) {
+        this.setState({
+          maxPhotos: true
+        })
+      }
     }
   }
 
@@ -352,6 +372,7 @@ class WriteReview extends React.Component {
       stars: null,
       photos: [],
       photoUrls: [],
+      maxPhotos: false,
       form: {
         characteristics: {
           size: null,
@@ -536,6 +557,8 @@ class WriteReview extends React.Component {
   completeCheck() {
     if (this.state.incomplete) {
       return <p id='form-incomplete'>Please fill out all fields</p>
+    } else if (this.state.maxPhotos) {
+      return <p id='form-incomplete'>Photo limit exceeded (5)</p>
     } else {
       return null;
     }
