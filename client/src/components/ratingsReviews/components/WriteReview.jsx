@@ -10,6 +10,8 @@ class WriteReview extends React.Component {
     this.state = {
       hovered: 0,
       stars: null,
+      photoUrls: [],
+      maxPhotos: false,
       form: {
         characteristics: {
           size: null,
@@ -47,6 +49,8 @@ class WriteReview extends React.Component {
     this.getCharIds = this.getCharIds.bind(this);
     this.completeCheck = this.completeCheck.bind(this);
     this.emailCheck = this.emailCheck.bind(this);
+    this.renderPics = this.renderPics.bind(this);
+    this.setPics = this.setPics.bind(this);
 
     this.fileInput = React.createRef();
   }
@@ -70,15 +74,18 @@ class WriteReview extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let form = this.state.form;
-    let files = this.fileInput.current.files
+    let photos = this.state.photoUrls.map(url => {
+      return url.props.src;
+    })
     let complete = true;
+    let photoLimit = true
 
     let data = {
       ...form,
       characteristics: this.getCharIds(),
       rating: this.state.stars,
       product_id: this.props.productId,
-      photos: files.length > 0 ? files : []
+      photos: photos.length > 0 ? photos : []
     }
 
     for (let key in data) {
@@ -96,14 +103,29 @@ class WriteReview extends React.Component {
       }
     }
 
-    if (!this.validateEmail(data.email)) {
+    if (data.photos.length > 5) {
+      console.log('Too many Photos!')
+      photoLimit = false
+    }
+
+    if (!this.validateEmail(data.email) && data.email.length > 0) {
       complete = false;
       this.setState({
         badEmail: true
       })
+    } else {
+      this.setState({
+        badEmail: false
+      })
     }
 
     if (complete) {
+      this.setState({
+        incomplete: false
+      })
+    }
+
+    if (complete && photoLimit) {
       this.setState({
         incomplete: false,
         badEmail: false
@@ -117,9 +139,16 @@ class WriteReview extends React.Component {
           console.log('ERROR:', err)
         });
     } else {
-      this.setState({
-        incomplete: true
-      })
+      if (!complete) {
+        this.setState({
+          incomplete: true
+        })
+      }
+      if (!photoLimit) {
+        this.setState({
+          maxPhotos: true
+        })
+      }
     }
   }
 
@@ -341,6 +370,9 @@ class WriteReview extends React.Component {
     this.setState({
       hovered: 0,
       stars: null,
+      photos: [],
+      photoUrls: [],
+      maxPhotos: false,
       form: {
         characteristics: {
           size: null,
@@ -524,7 +556,9 @@ class WriteReview extends React.Component {
 
   completeCheck() {
     if (this.state.incomplete) {
-      return <p id='form-incomplete'>Please fill out all required fields</p>
+      return <p id='form-incomplete'>Please fill out all fields</p>
+    } else if (this.state.maxPhotos) {
+      return <p id='form-incomplete'>Photo limit exceeded (5)</p>
     } else {
       return null;
     }
@@ -536,6 +570,27 @@ class WriteReview extends React.Component {
     } else {
       return null;
     }
+  }
+
+  setPics() {
+    if (this.fileInput.current) {
+      let files = this.fileInput.current.files;
+      let photoUrls = [];
+
+      for (let i = 0; i < files.length; i++) {
+        photoUrls.push(<img id={ 'preview-photo' + i } src={URL.createObjectURL(files[i])}></img>);
+      }
+
+      this.setState({
+        photoUrls: photoUrls,
+      })
+    }
+  }
+
+  renderPics() {
+    return this.state.photoUrls.map(photo => {
+      return photo;
+    })
   }
 
   render() {
@@ -583,7 +638,7 @@ class WriteReview extends React.Component {
                 <p>
                 <label>
                   Email:
-                  <input id='form-email' type='email' name='email' onChange={ this.handleInputChange }></input>
+                  <input id='form-email' type='email' name='email' onChange={ this.handleInputChange }></input> { this.emailCheck() }
                 </label>
                 </p>
 
@@ -601,15 +656,18 @@ class WriteReview extends React.Component {
                   </label>
                 </p>
 
-                <p id='file-p'>
+                <div id='file-p'>
                   <label>
                     Photos:
-                    <input id='form-file' type='file' name='photos' ref={ this.fileInput }></input>
+                    <input id={'form-file'} onChange={ this.setPics }type='file' name='photos' ref={ this.fileInput } multiple></input>
                   </label>
-                </p>
+                  <div id='form-file-preview'>
+                    { this.renderPics() }
+                  </div>
+                </div>
               </div>
             </div>
-            { this.emailCheck() }
+
             { this.completeCheck() }
           <button id='form-submit' onClick={ this.handleSubmit }>Submit</button>
           </form>

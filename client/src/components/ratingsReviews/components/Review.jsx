@@ -95,7 +95,7 @@ class Review extends React.Component {
         { this.renderResponse() }
 
         <div id='review-photos'>{ review.photos.map((photo) => {
-          return 'Photo Placeholder'
+          return <img src={photo.url}></img>
         })} </div><br/>
 
         <p id='review-helpful'>Was this review helpful?
