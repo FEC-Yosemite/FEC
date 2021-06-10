@@ -64,6 +64,16 @@
       max-height: 60vh;
       overflow: scroll;
       margin: auto;
+
+      .review {
+
+        img {
+          width: 100px;
+          height: 100px;
+          margin: 10px;
+          border: solid 1px black;
+        }
+      }
     }
 
     #more-reviews {
@@ -80,9 +90,9 @@
   #modal {
     position: fixed;
     left: 15vw;
-    top: 10vh;
+    top: 5vh;
     width: 70vw;
-    height: 80vh;
+    height: 90vh;
     background: white;
     border: 1px solid #ccc;
     transition: 1.1s ease-out;
@@ -129,6 +139,15 @@
 
     #review-form {
 
+      #form-incomplete {
+        position: absolute;
+        bottom: 7%;
+        margin: auto;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: red;
+      }
+
       input {
         margin: 10px;
       }
@@ -156,6 +175,12 @@
 
       #form-content {
 
+        #form-bad-email {
+          margin: 0;
+          padding: 0;
+          color: red;
+        }
+
         p {
 
           label {
@@ -171,6 +196,25 @@
 
         #file-p {
           float: right;
+          margin-top: 0;
+          padding-top: none;
+
+          #form-file-preview {
+            border: dotted;
+            width: 500px;
+            height: 75px;
+            margin: 10px;
+            margin-right: 25px;
+            margin-top: 0;
+
+            img {
+              display: inline;
+              border: solid 1px grey;
+              margin: 10px;
+              width: 60px;
+              height: 60px;
+            }
+          }
         }
 
         #textarea-p * {
