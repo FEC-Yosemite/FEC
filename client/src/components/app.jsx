@@ -10,11 +10,12 @@ class App extends React.Component {
     this.state = {
       currentProductId: 19089,
     }
-    this.setCurrentProductId = this.setCurrentProductId.bind(this);
+    this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
   }
 
-  setCurrentProductId(e) { // relatedItems will not need this functionality. If no one else needs this, we can get rid of it.
-    console.log(`app: e.target: ${JSON.stringify(e.target)}`);
+  updateCurrentProduct(e) {
+    e.preventDefault();
+    console.log(JSON.stringify(Object.keys(e.target)));
   }
 
   componentDidMount() {
@@ -27,7 +28,7 @@ class App extends React.Component {
     return (
       <div id="app-div">
         <Overview productId={ this.state.currentProductId }/>
-        <RelatedItems productId={ this.state.currentProductId } />
+        <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} />
         <RatingsReviews productId={ this.state.currentProductId }/>
       </div>
     )

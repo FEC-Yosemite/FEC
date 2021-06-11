@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
 class RelatedProductsList extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +22,6 @@ class RelatedProductsList extends Component {
 
     componentDidMount() {
         this.refreshCarousel()
-        this.setState({ state: this.state });
     }
 
     refreshCarousel() {
@@ -42,14 +45,16 @@ class RelatedProductsList extends Component {
         this.setState({
           page: pageModifier - 1
         });
-      } else {
+        this.refreshCarousel();
+      }
+      if (e.target.id === 'right-button') {
           this.setState({
             page: pageModifier + 1
           });
+          this.refreshCarousel();
       }
       console.log(`PAGE: ${this.state.page}`);
       console.log(`PAGE > LENGTH?: ${this.props.productsList.data.length}`);
-      this.refreshCarousel();
     }
 
     render() {
@@ -60,13 +65,14 @@ class RelatedProductsList extends Component {
                 this.state.page === 0 ?
                 <div id="left-button-placeholder"> </div>
                 :
-                <img id="left-button" src="client/pix/left-button.jpg" alt="left carousel arrow" onClick={this.buttonClick} />
+                <FontAwesomeIcon id="left-button" onClick={this.buttonClick} icon={faArrowLeft} />
+                // <img id="left-button" src="client/pix/left-button.jpg" alt="left carousel arrow" onClick={this.buttonClick} />
             }
             </div>
             {
                 this.state.related_products.length > 0 ?
                 this.state.related_products.map((productId, index) => (
-                    <RelatedProductCard key={productId} productId={productId} />
+                    <RelatedProductCard key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct}/>
                 ))
                 :
                 <h3>Loading "Related Cards"...</h3>
@@ -76,7 +82,8 @@ class RelatedProductsList extends Component {
                 this.state.page + this.state.window_size + 1 >= this.props.productsList.data.length ?
                 <div id="right-button-placeholder"> </div>
                 :
-                <img id="right-button" src="client/pix/right-button.jpg" alt="right carousel arrow" onClick={this.buttonClick} />
+                <FontAwesomeIcon id="right-button" onClick={this.buttonClick} icon={faArrowRight} />
+                // <img id="right-button" src="client/pix/right-button.jpg" alt="right carousel arrow" onClick={this.buttonClick} />
             }
             </div>
             {/* <div></div> */}
