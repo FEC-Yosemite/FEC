@@ -71,8 +71,8 @@ class RatingsReviews extends React.Component {
   render() {
     return (
       <div id='ratings-reviews'>
-        <SortReviews reviews={ this.state.reviews } sort={ this.state.sort } handleSort={ this.handleSort }/>
-        <ReviewsList reviews={ this.state.reviews } sort={ this.state.sort } requests={ this.reviewRequests } chars={ this.state.characteristics } productId={ this.props.productId }/>
+        <SortReviews reviews={ this.state.reviews } sort={ this.state.sort } handleSort={ this.handleSort } />
+        <ReviewsList reviews={ this.state.reviews } sort={ this.state.sort } requests={ this.reviewRequests } chars={ this.state.characteristics } productId={ this.props.productId } />
         <ProductBreakdown reviews={ this.state.reviews } />
         <RatingBreakdown reviews={ this.state.reviews } />
       </div>

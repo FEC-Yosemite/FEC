@@ -46,16 +46,14 @@ class Overview extends React.Component {
         ratings: res.data.ratings,
         syncedRatings: true,
       }))
+      .catch((err) => console.log('ERROR:', err));
 
-    getReviews(this.state.currentProduct)
-      .then((res) => {
-        console.log('REVIEWS:', res);
-        this.setState({
-          reviewCount: res.data.count,
+    getReviews(this.state.currentProduct, null, 100, 'newest')
+      .then((res) => this.setState({
+          reviewCount: res.data.results.length,
           syncedReviewCount: true,
-        })
-      })
-
+      }))
+      .catch((err) => console.log('ERROR:', err));
   }
 
   handleStyleChange(e) {

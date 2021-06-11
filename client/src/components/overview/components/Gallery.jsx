@@ -68,6 +68,8 @@ class Gallery extends React.Component {
   }
 
   handleNextImageClick() {
+    document.getElementById('product-image').classList.add('slide-left');
+    setTimeout(function(){ document.getElementById('product-image').classList.remove('slide-left'); }, 1000);
     let index = this.state.currentIndex;
     if (index !== this.state.currentImages.length - 1) {
       index++;
@@ -76,6 +78,8 @@ class Gallery extends React.Component {
   }
 
   handlePrevImageClick() {
+    document.getElementById('product-image').classList.add('slide-right');
+    setTimeout(function(){ document.getElementById('product-image').classList.remove('slide-right'); }, 1000);
     let index = this.state.currentIndex;
     if (index !== 0) {
       index--;
