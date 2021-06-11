@@ -233,9 +233,11 @@ class Gallery extends React.Component {
           <img id="product-image" onClick={this.handleImageClick.bind(this)} src={this.state.currentImage} alt="" />
           {this.renderNextArrow()}
           <div id="thumbnails">
-            {(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== 0) && <FontAwesomeIcon onClick={ this.scrollThumbnailsUp.bind(this) } className="chevron-down" icon={ faChevronUp } />}
-            { this.renderThumbnails(this.state.thumbIndex) }
-            {(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== this.state.currentImages.length - 7) && <FontAwesomeIcon onClick={ this.scrollThumbnailsDown.bind(this) } className="chevron-down" icon={ faChevronDown } />}
+            <div className="chevron-up-holder">{(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== 0) && <FontAwesomeIcon onClick={ this.scrollThumbnailsUp.bind(this) } className="chevron chevron-up" icon={ faChevronUp } />}</div>
+
+            <div className="thumb-holder">{ this.renderThumbnails(this.state.thumbIndex) }</div>
+
+            <div className="chevron-down-holder">{(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== this.state.currentImages.length - 7) && <FontAwesomeIcon onClick={ this.scrollThumbnailsDown.bind(this) } className="chevron chevron-down" icon={ faChevronDown } />}</div>
           </div>
 
         </div>

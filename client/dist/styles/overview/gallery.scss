@@ -34,18 +34,12 @@
       transform:scale(2.5);
     }
 
-    svg:not(.chevron-down) {
+    svg:not(.chevron) {
       color: black;
       font-size: 50px;
       cursor: pointer;
       margin: auto;
       bottom: 250px;
-    }
-
-    .chevron-down {
-      color: white;
-      cursor: pointer;
-      font-size: 50px;
     }
 
     .prev-arrow {
@@ -57,24 +51,25 @@
     }
 
     #thumbnails {
-      display: flex;
+      display: grid;
       grid-column: 2;
       grid-row: 1;
-      flex-direction: column;
-      justify-content: space-evenly;
-      height: 40rem;
+
+      .thumb-holder {
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 40rem;
+      }
 
       .thumbnail {
+        border: 2px solid white;
         height: 50px;
         width: 50px;
         cursor: pointer;
         margin-bottom: 5px;
         object-fit: cover;
-      }
-
-      .slide {
-        transform: translateY(-100%);
-        transition: 1s;
       }
 
       .thumbnail-icon {
@@ -87,6 +82,22 @@
 
       .current-thumb {
         border-bottom: 5px solid red;
+      }
+
+      .chevron {
+        color: white;
+        cursor: pointer;
+        font-size: 50px;
+      }
+
+      .chevron-up-holder {
+        grid-row: 1;
+        height: 50px;
+      }
+
+      .chevron-down-holder {
+        grid-row: 3;
+        height: 50px;
       }
 
     }
