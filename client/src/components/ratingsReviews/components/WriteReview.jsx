@@ -1,5 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { addReview, getReviewMeta } from '../../../requests.js';
@@ -49,7 +49,6 @@ class WriteReview extends React.Component {
     this.getCharIds = this.getCharIds.bind(this);
     this.completeCheck = this.completeCheck.bind(this);
     this.emailCheck = this.emailCheck.bind(this);
-    this.renderPics = this.renderPics.bind(this);
     this.setPics = this.setPics.bind(this);
 
     this.fileInput = React.createRef();
@@ -549,9 +548,7 @@ class WriteReview extends React.Component {
       items.push(this.renderFit())
     }
 
-    return items.map(item => {
-      return item
-    })
+    return items;
   }
 
   completeCheck() {
@@ -585,12 +582,6 @@ class WriteReview extends React.Component {
         photoUrls: photoUrls,
       })
     }
-  }
-
-  renderPics() {
-    return this.state.photoUrls.map(photo => {
-      return photo;
-    })
   }
 
   render() {
@@ -662,7 +653,7 @@ class WriteReview extends React.Component {
                     <input id={'form-file'} onChange={ this.setPics }type='file' name='photos' ref={ this.fileInput } multiple></input>
                   </label>
                   <div id='form-file-preview'>
-                    { this.renderPics() }
+                    { this.state.photoUrls }
                   </div>
                 </div>
               </div>
