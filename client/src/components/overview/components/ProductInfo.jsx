@@ -67,6 +67,7 @@ class ProductInfo extends React.Component {
         <a href="/" className="brand"><FontAwesomeIcon icon={faFacebookSquare} /></a>
         <a href="/" className="brand"><FontAwesomeIcon icon={faTwitterSquare} /></a>
         <a href="/" className="brand"><FontAwesomeIcon icon={faPinterestSquare} /></a>
+        <p><strong>Style ></strong>{ this.state.styles[this.state.currentStyle].name }</p>
       </div>
     )
   }
