@@ -27,6 +27,19 @@
       width: 100%;
       height: 50rem;
       object-position: center center;
+      z-index: -1;
+    }
+
+    .slide-left {
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: 1s;
+    }
+
+    .slide-right {
+      transform: translateX(100%);
+      opacity: 0;
+      transition: 1s;
     }
 
     .zoomed {
@@ -34,18 +47,12 @@
       transform:scale(2.5);
     }
 
-    svg:not(.chevron-down) {
+    svg:not(.chevron) {
       color: black;
       font-size: 50px;
       cursor: pointer;
       margin: auto;
       bottom: 250px;
-    }
-
-    .chevron-down {
-      color: white;
-      cursor: pointer;
-      font-size: 50px;
     }
 
     .prev-arrow {
@@ -57,14 +64,23 @@
     }
 
     #thumbnails {
-      display: flex;
+      display: grid;
       grid-column: 2;
       grid-row: 1;
-      flex-direction: column;
-      justify-content: space-evenly;
-      height: 40rem;
+      padding: 3% 0 3% 2%;
+      width: 50px;
+      text-align: center;
+
+      .thumb-holder {
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 40rem;
+      }
 
       .thumbnail {
+        border: 2px solid white;
         height: 50px;
         width: 50px;
         cursor: pointer;
@@ -82,6 +98,22 @@
 
       .current-thumb {
         border-bottom: 5px solid red;
+      }
+
+      .chevron {
+        color: white;
+        cursor: pointer;
+        font-size: 50px;
+      }
+
+      .chevron-up-holder {
+        grid-row: 1;
+        height: 50px;
+      }
+
+      .chevron-down-holder {
+        grid-row: 3;
+        height: 50px;
       }
 
     }
