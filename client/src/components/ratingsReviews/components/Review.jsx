@@ -28,13 +28,14 @@ class Review extends React.Component {
 
   handleHelpful(e) {
     var review = this.props.review;
+    console.log(e.target)
     if (!this.state.helpful) {
       markAsHelpful(review.review_id)
       this.setState({
         helpful: true
       });
       review.helpfulness += 1;
-      document.getElementById(e.target.id).classList.add('clicked')
+      e.target.classList.add('clicked')
     }
   }
 
@@ -43,7 +44,7 @@ class Review extends React.Component {
       this.setState({
         helpful: true
       })
-      document.getElementById(e.target.id).classList.add('clicked')
+      e.target.classList.add('clicked')
     }
   }
 
@@ -53,7 +54,7 @@ class Review extends React.Component {
       this.setState({
         report: true
       })
-      document.getElementById(e.target.id).classList.add('clicked')
+      e.target.classList.add('clicked')
     }
   }
 
@@ -138,9 +139,9 @@ class Review extends React.Component {
         })} </div><br/>
 
         <p id='review-helpful'>Was this review helpful?
-        <button id='helpful' onClick={ this.handleHelpful }>Yes</button>({ review.helpfulness })
-        <button id='unhelpful' onClick={ this.handleUnhelpful }>No</button> |
-        <button id='report' onClick={ this.handleReport }>Report</button></p>
+        <button className='helpful' onClick={ this.handleHelpful }>Yes</button>({ review.helpfulness })
+        <button className='unhelpful' onClick={ this.handleUnhelpful }>No</button> |
+        <button className='report' onClick={ this.handleReport }>Report</button></p>
       </div>
     )
   }
