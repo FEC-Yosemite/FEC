@@ -6,6 +6,10 @@
   height: 80vh;
   max-height: 80vh;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }
 
 #ratings-reviews .review #helpful {
@@ -50,15 +54,81 @@
   color: #a52e2e;
 }
 
+#ratings-reviews #rating-breakdown {
+  grid-column: 1;
+  grid-row: 1 / 2;
+}
+
+#ratings-reviews #product-breakdown {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#ratings-reviews #sort-review {
+  grid-column: 2;
+  grid-row: 1;
+}
+
 #ratings-reviews #reviews {
   position: relative;
   max-height: 100%;
+  grid-column: 2;
+  grid-row: 2/ 3;
 }
 
 #ratings-reviews #reviews #reviews-list {
   max-height: 60vh;
   overflow: scroll;
   margin: auto;
+}
+
+#ratings-reviews #reviews #reviews-list .review {
+  border: 1px solid;
+  margin: 25px;
+  padding: 10px;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-header {
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-header #review-stars {
+  grid-column: 1;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-header #review-name {
+  grid-column: 3;
+  text-align: right;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-header #review-date {
+  grid-column: 3;
+  text-align: right;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: grey;
+}
+
+#ratings-reviews #reviews #reviews-list .review h3 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-recommend {
+  font-weight: bold;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-response {
+  background: grey;
 }
 
 #ratings-reviews #reviews #reviews-list .review #review-photos img {
@@ -99,12 +169,12 @@
   border: solid 1px black;
 }
 
-#ratings-reviews #reviews #more-reviews {
+#ratings-reviews #reviews #reviews-list #more-reviews {
   margin: 10px;
   padding: 10px;
 }
 
-#ratings-reviews #reviews #write-review {
+#ratings-reviews #reviews #reviews-list #write-review {
   margin: 10px;
   padding: 10px;
 }

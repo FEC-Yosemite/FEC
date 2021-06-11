@@ -1,5 +1,10 @@
 import React from 'react';
 import PhotoView from './PhotoView.jsx';
+import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { markAsHelpful, reportReview } from '../../../requests.js';
 
 class Review extends React.Component {
@@ -54,10 +59,15 @@ class Review extends React.Component {
 
   renderStars() {
     var review = this.props.review;
-    var stars = '';
+    var stars = [];
     for (var i = 0; i < review.rating; i++) {
-      stars += '*';
+      stars.push(<FontAwesomeIcon icon={ fasStar } />);
     }
+
+    while (stars.length < 5) {
+      stars.push(<FontAwesomeIcon icon={farStar } />);
+    }
+
     return stars;
   }
 
@@ -66,7 +76,7 @@ class Review extends React.Component {
     if (review.recommend) {
       return (
         <div id='review-recommend'>
-          ^ I recommend this product
+          <FontAwesomeIcon icon={ faCheck } /> I recommend this product
         </div>
       )
     }
@@ -107,7 +117,11 @@ class Review extends React.Component {
 
     return (
       <div className='review'>
-        <div id='review-header'>{ this.renderStars() } { review.reviewer_name } { review.date } </div>
+        <div id='review-header'>
+          <p id='review-stars'>{ this.renderStars() }</p>
+          <p id='review-name'>{ review.reviewer_name }</p>
+          <p id='review-date'>{ moment(review.date).format('MM / DD / YYYY') }</p>
+        </div>
 
         <h3 id='review-summary'>{ review.summary }</h3> <br/>
 
