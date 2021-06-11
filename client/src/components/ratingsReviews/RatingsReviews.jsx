@@ -71,7 +71,7 @@ class RatingsReviews extends React.Component {
   render() {
     return (
       <div id='ratings-reviews'>
-        <RatingBreakdown reviews={ this.state.reviews } />
+        <RatingBreakdown reviews={ this.state.reviews } productId={ this.props.productId }/>
         <ProductBreakdown reviews={ this.state.reviews } />
         <SortReviews reviews={ this.state.reviews } sort={ this.state.sort } handleSort={ this.handleSort }/>
         <ReviewsList reviews={ this.state.reviews } sort={ this.state.sort } requests={ this.reviewRequests } chars={ this.state.characteristics } productId={ this.props.productId }/>
