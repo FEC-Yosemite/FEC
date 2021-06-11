@@ -173,10 +173,10 @@ class Gallery extends React.Component {
 
       if (count <= 7) {
         if (index === this.state.currentIndex) {
-          let thumb = <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+          let thumb = <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
           renderArray.push(thumb);
         } else {
-          let thumb = <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+          let thumb = <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
           renderArray.push(thumb);
         }
       }
@@ -195,9 +195,9 @@ class Gallery extends React.Component {
         return this.state.currentImages.map((photo) => {
           const index = this.state.currentImages.indexOf(photo);
           if (index === this.state.currentIndex) {
-            return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+            return <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
           }
-          return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+          return <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
         });
       }
       return this.renderThumbnailIcons();
@@ -208,9 +208,9 @@ class Gallery extends React.Component {
     return this.state.currentImages.map((photo) => {
       const index = this.state.currentImages.indexOf(photo);
       if (index === this.state.currentIndex) {
-        return <FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={fasFaCircle} />;
+        return <FontAwesomeIcon key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={fasFaCircle} />;
       }
-      return <FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={farFaCircle} />;
+      return <FontAwesomeIcon key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={farFaCircle} />;
     });
   }
 

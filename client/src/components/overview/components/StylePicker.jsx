@@ -13,9 +13,9 @@ const StylePicker = (props) => {
     return styles.map((style) => {
       const index = styles.indexOf(style);
       if (index === currentStyle) {
-        return <div className="selected-style"><FontAwesomeIcon className="checked" icon={faCheck} /> <img onClick={changeStyle} data-index={index} className="style-thumbnail selected-style" src={ style.photos[0].thumbnail_url }></img></div>
+        return <div key={index} className="selected-style"><FontAwesomeIcon className="checked" icon={faCheck} /> <img onClick={changeStyle} data-index={index} className="style-thumbnail selected-style" src={ style.photos[0].thumbnail_url }></img></div>
       } else {
-        return <img onClick={changeStyle} data-index={index} className="style-thumbnail" src={ style.photos[0].thumbnail_url }></img>
+        return <img key={index} onClick={changeStyle} data-index={index} className="style-thumbnail" src={ style.photos[0].thumbnail_url }></img>
       }
     })
   }
