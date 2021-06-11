@@ -2,13 +2,13 @@ import React from 'react';
 import Overview from './overview/Overview.jsx';
 import RatingsReviews from './ratingsReviews/RatingsReviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
-import { getProducts } from '../requests.js'
+import { getProducts, getProductById } from '../requests.js'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: 19089,
+      currentProductId: 19093,
     }
     this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
   }
@@ -20,8 +20,11 @@ class App extends React.Component {
 
   componentDidMount() {
     getProducts()
-      .then((data) => console.log('Products:', data))
-      .catch((err) => console.log('ERROR:', err));
+      .then(data => console.log('Products:', data))
+      .catch(err => console.log('ERROR:', err));
+    getProductById(this.state.currentProductId)
+      .then(data => console.log('Current Product:', data))
+      .catch(err => console.log('ERROR:', err));
   }
 
   render() {
