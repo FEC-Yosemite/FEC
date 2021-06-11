@@ -48,10 +48,14 @@ class Overview extends React.Component {
       }))
 
     getReviews(this.state.currentProduct)
-      .then((res) => this.setState({
-        reviewCount: res.data.count,
-        syncedReviewCount: true,
-      }))
+      .then((res) => {
+        console.log('REVIEWS:', res);
+        this.setState({
+          reviewCount: res.data.count,
+          syncedReviewCount: true,
+        })
+      })
+
   }
 
   handleStyleChange(e) {

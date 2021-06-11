@@ -72,6 +72,11 @@
         object-fit: cover;
       }
 
+      .slide {
+        transform: translateY(-100%);
+        transition: 1s;
+      }
+
       .thumbnail-icon {
         font-size: 20px;
         cursor: pointer;

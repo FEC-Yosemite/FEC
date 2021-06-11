@@ -18,6 +18,7 @@ import { faCircle as fasFaCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farFaCircle } from '@fortawesome/free-regular-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 class Gallery extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Gallery extends React.Component {
       collapsed: true,
       zoomed: false,
       currentStyle: 0,
+      thumbIndex: 0,
     };
 
   }
@@ -44,6 +46,7 @@ class Gallery extends React.Component {
         currentImage: this.state.styles[this.props.currentStyle].photos[0].url,
         currentThumb: this.state.styles[this.props.currentStyle].photos[0].thumbnail_url,
         currentIndex: 0,
+        thumbIndex: 0,
       })
     }
   }
@@ -138,26 +141,51 @@ class Gallery extends React.Component {
   }
 
   scrollThumbnailsDown() {
+    let increaser = this.state.thumbIndex;
+    if (increaser !== this.state.currentImages.length - 7) {
+      increaser++;
+      this.setState({ thumbIndex: increaser })
+    }
 
   }
 
-  renderThumbnailCarousel() {
+  scrollThumbnailsUp() {
+    let increaser = this.state.thumbIndex;
+    if (increaser !== 0) {
+      increaser--;
+      this.setState({ thumbIndex: increaser })
+    }
+
+  }
+
+  renderThumbnailCarousel(input) {
+    let renderArray = [];
     let count = 0;
-    return this.state.currentImages.map((photo) => {
+
+    for (var i = input; i < this.state.currentImages.length; i++) {
       count++;
-      const index = this.state.currentImages.indexOf(photo);
-      // if (count <= 7) {
+      const index = i;
+      let photo = this.state.currentImages[i]
+
+      if (count <= 7) {
         if (index === this.state.currentIndex) {
-          return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+          let thumb = <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+          renderArray.push(thumb);
+        } else {
+          let thumb = <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+          renderArray.push(thumb);
         }
-        return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
-      // }
+      }
+    }
+
+    return renderArray.map((thumb) => {
+      return thumb;
     });
   }
 
-  renderThumbnails() {
+  renderThumbnails(input) {
     if (this.state.currentImages.length > 7 && this.state.collapsed === true) {
-      return this.renderThumbnailCarousel();
+      return this.renderThumbnailCarousel(input);
     } else {
       if (this.state.collapsed === true) {
         return this.state.currentImages.map((photo) => {
@@ -205,8 +233,9 @@ class Gallery extends React.Component {
           <img id="product-image" onClick={this.handleImageClick.bind(this)} src={this.state.currentImage} alt="" />
           {this.renderNextArrow()}
           <div id="thumbnails">
-            {this.renderThumbnails()}
-            {this.state.currentImages.length > 7 && <FontAwesomeIcon onClick={ this.scrollThumbnailsDown } className="chevron-down" icon={ faChevronDown } />}
+            {(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== 0) && <FontAwesomeIcon onClick={ this.scrollThumbnailsUp.bind(this) } className="chevron-down" icon={ faChevronUp } />}
+            { this.renderThumbnails(this.state.thumbIndex) }
+            {(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== this.state.currentImages.length - 7) && <FontAwesomeIcon onClick={ this.scrollThumbnailsDown.bind(this) } className="chevron-down" icon={ faChevronDown } />}
           </div>
 
         </div>
