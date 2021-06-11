@@ -66,19 +66,25 @@ class Overview extends React.Component {
       <div id="overview">
         <h4>site-wide announcement message! - sale / discount <strong>offer</strong> - <a href="blank">new product highlight</a></h4>
         <div id="container" className="collapsed">
+
           { this.state.syncedStyles ?
           <Gallery productId={ this.state.currentProduct } styles={ this.state.styles } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
           <aside id="info-aside">
+
             { this.state.syncedStyles && this.state.syncedProduct && this.state.syncedRatings && this.state.syncedReviewCount ?
             <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
             { this.state.syncedStyles ? <StylePicker styles={ this.state.styles } changeStyle={ this.handleStyleChange.bind(this) } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
-            <AddToCart />
+
+            { this.state.syncedStyles ? <AddToCart skus={ this.state.styles[this.state.currentStyle].skus } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+
           </aside>
         </div>
         <div id="product-description">
+
           { this.state.syncedProduct && <ProductDescription product={ this.state.product } /> }
+
         </div>
       </div>
     )
