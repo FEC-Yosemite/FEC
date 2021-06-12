@@ -4,11 +4,11 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { getReviewMeta } from '../../../requests.js';
-import quarterStar from 'svg-url-loader!../../../../pix/svgs/starquarter.svg';
-import threeQuarterStar from 'svg-url-loader!../../../../pix/svgs/star3quarters.svg';
-import star from 'svg-url-loader!../../../../pix/svgs/star.svg';
-import starEmpty from 'svg-url-loader!../../../../pix/svgs/star-o.svg';
-import starHalf from 'svg-url-loader!../../../../pix/svgs/star-half-empty.svg';
+import quarterStar from '../../../../pix/svgs/starquarter.svg';
+import threeQuarterStar from '../../../../pix/svgs/star3quarters.svg';
+import star from '../../../../pix/svgs/star.svg';
+import starEmpty from '../../../../pix/svgs/star-o.svg';
+import starHalf from '../../../../pix/svgs/star-half-empty.svg';
 
 // => DataUrl for file.svg
 
