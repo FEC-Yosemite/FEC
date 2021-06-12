@@ -6,7 +6,9 @@ const PhotoView = ({ url, close }) => {
   return(
     <div id='photo-view'>
       <button id='close-expanded' onClick={ close }><FontAwesomeIcon id='close-expanded' icon={ faArrowLeft } size='2x'></FontAwesomeIcon></button>
-      <img id='expanded-image' src={ url }></img>
+      <div id='photo-container'>
+        <img id='expanded-image' src={ url }></img>
+      </div>
     </div>
   )
 }
