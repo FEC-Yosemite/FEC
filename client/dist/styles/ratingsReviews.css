@@ -145,7 +145,20 @@
   display: inline;
   margin: 0;
   padding: 0;
+  color: #4b4a4a;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-body button {
+  position: relative;
+  left: 80%;
+  border: none;
+  border-bottom: solid 1px #444343;
+  background: none;
   color: grey;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-body button:hover {
+  color: darkgray;
 }
 
 #ratings-reviews #reviews #reviews-list .review h3 {
@@ -185,7 +198,14 @@
   background: rgba(0, 0, 0, 0.7);
 }
 
+#ratings-reviews #reviews #reviews-list .review #photo-view #photo-container .helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
 #ratings-reviews #reviews #reviews-list .review #photo-view #photo-container img {
+  vertical-align: middle;
   max-width: 100%;
   max-height: 100%;
   width: auto;
