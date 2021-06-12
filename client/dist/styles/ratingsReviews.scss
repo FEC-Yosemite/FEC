@@ -156,7 +156,24 @@
             display: inline;
             margin: 0;
             padding: 0;
+            color: rgb(75, 74, 74);
+          }
+        }
+
+        #review-body {
+
+
+          button {
+            position: relative;
+            left: 80%;
+            border: none;
+            border-bottom: solid 1px rgb(68, 67, 67);
+            background: none;
             color: grey;
+
+            &:hover {
+              color: darkgray;
+            }
           }
         }
 
@@ -188,14 +205,33 @@
           height: 100vh;
           background: rgba(0, 0, 0, 0.5);
 
-          img {
-            position: fixed;
-            width: 80vw;
+          #photo-container {
             height: 80vh;
+            width: 80vw;
+            position: fixed;
             top: 10vh;
             left: 10vw;
-            object-fit: cover;
+            text-align: center;
+            border: 1px solid darkgray;
+            background: rgba(0, 0, 0, 0.7);
+
+            .helper {
+              display: inline-block;
+              height: 100%;
+              vertical-align: middle;
           }
+
+            img {
+              vertical-align: middle;
+              max-width: 100%;
+              max-height: 100%;
+              width: auto;
+              height: auto;
+              margin: auto;
+              object-fit: cover;
+            }
+          }
+
 
           button {
             position: fixed;

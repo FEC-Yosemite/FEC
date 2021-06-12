@@ -13,7 +13,8 @@ class Review extends React.Component {
     this.state = {
       helpful: false,
       report: false,
-      expanded: ''
+      expanded: '',
+      more: false
     }
     this.renderStars = this.renderStars.bind(this);
     this.renderRecommend = this.renderRecommend.bind(this);
@@ -24,6 +25,8 @@ class Review extends React.Component {
     this.handleExpand = this.handleExpand.bind(this);
     this.closeExpanded = this.closeExpanded.bind(this);
     this.renderExpanded = this.renderExpanded.bind(this);
+    this.renderBody = this.renderBody.bind(this);
+    this.handleMore = this.handleMore.bind(this);
   }
 
   handleHelpful(e) {
@@ -113,8 +116,33 @@ class Review extends React.Component {
     }
   }
 
+  handleMore() {
+    this.setState({
+      more: true
+    })
+  }
+
+  renderBody() {
+    let body = this.props.review.body;
+
+    if (body.length > 250) {
+      if (this.state.more) {
+        return body
+      }
+      if (!this.state.more) {
+        return ([
+          body.slice(0, 251),
+          <br></br>,
+          <button id='see-more' onClick={ this.handleMore }>See more...</button>
+        ])
+      }
+    } else {
+      return body;
+    }
+  }
+
   render() {
-    var review = this.props.review;
+    let review = this.props.review;
 
     return (
       <div className='review'>
@@ -126,7 +154,7 @@ class Review extends React.Component {
 
         <h3 id='review-summary'>{ review.summary }</h3> <br/>
 
-        <p id='review-body'>{ review.body }</p>
+        <p id='review-body'>{ this.renderBody() }</p>
 
         { this.renderRecommend() }
 
