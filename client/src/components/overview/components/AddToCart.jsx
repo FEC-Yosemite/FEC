@@ -5,7 +5,8 @@ class AddToCart extends React.Component {
     super(props);
     this.state = {
       skus: this.props.skus,
-      value: 'Select size',
+      selectedSize: 'Select size',
+      currentSku: '',
     };
   }
 
@@ -13,21 +14,23 @@ class AddToCart extends React.Component {
     if (this.props.skus !== prevProps.skus) {
       this.setState({
         skus: this.props.skus,
-        value: 'Select size',
+        selectedSize: 'Select size',
+        currentSku: '',
       })
     }
   }
 
   renderSizes() {
     let optionArray = [];
-    for (var key in this.state.skus) {
+    for (let key in this.state.skus) {
       if ( this.state.skus[key].quantity ) {
-        let option = <option key={ this.state.skus[key].size } value={ this.state.skus[key].size }>{ this.state.skus[key].size }</option>
+        let skuNum = key;
+        let option = <option data-sku={ skuNum } key={ this.state.skus[key].size } value={ this.state.skus[key].size }>{ this.state.skus[key].size }</option>
         optionArray.push(option);
       }
     }
     if (optionArray.length) {
-      return <select onChange={ this.handleSizeChange.bind(this) } value={this.state.value} id="size-picker" name="size-picker">
+      return <select onChange={ this.handleSizeChange.bind(this) } value={this.state.selectedSize} id="size-picker" name="size-picker">
               <option value="Select size">Select size</option>
               { optionArray.map((option) => { return option }) }
             </select>
@@ -40,32 +43,45 @@ class AddToCart extends React.Component {
 
   renderQuantity() {
     let optionArray = [];
-    for (var key in this.state.skus) {
-      if (this.state.skus[key].quantity > 15) {
-        let option = <option value="15">15</option>
-        optionArray.push(option);
-      } else {
-        let option = <option value={ this.state.skus[key].quantity }>{ this.state.skus[key].quantity }</option>
-        optionArray.push(option);
+    for (let key in this.state.skus) {
+      if (key === this.state.currentSku) {
+        if (this.state.skus[key].quantity > 15) {
+          for (let i = 1; i <= 15; i++) {
+            let option = <option value={i}>{i}</option>
+            optionArray.push(option);
+          }
+        } else {
+          for (let i = 1; i <= this.state.skus[key].quantity; i++) {
+            let option = <option value={i}>{i}</option>
+            optionArray.push(option);
+          }
+        }
       }
-
     }
-    return <select id="quantity-picker" name="quantity-picker">
+    if (this.state.selectedSize === 'Select size') {
+      return <select id="quantity-picker" name="quantity-picker" disabled>
+        <option value="-">-</option>
+      </select>
+    } else {
+      return <select id="quantity-picker" name="quantity-picker">
              { optionArray.map((option) => { return option }) }
            </select>
+    }
   }
 
   handleSizeChange(e) {
-    if (e.target.value !== "Select size") {
-      this.setState({
-        value: e.target.value,
-      })
-    } else {
-      this.setState({
-        value: "Select size",
-      })
+    let sizes = e.target.children;
+    let sku;
+    for (let i = 0; i < sizes.length; i++) {
+      if (sizes[i].getAttribute('value') === e.target.value) {
+        sku = sizes[i].getAttribute('data-sku');
+      }
     }
 
+    this.setState({
+      selectedSize: e.target.value,
+      currentSku: sku,
+    })
   }
 
   render() {

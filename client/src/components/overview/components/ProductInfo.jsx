@@ -5,11 +5,11 @@ import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import { faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
 import { faPinterestSquare } from '@fortawesome/free-brands-svg-icons';
 
-import quarterStar from 'svg-url-loader!../../../../pix/svgs/starquarter.svg';
-import threeQuarterStar from 'svg-url-loader!../../../../pix/svgs/star3quarters.svg';
-import star from 'svg-url-loader!../../../../pix/svgs/star.svg';
-import starEmpty from 'svg-url-loader!../../../../pix/svgs/star-o.svg';
-import starHalf from 'svg-url-loader!../../../../pix/svgs/star-half-empty.svg';
+import quarterStar from '../../../../pix/svgs/starquarter.svg';
+import threeQuarterStar from '../../../../pix/svgs/star3quarters.svg';
+import star from '../../../../pix/svgs/star.svg';
+import starEmpty from '../../../../pix/svgs/star-o.svg';
+import starHalf from '../../../../pix/svgs/star-half-empty.svg';
 
 class ProductInfo extends React.Component {
   constructor(props) {
