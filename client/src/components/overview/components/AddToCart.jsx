@@ -6,6 +6,7 @@ class AddToCart extends React.Component {
     this.state = {
       skus: this.props.skus,
       selectedSize: 'Select size',
+      selectedQuantity: '-',
       currentSku: '',
     };
   }
@@ -63,7 +64,7 @@ class AddToCart extends React.Component {
         <option value="-">-</option>
       </select>
     } else {
-      return <select id="quantity-picker" name="quantity-picker">
+      return <select onChange={ this.handleQuantityChange.bind(this) } id="quantity-picker" name="quantity-picker" value={ this.state.selectedQuantity } defaultValue={'1'}>
              { optionArray.map((option) => { return option }) }
            </select>
     }
@@ -81,13 +82,25 @@ class AddToCart extends React.Component {
     this.setState({
       selectedSize: e.target.value,
       currentSku: sku,
+      selectedQuantity: '1',
     })
+  }
+
+  handleQuantityChange(e) {
+    this.setState({
+      selectedQuantity: e.target.value,
+    })
+  }
+
+  handleAddToCart(e) {
+    e.preventDefault();
+    alert("YOUR ORDER IS: SIZE -" + this.state.selectedSize + " QUANTITY -" + this.state.selectedQuantity)
   }
 
   render() {
     return (
       <div id="add-to-cart">
-        <form>
+        <form onSubmit={ this.handleAddToCart.bind(this) }>
             { this.renderSizes() }
             { this.renderQuantity() }
           <input type="submit" value="Add to Cart +" />
