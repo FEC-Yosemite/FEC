@@ -15,7 +15,6 @@ class RelatedItems extends Component {
             finished: false
         };
         this.refreshProductsList = this.refreshProductsList.bind(this);
-        this.clickedProduct = this.clickedProduct.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
     }
@@ -26,10 +25,14 @@ class RelatedItems extends Component {
             let ids = [...new Set(idsArray.data)];
             this.setState({
                 productsList: ids,
-                finished: true,
+                finished: false,
                 show: false,
                 modal_product: null,
                 current_product: null
+            }, () => {
+                this.setState({
+                    finished: true
+                });
             });
             console.log(`idsArray.data: ${idsArray.data}`);
         });
@@ -43,10 +46,6 @@ class RelatedItems extends Component {
         this.setState({ show: false });
     }
 
-    clickedProduct(e) {
-        // TODO? up in app?
-    }
-
     getCurrentProduct(product) {
         getProductById(this.props.productId)
         .then(currentProduct => {
@@ -56,6 +55,12 @@ class RelatedItems extends Component {
                 modal_product: (product)
             });
         });
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.productId !== this.props.productId) {
+            this.refreshProductsList();
+        }
     }
 
     componentDidMount() {

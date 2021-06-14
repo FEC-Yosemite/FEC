@@ -13,6 +13,7 @@ class RelatedProductCard extends Component {
             styles: null,
         };
         this.refreshProduct = this.refreshProduct.bind(this);
+        this.productClickHandler = this.productClickHandler.bind(this);
     }
 
     refreshProduct() {
@@ -40,15 +41,24 @@ class RelatedProductCard extends Component {
         }
     }
 
+    productClickHandler(e) {
+        if (e.target.id === 'modal-star') {
+            this.props.showModal(this.state.product)
+        } else {
+            this.props.updateCurrentProduct(this.props.productId)
+        }
+    }
+
+
     render() {
         return (
-            <div id="carousel-item" onClick={() => this.props.updateCurrentProduct(this.props.productId)} >
+            <div id="carousel-item" onClick={(e) => this.productClickHandler(e)} >
                 {
                     this.state.styles === null || this.state.product === null ?
                     <h3>Loading...</h3>
                     :
                     <div id="product-card">
-                        <FontAwesomeIcon id="modal-star" onClick={() => this.props.showModal(this.state.product)} icon={farStar} /> 
+                        <FontAwesomeIcon id="modal-star" onClick={(e) => this.productClickHandler(e)} icon={farStar} /> 
 
                         {
                         this.state.styles[0].photos[0].thumbnail_url !== null ?
