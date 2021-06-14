@@ -11,7 +11,7 @@ class RelatedProductsList extends Component {
         this.state = {
             page: 0,
             window: [],
-            window_size: 3, //changing this will offer valuable insight into debugging later
+            window_size: 3,
             related_products: this.props.productsList
         };
         this.refreshCarousel = this.refreshCarousel.bind(this);
@@ -25,7 +25,7 @@ class RelatedProductsList extends Component {
     refreshCarousel() {
         let products_window = [];
         
-        for (let i = this.state.page * this.state.window_size; i <= (this.state.window_size * this.state.page) + (this.state.window_size - 1) ; i++) {
+        for (let i = this.state.page; i < this.state.page + this.state.window_size; i++) {
             if (i < this.props.productsList.length) {
                 products_window.push(this.props.productsList[i]);
             }

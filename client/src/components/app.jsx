@@ -14,8 +14,17 @@ class App extends React.Component {
   }
 
   updateCurrentProduct(e) {
-    e.preventDefault();
-    console.log(JSON.stringify(Object.keys(e.target)));
+    this.setState({
+      currentProductId: e
+    }, () => {
+    getProducts()
+      .then(data => console.log('Products:', data))
+      .catch(err => console.log('ERROR:', err));
+    getProductById(this.state.currentProductId)
+      .then(data => console.log('Current Product:', data))
+      .catch(err => console.log('ERROR:', err));
+    });
+    console.log(e);
   }
 
   componentDidMount() {
