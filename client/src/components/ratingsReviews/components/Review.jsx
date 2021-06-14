@@ -31,7 +31,7 @@ class Review extends React.Component {
 
   handleHelpful(e) {
     var review = this.props.review;
-    console.log(e.target)
+    this.props.interact(e.target.outerHTML, 'ratings&reviews')
     if (!this.state.helpful) {
       markAsHelpful(review.review_id)
       this.setState({

@@ -17,10 +17,12 @@ class RatingBreakdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      ratings: {},
       avg: null,
-      rec: null,
-
+      rec: null
     }
+
+    this.renderChart = this.renderChart.bind(this);
   }
 
   renderStars() {
@@ -79,6 +81,12 @@ class RatingBreakdown extends React.Component {
     return avg;
   }
 
+  renderChart() {
+    let ratings = this.state.ratings;
+
+    console.log(ratings);
+  }
+
   componentDidMount() {
     getReviewMeta(this.props.productId)
       .then(res => {
@@ -86,6 +94,7 @@ class RatingBreakdown extends React.Component {
         let rec = this.getRecommended(res.data.recommended);
 
         this.setState({
+          ratings: res.data.ratings,
           avg: avg,
           rec: rec
         })
@@ -101,6 +110,9 @@ class RatingBreakdown extends React.Component {
           <h1 id='average-rating'>{ this.state.avg }</h1>
           <div id='stars'>
               { this.renderStars() }
+          </div>
+          <div id='rating-chart'>
+            { this.renderChart() }
           </div>
         </div>
         <p i='recommend-percent'>{ this.state.rec }% of reviews recommend this product</p>

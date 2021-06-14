@@ -55,7 +55,7 @@ class ReviewsList extends React.Component {
     var reviewArray = []
     for (var i = 0; i < this.state.renderedReviews; i++) {
       reviewArray.push(
-        <Review review={ this.props.reviews[this.props.sort][i] } />
+        <Review review={ this.props.reviews[this.props.sort][i] } interact={ this.props.interact } />
       )
     }
 
