@@ -12,6 +12,10 @@ class AddToCart extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.checkforStock();
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.skus !== prevProps.skus) {
       this.setState({
@@ -19,13 +23,20 @@ class AddToCart extends React.Component {
         currentSku: '',
       })
 
-      for (let key in this.props.skus) {
-        if (this.props.skus[key].quantity !== 0) {
-          this.setState({ hasStock: true })
-          break;
-        } else {
-          this.setState({ hasStock: false })
-        }
+      this.checkforStock();
+    }
+  }
+
+  checkforStock() {
+    for (let key in this.props.skus) {
+      if (key === 'null') {
+        this.setState({ hasStock: false });
+        break;
+      } else if (this.props.skus[key].quantity !== 0) {
+        this.setState({ hasStock: true });
+        break;
+      } else {
+        this.setState({ hasStock: false });
       }
     }
   }
