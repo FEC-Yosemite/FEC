@@ -149,6 +149,7 @@ const getCart = () => {
 // params must be an object
 
 const addToCart = (params) => {
+  console.log(params)
   var options = {
     method: 'post',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,

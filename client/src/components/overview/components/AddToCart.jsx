@@ -8,6 +8,7 @@ class AddToCart extends React.Component {
       selectedSize: 'Select size',
       selectedQuantity: '-',
       currentSku: '',
+      sizeNotSelected: '',
     };
   }
 
@@ -36,7 +37,7 @@ class AddToCart extends React.Component {
               { optionArray.map((option) => { return option }) }
             </select>
     } else {
-      return <select id="size-picker" name="size-picker" disabled>
+      return <select id="size-picker-disabled" name="size-picker-disabled" value="OUT OF STOCK" disabled>
               <option value="OUT OF STOCK">OUT OF STOCK</option>
              </select>
     }
@@ -71,6 +72,7 @@ class AddToCart extends React.Component {
   }
 
   handleSizeChange(e) {
+    if (e.target.value !== 'Select size') this.setState({ sizeNotSelected: false })
     let sizes = e.target.children;
     let sku;
     for (let i = 0; i < sizes.length; i++) {
@@ -94,16 +96,25 @@ class AddToCart extends React.Component {
 
   handleAddToCart(e) {
     e.preventDefault();
-    alert("YOUR ORDER IS: SIZE -" + this.state.selectedSize + " QUANTITY -" + this.state.selectedQuantity)
+    if (this.state.selectedSize === 'Select size') {
+      this.setState({ sizeNotSelected: true })
+    } else {
+      this.setState({ sizeNotSelected: false })
+      for (let i = 0; i < this.state.selectedQuantity; i++) {
+        this.props.addToCart(Number(this.state.currentSku));
+      }
+    }
   }
 
   render() {
     return (
       <div id="add-to-cart">
         <form onSubmit={ this.handleAddToCart.bind(this) }>
+          { this.state.sizeNotSelected && <span>Please select a size</span>}
             { this.renderSizes() }
             { this.renderQuantity() }
-          <input type="submit" value="Add to Cart +" />
+            {/* FIX */}
+          { !(document.getElementById('size-picker-disabled')) && <input type="submit" value="Add to Cart +" /> }
         </form>
       </div>
     );

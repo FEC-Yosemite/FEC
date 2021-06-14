@@ -5,7 +5,7 @@ import StylePicker from './components/StylePicker.jsx';
 import AddToCart from './components/AddToCart.jsx';
 import ProductDescription from './components/ProductDescription.jsx';
 
-import { getProductById, getProductStyles, getReviewMeta, getReviews } from '../../requests.js';
+import { getProductById, getProductStyles, getReviewMeta, getReviews, addToCart } from '../../requests.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
@@ -23,6 +23,7 @@ class Overview extends React.Component {
       reviewCount: 0,
       syncedReviewCount: false,
       currentStyle: 0,
+      cart: '',
     };
   }
 
@@ -61,6 +62,13 @@ class Overview extends React.Component {
     this.setState({ currentStyle: index });
   }
 
+  handleCartAdd(id) {
+    console.log(id)
+    addToCart({sku_id: id})
+    .then((res) => console.log(res))
+    .catch((err) => console.log('ERROR:', err));
+  }
+
   render() {
     return(
       <div id="overview">
@@ -77,7 +85,7 @@ class Overview extends React.Component {
 
             { this.state.syncedStyles ? <StylePicker styles={ this.state.styles } changeStyle={ this.handleStyleChange.bind(this) } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
-            { this.state.syncedStyles ? <AddToCart skus={ this.state.styles[this.state.currentStyle].skus } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+            { this.state.syncedStyles ? <AddToCart skus={ this.state.styles[this.state.currentStyle].skus } addToCart={ this.handleCartAdd.bind(this) } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
           </aside>
         </div>

@@ -129,13 +129,11 @@ export function getCart() {
 
 // must pass in an object
 
-export function addToCart(id) {
+export function addToCart(data) {
   var options = {
     method: 'post',
     url: `http://localhost:3000/cart`,
-    params: {
-      sku_id: id
-    }
+    data: data
   }
 
   return axios(options);
