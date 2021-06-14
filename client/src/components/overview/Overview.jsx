@@ -5,7 +5,7 @@ import StylePicker from './components/StylePicker.jsx';
 import AddToCart from './components/AddToCart.jsx';
 import ProductDescription from './components/ProductDescription.jsx';
 
-import { getProductById, getProductStyles, getReviewMeta, getReviews } from '../../requests.js';
+import { getProductById, getProductStyles, getReviewMeta, getReviews, addToCart } from '../../requests.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,7 +13,6 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: this.props.productId,
       product: {},
       syncedProduct: false,
       styles: [],
@@ -23,37 +22,54 @@ class Overview extends React.Component {
       reviewCount: 0,
       syncedReviewCount: false,
       currentStyle: 0,
+      cart: '',
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.productId !== prevProps.productId) {
+      this.setState({
+        syncedProduct: false,
+        syncedStyles: false,
+        syncedRatings: false,
+        syncedReviewCount: false,
+      })
+      this.refreshProduct();
+    }
+  }
+
+  refreshProduct() {
+    getProductById(this.props.productId)
+    .then((res) => this.setState({
+      product: res.data,
+      syncedProduct: true,
+    }))
+    .catch((err) => console.log('ERROR:', err));
+
+  getProductStyles(this.props.productId)
+    .then((res) => this.setState({
+      styles: res.data.results,
+      syncedStyles: true,
+    }))
+    .catch((err) => console.log('ERROR:', err));
+
+  getReviewMeta(this.props.productId)
+    .then((res) => this.setState({
+      ratings: res.data.ratings,
+      syncedRatings: true,
+    }))
+    .catch((err) => console.log('ERROR:', err));
+
+  getReviews(this.props.productId, null, 100, 'newest')
+    .then((res) => this.setState({
+        reviewCount: res.data.results.length,
+        syncedReviewCount: true,
+    }))
+    .catch((err) => console.log('ERROR:', err));
+  }
+
   componentDidMount() {
-    getProductById(this.state.currentProduct)
-      .then((res) => this.setState({
-        product: res.data,
-        syncedProduct: true,
-      }))
-      .catch((err) => console.log('ERROR:', err));
-
-    getProductStyles(this.state.currentProduct)
-      .then((res) => this.setState({
-        styles: res.data.results,
-        syncedStyles: true,
-      }))
-      .catch((err) => console.log('ERROR:', err));
-
-    getReviewMeta(this.state.currentProduct)
-      .then((res) => this.setState({
-        ratings: res.data.ratings,
-        syncedRatings: true,
-      }))
-      .catch((err) => console.log('ERROR:', err));
-
-    getReviews(this.state.currentProduct, null, 100, 'newest')
-      .then((res) => this.setState({
-          reviewCount: res.data.results.length,
-          syncedReviewCount: true,
-      }))
-      .catch((err) => console.log('ERROR:', err));
+    this.refreshProduct();
   }
 
   handleStyleChange(e) {
@@ -61,24 +77,37 @@ class Overview extends React.Component {
     this.setState({ currentStyle: index });
   }
 
+  handleCartAdd(id) {
+    console.log(id)
+    addToCart({sku_id: id})
+    .then((res) => console.log(res))
+    .catch((err) => console.log('ERROR:', err));
+  }
+
   render() {
     return(
       <div id="overview">
         <h4>site-wide announcement message! - sale / discount <strong>offer</strong> - <a href="blank">new product highlight</a></h4>
         <div id="container" className="collapsed">
+
           { this.state.syncedStyles ?
-          <Gallery productId={ this.state.currentProduct } styles={ this.state.styles } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+          <Gallery productId={ this.props.productId } styles={ this.state.styles } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
           <aside id="info-aside">
+
             { this.state.syncedStyles && this.state.syncedProduct && this.state.syncedRatings && this.state.syncedReviewCount ?
             <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
             { this.state.syncedStyles ? <StylePicker styles={ this.state.styles } changeStyle={ this.handleStyleChange.bind(this) } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
-            <AddToCart />
+
+            { this.state.syncedStyles ? <AddToCart skus={ this.state.styles[this.state.currentStyle].skus } addToCart={ this.handleCartAdd.bind(this) } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+
           </aside>
         </div>
         <div id="product-description">
+
           { this.state.syncedProduct && <ProductDescription product={ this.state.product } /> }
+
         </div>
       </div>
     )
