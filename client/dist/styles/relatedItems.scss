@@ -71,3 +71,37 @@ $carousel-height: 550px;
         width: auto;
     }
 }
+
+.modal {
+    position: fixed;
+    left: 15vw;
+    top: 10vh;
+    width: 70vw;
+    height: 80vh;
+    background: white;
+    border: 1px solid #ccc;
+    transition: 1.1s ease-out;
+    box-shadow: -2rem 2rem 2rem rgba(black, 0.2);
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+    text-align: center;
+    z-index: 10;
+    #related-products-modal-head {
+      background: lightgray;
+      text-align: center;
+      padding: 10px;
+    }
+}
+table {
+  width: 100%;
+  text-align: center;
+  tr {
+    width: 100%;
+
+    td{
+      width: 33%;
+    }
+  }
+}
