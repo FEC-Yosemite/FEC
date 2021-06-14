@@ -7,56 +7,70 @@
   max-height: 80vh;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 30% 70%;
-  gap: 10px;
+  grid-template-columns: 30% 35% 35%;
   grid-auto-rows: minmax(100px, auto);
 }
 
-#ratings-reviews .review #helpful {
+#ratings-reviews #rating-breakdown #breakdown-header h1 {
+  display: inline;
+  font-size: 64px;
+  margin-right: 20px;
+}
+
+#ratings-reviews #rating-breakdown #breakdown-header #stars {
+  font-size: 36px;
+}
+
+#ratings-reviews #rating-breakdown #breakdown-header #stars img {
+  height: 36px;
+  width: 36px;
+}
+
+#ratings-reviews .review .helpful {
   background: none;
   border: none;
 }
 
-#ratings-reviews .review #helpful:hover {
+#ratings-reviews .review .helpful:hover {
   color: lightblue;
   cursor: pointer;
 }
 
-#ratings-reviews .review #unhelpful {
+#ratings-reviews .review .unhelpful {
   background: none;
   border: none;
 }
 
-#ratings-reviews .review #unhelpful:hover {
+#ratings-reviews .review .unhelpful:hover {
   color: lightblue;
   cursor: pointer;
 }
 
-#ratings-reviews .review #report {
+#ratings-reviews .review .report {
   background: none;
   border: none;
 }
 
-#ratings-reviews .review #report:hover {
+#ratings-reviews .review .report:hover {
   color: lightcoral;
   cursor: pointer;
 }
 
-#ratings-reviews .review .clicked#helpful {
+#ratings-reviews .review .clicked.helpful {
   color: #2d2dc0;
 }
 
-#ratings-reviews .review .clicked#unhelpful {
+#ratings-reviews .review .clicked.unhelpful {
   color: #2d2dc0;
 }
 
-#ratings-reviews .review .clicked#report {
+#ratings-reviews .review .clicked.report {
   color: #a52e2e;
 }
 
 #ratings-reviews #rating-breakdown {
   grid-column: 1;
-  grid-row: 1 / 2;
+  grid-row: 1 / 3;
 }
 
 #ratings-reviews #product-breakdown {
@@ -65,25 +79,41 @@
 }
 
 #ratings-reviews #sort-review {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1;
+}
+
+#ratings-reviews #sort-review h3 {
+  font-size: 18px;
+}
+
+#ratings-reviews #sort-review h3 select {
+  border: none;
+  border-bottom: 2px solid;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 #ratings-reviews #reviews {
   position: relative;
   max-height: 100%;
-  grid-column: 2;
-  grid-row: 2/ 3;
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
 #ratings-reviews #reviews #reviews-list {
   max-height: 60vh;
   overflow: scroll;
-  margin: auto;
+  margin: 10px;
+  grid-column: 1 / 3;
 }
 
 #ratings-reviews #reviews #reviews-list .review {
   border: 1px solid;
+  box-shadow: 0 1rem 10px rgba(0, 0, 0, 0.1);
   margin: 25px;
   padding: 10px;
 }
@@ -115,7 +145,20 @@
   display: inline;
   margin: 0;
   padding: 0;
+  color: #4b4a4a;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-body button {
+  position: relative;
+  left: 80%;
+  border: none;
+  border-bottom: solid 1px #444343;
+  background: none;
   color: grey;
+}
+
+#ratings-reviews #reviews #reviews-list .review #review-body button:hover {
+  color: darkgray;
 }
 
 #ratings-reviews #reviews #reviews-list .review h3 {
@@ -144,12 +187,31 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-#ratings-reviews #reviews #reviews-list .review #photo-view img {
-  position: fixed;
-  width: 80vw;
+#ratings-reviews #reviews #reviews-list .review #photo-view #photo-container {
   height: 80vh;
+  width: 80vw;
+  position: fixed;
   top: 10vh;
   left: 10vw;
+  text-align: center;
+  border: 1px solid darkgray;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#ratings-reviews #reviews #reviews-list .review #photo-view #photo-container .helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+#ratings-reviews #reviews #reviews-list .review #photo-view #photo-container img {
+  vertical-align: middle;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  margin: auto;
+  object-fit: cover;
 }
 
 #ratings-reviews #reviews #reviews-list .review #photo-view button {
@@ -169,14 +231,18 @@
   border: solid 1px black;
 }
 
-#ratings-reviews #reviews #reviews-list #more-reviews {
-  margin: 10px;
+#ratings-reviews #reviews #more-reviews {
+  margin: auto;
   padding: 10px;
+  grid-column: 1;
+  width: 50%;
 }
 
-#ratings-reviews #reviews #reviews-list #write-review {
-  margin: 10px;
+#ratings-reviews #reviews #write-review {
+  margin: auto;
   padding: 10px;
+  grid-column: 2;
+  width: 50%;
 }
 
 #ratings-reviews #modal {
