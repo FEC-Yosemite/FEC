@@ -24,16 +24,16 @@ class ProductInfo extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({ avg: this.getAvgRating() })
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.currentStyle !== prevProps.currentStyle) {
       this.setState({
         currentStyle: this.props.currentStyle,
       })
     }
-  }
-
-  componentDidMount() {
-    this.setState({ avg: this.getAvgRating() })
   }
 
   renderStars() {
@@ -58,7 +58,6 @@ class ProductInfo extends React.Component {
       stars.push(<img src={ starEmpty }/>)
     }
 
-
     return stars;
   }
 
@@ -79,7 +78,7 @@ class ProductInfo extends React.Component {
     return(
       <div id="product-info">
          { <p>Average rating: { this.state.avg }</p>}
-         { (this.state.reviewCount !== 0) && <a href="#reviews" >See all { this.state.reviewCount } reviews</a>}
+         { (this.state.reviewCount !== 0) && <a href="#reviews" onClick={ this.props.interact } >See all { this.state.reviewCount } reviews</a>}
          { this.renderStars() }
         <p>{ this.state.product.category }</p>
         <h3>{ this.state.product.name }</h3>
@@ -90,9 +89,9 @@ class ProductInfo extends React.Component {
         <p className="sale-price" >{ this.state.styles[this.state.currentStyle].sale_price }</p>
         </> :
         <p className="regular-price">{ this.state.styles[this.state.currentStyle].original_price }</p> }
-        <a href="/" className="brand"><FontAwesomeIcon icon={faFacebookSquare} /></a>
-        <a href="/" className="brand"><FontAwesomeIcon icon={faTwitterSquare} /></a>
-        <a href="/" className="brand"><FontAwesomeIcon icon={faPinterestSquare} /></a>
+        <a href="/" className="brand"><FontAwesomeIcon icon={faFacebookSquare} onClick={ this.props.interact } /></a>
+        <a href="/" className="brand"><FontAwesomeIcon icon={faTwitterSquare} onClick={ this.props.interact } /></a>
+        <a href="/" className="brand"><FontAwesomeIcon icon={faPinterestSquare} onClick={ this.props.interact } /></a>
         <p><strong>Style ></strong>{ this.state.styles[this.state.currentStyle].name }</p>
       </div>
     )

@@ -26,6 +26,10 @@ class Gallery extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.refreshProduct();
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.currentStyle !== prevProps.currentStyle) {
       this.setState({
@@ -47,10 +51,6 @@ class Gallery extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this.refreshProduct();
-  }
-
   handleImageChange(index) {
     this.setState({
       currentIndex: index,
@@ -59,7 +59,8 @@ class Gallery extends React.Component {
     });
   }
 
-  handleNextImageClick() {
+  handleNextImageClick(e) {
+    this.props.interact(e);
     document.getElementById('product-image').classList.add('slide-left');
     setTimeout(function(){ document.getElementById('product-image').classList.remove('slide-left'); }, 1000);
     let index = this.state.currentIndex;
@@ -69,7 +70,8 @@ class Gallery extends React.Component {
     }
   }
 
-  handlePrevImageClick() {
+  handlePrevImageClick(e) {
+    this.props.interact(e);
     document.getElementById('product-image').classList.add('slide-right');
     setTimeout(function(){ document.getElementById('product-image').classList.remove('slide-right'); }, 1000);
     let index = this.state.currentIndex;
@@ -77,10 +79,10 @@ class Gallery extends React.Component {
       index--;
       this.handleImageChange(index);
     }
-    this.handleThumbnailHighlight(index);
   }
 
   handleThumbnailClick(e) {
+    this.props.interact(e);
     const index = Number(e.target.getAttribute('data-index'));
     this.setState({
       currentImage: e.target.getAttribute('data-url'),
@@ -89,6 +91,7 @@ class Gallery extends React.Component {
   }
 
   handleMouseMove(e) {
+    this.props.interact(e);
     const prodImage = e.target;
     const left = -(e.offsetX / e.target.width * 100);
     const top = e.offsetY / e.target.height * 100;
@@ -113,6 +116,7 @@ class Gallery extends React.Component {
   }
 
   handleImageClick(e) {
+    this.props.interact(e);
     const prodImage = e.target;
     if (this.state.collapsed === true) {
       document.getElementById('info-aside').classList.add('collapsed');
@@ -123,7 +127,8 @@ class Gallery extends React.Component {
     this.handleZoom(prodImage);
   }
 
-  handleCollapse() {
+  handleCollapse(e) {
+    this.props.interact(e);
     const prodImage = document.getElementById('product-image');
     if (this.state.collapsed === false) {
       if (this.state.zoomed === true) {
@@ -136,7 +141,8 @@ class Gallery extends React.Component {
     }
   }
 
-  scrollThumbnailsDown() {
+  scrollThumbnailsDown(e) {
+    this.props.interact(e);
     let increaser = this.state.thumbIndex;
     if (increaser !== this.state.currentImages.length - 7) {
       increaser++;
@@ -145,7 +151,8 @@ class Gallery extends React.Component {
 
   }
 
-  scrollThumbnailsUp() {
+  scrollThumbnailsUp(e) {
+    this.props.interact(e);
     let increaser = this.state.thumbIndex;
     if (increaser !== 0) {
       increaser--;
@@ -226,7 +233,7 @@ class Gallery extends React.Component {
         <div id="jumbotron">
           {this.renderPrevArrow()}
 
-          <img id="product-image" onClick={this.handleImageClick.bind(this)} src={this.state.currentImage} alt="" />
+          { this.state.currentImage !== null ? <img id="product-image" onClick={this.handleImageClick.bind(this)} src={this.state.currentImage} alt="" /> : <img id="product-image" onClick={this.handleImageClick.bind(this)} src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" alt="" /> }
           {this.renderNextArrow()}
           <div id="thumbnails">
             <div className="chevron-up-holder">{(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== 0) && <FontAwesomeIcon onClick={ this.scrollThumbnailsUp.bind(this) } className="chevron chevron-up" icon={ faChevronUp } />}</div>
