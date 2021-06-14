@@ -11,9 +11,13 @@ class RelatedProductCard extends Component {
         this.state = {
             product: null,
             styles: null,
+            star: farStar,
+            star_state: false
         };
         this.refreshProduct = this.refreshProduct.bind(this);
         this.productClickHandler = this.productClickHandler.bind(this);
+        this.starEnter = this.starEnter.bind(this);
+        this.starLeave = this.starLeave.bind(this);
     }
 
     refreshProduct() {
@@ -30,6 +34,30 @@ class RelatedProductCard extends Component {
             });
         });
     }
+    
+    productClickHandler(e) {
+        if (this.state.star_state) {
+            this.props.showModal(this.state.product);
+            this.props.interact(e.target.outerHTML);
+        } else {
+            this.props.updateCurrentProduct(this.props.productId);
+            this.props.interact(e.target.outerHTML);
+        }
+    }
+
+    starEnter() {
+        this.setState({
+            star: fasStar,
+            star_state: true
+        });
+    }
+
+    starLeave() {
+        this.setState({
+            star: farStar,
+            star_state: false
+        });
+    }
 
     componentDidMount() {
         this.refreshProduct();
@@ -41,15 +69,6 @@ class RelatedProductCard extends Component {
         }
     }
 
-    productClickHandler(e) {
-        if (e.target.id === 'modal-star') {
-            this.props.showModal(this.state.product)
-        } else {
-            this.props.updateCurrentProduct(this.props.productId)
-        }
-    }
-
-
     render() {
         return (
             <div id="carousel-item" onClick={(e) => this.productClickHandler(e)} >
@@ -58,7 +77,7 @@ class RelatedProductCard extends Component {
                     <h3>Loading...</h3>
                     :
                     <div id="product-card">
-                        <FontAwesomeIcon id="modal-star" onClick={(e) => this.productClickHandler(e)} icon={farStar} /> 
+                        <FontAwesomeIcon id="modal-star" icon={this.state.star} onMouseEnter={this.starEnter} onMouseLeave={this.starLeave} />
 
                         {
                         this.state.styles[0].photos[0].thumbnail_url !== null ?

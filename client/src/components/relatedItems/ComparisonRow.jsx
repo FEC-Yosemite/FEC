@@ -34,9 +34,9 @@ class ComparisonRow extends Component {
                 null :
                 typeof this.props.right_data === 'boolean' ?
                     this.props.right_data ?
-                    <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faXmark} />
-                :
-                this.props.right_data}
+                        <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faXmark} />
+                    :
+                    this.props.right_data}
                 </td>
             </tr>
         );

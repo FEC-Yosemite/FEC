@@ -64,7 +64,6 @@ class Carousel extends Component {
                 <div id="left-button-placeholder"> </div>
                 :
                 <FontAwesomeIcon id="left-button" onClick={this.buttonClick} icon={faArrowLeft} />
-                // <img id="left-button" src="client/pix/left-button.jpg" alt="left carousel arrow" onClick={this.buttonClick} />
             }
             </div>
             {
@@ -81,7 +80,6 @@ class Carousel extends Component {
                 <div id="right-button-placeholder"> </div>
                 :
                 <FontAwesomeIcon id="right-button" onClick={this.buttonClick} icon={faArrowRight} />
-                // <img id="right-button" src="client/pix/right-button.jpg" alt="right carousel arrow" onClick={this.buttonClick} />
             }
             </div>
             {/* <div></div> */}

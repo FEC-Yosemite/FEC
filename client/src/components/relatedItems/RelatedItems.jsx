@@ -42,8 +42,9 @@ class RelatedItems extends Component {
         this.getCurrentProduct(product);
     }
 
-    hideModal() {
+    hideModal(e) {
         this.setState({ show: false });
+        this.props.interact(e.target.outerHTML);
     }
 
     getCurrentProduct(product) {
@@ -73,13 +74,13 @@ class RelatedItems extends Component {
             <div id="related-items">
                 {
                 this.state.show ?
-                <Comparison modal_product={JSON.stringify(this.state.modal_product)} current_product={JSON.stringify(this.state.current_product)} hideModal={this.hideModal} />
+                <Comparison modal_product={JSON.stringify(this.state.modal_product)} current_product={JSON.stringify(this.state.current_product)} hideModal={this.hideModal} interact={this.props.interact} />
                 :
                 null
                 }
                 {
                 this.state.finished ?
-                <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} />
+                <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} />
                 // <Carousel productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} />
                 :
                 <h1>Loading</h1>

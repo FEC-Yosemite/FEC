@@ -12,6 +12,7 @@ class App extends React.Component {
       currentProductId: 19089,
     }
     this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
+    this.handleInteraction = this.handleInteraction.bind(this);
   }
 
   updateCurrentProduct(e) {
@@ -52,7 +53,7 @@ class App extends React.Component {
     return (
       <div id="app-div">
         <Overview productId={ this.state.currentProductId }/>
-        <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} />
+        <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} interact={ target => this.handleInteraction(target, 'Related Items') } />
         <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } />
       </div>
     )

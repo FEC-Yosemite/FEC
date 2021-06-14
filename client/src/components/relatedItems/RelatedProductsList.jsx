@@ -43,15 +43,16 @@ class RelatedProductsList extends Component {
 
     buttonClick(e) {
       e.preventDefault();
+      this.props.interact(e.target.outerHTML);
       let pageModifier = this.state.page;
-      if (e.target.id === 'left-button') {
+      if (e.currentTarget.id === 'left-button') {
         this.setState({
           page: pageModifier - 1
         }, () => {
             this.refreshCarousel();
         });
       }
-      if (e.target.id === 'right-button') {
+      if (e.currentTarget.id === 'right-button') {
           this.setState({
             page: pageModifier + 1
           }, () => {
@@ -74,7 +75,7 @@ class RelatedProductsList extends Component {
                 {
                 this.state.window.length > 0 ?
                 this.state.window.map((productId, index) => (
-                    <RelatedProductCard key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct}/>
+                    <RelatedProductCard key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} />
                 ))
                 :
                 
