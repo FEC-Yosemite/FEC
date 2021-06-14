@@ -58,6 +58,18 @@ class RatingsReviews extends React.Component {
       .catch((err) => console.log('ERROR:', err));
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      this.reviewRequests();
+
+      getReviewMeta(this.props.productId)
+        .then(res => this.setState({
+          characteristics: res.data.characteristics
+        }))
+        .catch(err => console.log('ERROR:', err))
+    }
+  }
+
   componentDidMount() {
     this.reviewRequests();
 
