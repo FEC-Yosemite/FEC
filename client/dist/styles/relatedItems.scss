@@ -21,6 +21,7 @@ $carousel-height: 550px;
     }
     
     #left-button {
+      cursor: pointer;
       float: left;
       height: 80px;
       width: auto;
@@ -42,6 +43,7 @@ $carousel-height: 550px;
     }
 
     #right-button {
+      cursor: pointer;
       float: right;
       height: 80px;
       width: auto;

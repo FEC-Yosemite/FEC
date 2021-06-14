@@ -18,8 +18,14 @@ class RelatedProductsList extends Component {
         this.buttonClick = this.buttonClick.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.productId !== this.props.productId) {
+            this.refreshCarousel();
+        }
+      }
+
     componentDidMount() {
-        this.refreshCarousel()
+        this.refreshCarousel();
     }
 
     refreshCarousel() {
