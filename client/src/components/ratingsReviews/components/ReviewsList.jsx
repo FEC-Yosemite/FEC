@@ -76,8 +76,10 @@ class ReviewsList extends React.Component {
       </div>
     )
     : (
-      <div>
-        loading...
+      <div id='reviews'>
+        <div id='reviews-list'>
+          <h2>loading...</h2>
+        </div>
       </div>
     )
   }

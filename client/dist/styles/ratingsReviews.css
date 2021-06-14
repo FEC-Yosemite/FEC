@@ -46,7 +46,13 @@
   width: 100%;
 }
 
-#ratings-reviews #product-breakdown .chart div {
+#ratings-reviews #product-breakdown .chart .char-div {
+  background: #CDCDCD;
+  height: 10px;
+  width: 100%;
+}
+
+#ratings-reviews #product-breakdown .chart .char-wrapper {
   display: flex;
   /* establish flex container */
   flex-direction: row;
@@ -56,7 +62,7 @@
   justify-content: space-between;
 }
 
-#ratings-reviews #product-breakdown .chart div p {
+#ratings-reviews #product-breakdown .chart .char-wrapper p {
   margin: 0;
   padding: 0;
   display: inline;
@@ -147,6 +153,10 @@
   grid-column: 1 / 3;
 }
 
+#ratings-reviews #reviews #reviews-list h2 {
+  text-align: center;
+}
+
 #ratings-reviews #reviews #reviews-list .review {
   border: 1px solid;
   box-shadow: 0 1rem 10px rgba(0, 0, 0, 0.1);
@@ -207,7 +217,10 @@
 }
 
 #ratings-reviews #reviews #reviews-list .review #review-response {
-  background: grey;
+  background: #bdbaba;
+  margin: 10px;
+  padding: 10px;
+  border: solid 1px #CDCDCD;
 }
 
 #ratings-reviews #reviews #reviews-list .review #review-photos img {
