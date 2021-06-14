@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { getProductById, getProductStyles } from  '../../requests.js';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+
 class RelatedProductCard extends Component {
     constructor(props) {
         super(props);
@@ -30,20 +34,29 @@ class RelatedProductCard extends Component {
         this.refreshProduct();
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.product !== prevProps.product) {
+            this.fetchData(this.props.userID);
+        }
+    }
+
     render() {
         return (
-            <div id="carousel-item">
+            <div id="carousel-item" onClick={() => this.props.updateCurrentProduct(this.props.productId)} >
                 {
                     this.state.styles === null || this.state.product === null ?
                     <h3>Loading...</h3>
                     :
                     <div id="product-card">
+                        <FontAwesomeIcon id="modal-star" onClick={() => this.props.showModal(this.state.product)} icon={farStar} /> 
+
                         {
                         this.state.styles[0].photos[0].thumbnail_url !== null ?
-                            <img src={this.state.styles[0].photos[0].thumbnail_url}/>
-                            :
-                            <img src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg"/>
+                        <img src={this.state.styles[0].photos[0].thumbnail_url} key={this.props.productId} />
+                        :
+                        <img src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" key={this.props.productId} />
                         }
+
                         <p>{this.state.product.category}</p>
                         <h4>{this.state.product.name}</h4>
                     </div>
