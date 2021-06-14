@@ -39,12 +39,16 @@ class Gallery extends React.Component {
     }
   }
 
-  componentDidMount() {
+  refreshProduct() {
     this.setState({
       currentImages: this.state.styles[this.state.currentStyle].photos,
       currentImage: this.state.styles[this.state.currentStyle].photos[0].url,
       currentThumb: this.state.styles[this.state.currentStyle].photos[0].thumbnail_url,
     })
+  }
+
+  componentDidMount() {
+    this.refreshProduct();
   }
 
   handleImageChange(index) {

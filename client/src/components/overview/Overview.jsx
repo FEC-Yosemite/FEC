@@ -13,7 +13,6 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: this.props.productId,
       product: {},
       syncedProduct: false,
       styles: [],
@@ -27,34 +26,50 @@ class Overview extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.productId !== prevProps.productId) {
+      this.setState({
+        syncedProduct: false,
+        syncedStyles: false,
+        syncedRatings: false,
+        syncedReviewCount: false,
+      })
+      this.refreshProduct();
+    }
+  }
+
+  refreshProduct() {
+    getProductById(this.props.productId)
+    .then((res) => this.setState({
+      product: res.data,
+      syncedProduct: true,
+    }))
+    .catch((err) => console.log('ERROR:', err));
+
+  getProductStyles(this.props.productId)
+    .then((res) => this.setState({
+      styles: res.data.results,
+      syncedStyles: true,
+    }))
+    .catch((err) => console.log('ERROR:', err));
+
+  getReviewMeta(this.props.productId)
+    .then((res) => this.setState({
+      ratings: res.data.ratings,
+      syncedRatings: true,
+    }))
+    .catch((err) => console.log('ERROR:', err));
+
+  getReviews(this.props.productId, null, 100, 'newest')
+    .then((res) => this.setState({
+        reviewCount: res.data.results.length,
+        syncedReviewCount: true,
+    }))
+    .catch((err) => console.log('ERROR:', err));
+  }
+
   componentDidMount() {
-    getProductById(this.state.currentProduct)
-      .then((res) => this.setState({
-        product: res.data,
-        syncedProduct: true,
-      }))
-      .catch((err) => console.log('ERROR:', err));
-
-    getProductStyles(this.state.currentProduct)
-      .then((res) => this.setState({
-        styles: res.data.results,
-        syncedStyles: true,
-      }))
-      .catch((err) => console.log('ERROR:', err));
-
-    getReviewMeta(this.state.currentProduct)
-      .then((res) => this.setState({
-        ratings: res.data.ratings,
-        syncedRatings: true,
-      }))
-      .catch((err) => console.log('ERROR:', err));
-
-    getReviews(this.state.currentProduct, null, 100, 'newest')
-      .then((res) => this.setState({
-          reviewCount: res.data.results.length,
-          syncedReviewCount: true,
-      }))
-      .catch((err) => console.log('ERROR:', err));
+    this.refreshProduct();
   }
 
   handleStyleChange(e) {
@@ -76,7 +91,7 @@ class Overview extends React.Component {
         <div id="container" className="collapsed">
 
           { this.state.syncedStyles ?
-          <Gallery productId={ this.state.currentProduct } styles={ this.state.styles } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+          <Gallery productId={ this.props.productId } styles={ this.state.styles } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
           <aside id="info-aside">
 
