@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 class ProductBreakdown extends React.Component {
   constructor(props) {
@@ -11,11 +13,18 @@ class ProductBreakdown extends React.Component {
   }
 
   renderSize() {
+    let fit = this.props.chars.Size.value;
+    let pct = (fit / 5) * 100;
+    let style = {
+      position: 'relative',
+      left: `${pct}%`,
+      transform: 'translate(-50%, -50%)'
+    }
     return (
       <div className='chart'>
         <h3>Size</h3>
-        <canvas id='size-chart'></canvas>
-        <div>
+        <div id='size-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
+        <div className='char-wrapper'>
           <p className='lowest'>A size too small</p>
           <p className='perfect'>Perfect</p>
           <p className='highest'>A size too big</p>
@@ -25,11 +34,18 @@ class ProductBreakdown extends React.Component {
   }
 
   renderWidth() {
+    let fit = this.props.chars.Width.value;
+    let pct = (fit / 5) * 100;
+    let style = {
+      position: 'relative',
+      left: `${pct}%`,
+      transform: 'translate(-50%, -50%)'
+    }
     return (
       <div className='chart'>
         <h3>Width</h3>
-        <canvas id='width-chart'></canvas>
-        <div>
+        <div id='width-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
+        <div className='char-wrapper'>
           <p className='lowest'>Too narrow</p>
           <p className='perfect'>Perfect</p>
           <p className='highest'>Too wide</p>
@@ -40,11 +56,18 @@ class ProductBreakdown extends React.Component {
   }
 
   renderComfort() {
+    let fit = this.props.chars.Comfort.value;
+    let pct = (fit / 5) * 100;
+    let style = {
+      position: 'relative',
+      left: `${pct}%`,
+      transform: 'translate(-50%, -50%)'
+    }
     return (
       <div className='chart'>
         <h3>Comfort</h3>
-        <canvas id='comfort-chart'></canvas>
-        <div>
+        <div id='comfort-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
+        <div className='char-wrapper'>
           <p className='lowest'>Uncomfortable</p>
           <p className='highest'>Perfect</p>
         </div>
@@ -54,11 +77,18 @@ class ProductBreakdown extends React.Component {
   }
 
   renderQuality() {
+    let fit = this.props.chars.Quality.value;
+    let pct = (fit / 5) * 100;
+    let style = {
+      position: 'relative',
+      left: `${pct}%`,
+      transform: 'translate(-50%, -50%)'
+    }
     return (
       <div className='chart'>
         <h3>Quality</h3>
-        <canvas id='quality-chart'></canvas>
-        <div>
+        <div id='quality-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
+        <div className='char-wrapper'>
           <p className='lowest'>Poor</p>
           <p className='highest'>Perfect</p>
         </div>
@@ -68,11 +98,18 @@ class ProductBreakdown extends React.Component {
   }
 
   renderLength() {
+    let fit = this.props.chars.Length.value;
+    let pct = (fit / 5) * 100;
+    let style = {
+      position: 'relative',
+      left: `${pct}%`,
+      transform: 'translate(-50%, -50%)'
+    }
     return (
       <div className='chart'>
         <h3>Length</h3>
-        <canvas id='length-chart'></canvas>
-        <div>
+        <div id='length-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
+        <div className='char-wrapper'>
           <p className='lowest'>Runs short</p>
           <p className='perfect'>Perfect</p>
           <p className='highest'>Runs long</p>
@@ -83,11 +120,18 @@ class ProductBreakdown extends React.Component {
   }
 
   renderFit() {
+    let fit = this.props.chars.Fit.value;
+    let pct = (fit / 5) * 100;
+    let style = {
+      position: 'relative',
+      left: `${pct}%`,
+      transform: 'translate(-50%, -50%)'
+    }
     return (
       <div className='chart'>
         <h3>Fit</h3>
-        <canvas id='fit-chart'></canvas>
-        <div>
+        <div id='fit-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
+        <div className='char-wrapper'>
           <p className='lowest'>Runs tight</p>
           <p className='perfect'>Perfect</p>
           <p className='highest'>Runs long</p>
