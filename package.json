@@ -44,6 +44,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "axios": "^0.21.1",
     "chai": "^4.3.4",
+    "chart.js": "^3.3.2",
     "express": "^4.17.1",
     "mocha": "^8.4.0",
     "moment": "^2.29.1",

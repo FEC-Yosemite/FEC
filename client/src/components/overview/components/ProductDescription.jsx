@@ -14,7 +14,7 @@ const ProductDescription = (props) => {
         </div>
         <div id="features">
           { features.length && <ul className="features">{features.map((feature) => (
-            <li>{ feature.feature }: { feature.value }</li>
+            <li key={feature.feature}>{ feature.feature }: { feature.value }</li>
           ))}</ul>}
         </div>
       </>

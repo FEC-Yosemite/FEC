@@ -1,11 +1,15 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar as farFaStar } from '@fortawesome/free-regular-svg-icons';
-import { faStar as fasFaStar } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import { faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
 import { faPinterestSquare } from '@fortawesome/free-brands-svg-icons';
+
+import quarterStar from '../../../../pix/svgs/starquarter.svg';
+import threeQuarterStar from '../../../../pix/svgs/star3quarters.svg';
+import star from '../../../../pix/svgs/star.svg';
+import starEmpty from '../../../../pix/svgs/star-o.svg';
+import starHalf from '../../../../pix/svgs/star-half-empty.svg';
 
 class ProductInfo extends React.Component {
   constructor(props) {
@@ -15,7 +19,7 @@ class ProductInfo extends React.Component {
       styles: this.props.styles,
       currentStyle: this.props.currentStyle,
       ratings: this.props.ratings,
-      avgRating: 0,
+      avg: 0,
       reviewCount: this.props.reviewCount,
     };
   }
@@ -29,14 +33,36 @@ class ProductInfo extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ avgRating: this.calcReviewAvg() })
+    this.setState({ avg: this.getAvgRating() })
   }
 
   renderStars() {
-    return <><FontAwesomeIcon icon={farFaStar} /><FontAwesomeIcon icon={farFaStar} /><FontAwesomeIcon icon={farFaStar} /><FontAwesomeIcon icon={farFaStar} /><FontAwesomeIcon icon={farFaStar} /></>
+    let stars = [];
+    let avg = this.state.avg;
+    let whole = Math.floor(avg);
+    let float = avg % 1;
+
+    while (stars.length < whole) {
+      stars.push(<img src={ star }/>)
+    }
+
+    if (float > 0 && float <= 0.33) {
+      stars.push(<img src={ quarterStar }/>)
+    } else if (float > 0.33 && float <= 0.67) {
+      stars.push(<img src={ starHalf }/>)
+    } else if (float > 0.67 && float < 1) {
+      stars.push(<img src={ threeQuarterStar }/>)
+    }
+
+    while (stars.length < 5) {
+      stars.push(<img src={ starEmpty }/>)
+    }
+
+
+    return stars;
   }
 
-  calcReviewAvg() {
+  getAvgRating() {
     const keys = Object.keys(this.state.ratings);
     if (keys.length === 0) return 'No reviews yet';
     let total = 0;
@@ -52,7 +78,7 @@ class ProductInfo extends React.Component {
   render() {
     return(
       <div id="product-info">
-         { <p>Average rating: { this.state.avgRating }</p>}
+         { <p>Average rating: { this.state.avg }</p>}
          { (this.state.reviewCount !== 0) && <a href="#reviews" >See all { this.state.reviewCount } reviews</a>}
          { this.renderStars() }
         <p>{ this.state.product.category }</p>

@@ -1,14 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-undef */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
-/* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/no-unused-state */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable-next-line class-methods-use-this */
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,7 +24,6 @@ class Gallery extends React.Component {
       currentStyle: 0,
       thumbIndex: 0,
     };
-
   }
 
   componentDidUpdate(prevProps) {
@@ -51,12 +39,16 @@ class Gallery extends React.Component {
     }
   }
 
-  componentDidMount() {
+  refreshProduct() {
     this.setState({
       currentImages: this.state.styles[this.state.currentStyle].photos,
       currentImage: this.state.styles[this.state.currentStyle].photos[0].url,
       currentThumb: this.state.styles[this.state.currentStyle].photos[0].thumbnail_url,
     })
+  }
+
+  componentDidMount() {
+    this.refreshProduct();
   }
 
   handleImageChange(index) {
@@ -173,10 +165,10 @@ class Gallery extends React.Component {
 
       if (count <= 7) {
         if (index === this.state.currentIndex) {
-          let thumb = <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+          let thumb = <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
           renderArray.push(thumb);
         } else {
-          let thumb = <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+          let thumb = <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
           renderArray.push(thumb);
         }
       }
@@ -195,9 +187,9 @@ class Gallery extends React.Component {
         return this.state.currentImages.map((photo) => {
           const index = this.state.currentImages.indexOf(photo);
           if (index === this.state.currentIndex) {
-            return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+            return <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
           }
-          return <img data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+          return <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
         });
       }
       return this.renderThumbnailIcons();
@@ -208,9 +200,9 @@ class Gallery extends React.Component {
     return this.state.currentImages.map((photo) => {
       const index = this.state.currentImages.indexOf(photo);
       if (index === this.state.currentIndex) {
-        return <FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={fasFaCircle} />;
+        return <FontAwesomeIcon key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={fasFaCircle} />;
       }
-      return <FontAwesomeIcon data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={farFaCircle} />;
+      return <FontAwesomeIcon key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail-icon" icon={farFaCircle} />;
     });
   }
 

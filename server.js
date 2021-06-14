@@ -114,11 +114,20 @@ app.get('/cart', (req, res) => {
 
 app.post('/cart', (req, res) => {
   api.addToCart(req.body)
-    .then(result => res.status(200).send(result.data))
+    .then(result => res.status(201).send(result.data))
     .catch(err => {
       console.log('ERROR:', err);
       res.status(500).send(err);
     });
+})
+
+app.post('/interactions', (req, res) => {
+  api.addInteraction(req.body)
+    .then(result => res.status(201).send(result.data))
+    .catch(err => {
+      console.log('ERROR:', err);
+      res.status(500).send(err);
+    })
 })
 
 app.listen(port, () => {
