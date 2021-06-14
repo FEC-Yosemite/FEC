@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import RelatedProductsList from './RelatedProductsList.jsx';
 import Comparison from './Comparison.jsx';
+import Carousel from './Carousel.jsx';
 
 import { getRelatedProducts } from  '../../requests.js';
 import { getProductById } from  '../../requests.js';
@@ -10,10 +11,8 @@ class RelatedItems extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productsList: { data: [] },
+            productsList: [],
             finished: false
-            // window_size: 3,
-            // related_products:
         };
         this.refreshProductsList = this.refreshProductsList.bind(this);
         this.clickedProduct = this.clickedProduct.bind(this);
@@ -24,14 +23,15 @@ class RelatedItems extends Component {
     refreshProductsList() {
         getRelatedProducts(this.props.productId)
         .then(idsArray => {
+            let ids = [...new Set(idsArray.data)];
             this.setState({
-                productsList: idsArray,
+                productsList: ids,
                 finished: true,
                 show: false,
                 modal_product: null,
                 current_product: null
             });
-            console.log(`state: ${this.state.productsList}`);
+            console.log(`idsArray.data: ${idsArray.data}`);
         });
     }
 
@@ -75,6 +75,7 @@ class RelatedItems extends Component {
                 {
                 this.state.finished ?
                 <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} />
+                // <Carousel productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} />
                 :
                 <h1>Loading</h1>
                 }
