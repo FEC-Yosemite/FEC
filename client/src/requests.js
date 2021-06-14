@@ -139,3 +139,14 @@ export function addToCart(data) {
   return axios(options);
 }
 
+// interactions
+
+export function addInteraction(data) {
+  var options = {
+    method: 'post',
+    url: 'http://localhost:3000/interactions',
+    data: data
+  }
+
+  return axios(options);
+}

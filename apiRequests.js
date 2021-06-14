@@ -95,14 +95,14 @@ const getReviewMeta = (params) => {
   return axios(options);
 }
 
-const addReview = (params) => {
+const addReview = (data) => {
   var options = {
     method: 'post',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews`,
     headers: {
       authorization: key
     },
-    data: params
+    data: data
   }
 
   return axios(options);
@@ -148,15 +148,29 @@ const getCart = () => {
 
 // params must be an object
 
-const addToCart = (params) => {
-  console.log(params)
+const addToCart = (data) => {
   var options = {
     method: 'post',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,
     headers: {
       authorization: key
     },
-    data: params
+    data: data
+  }
+
+  return axios(options);
+}
+
+// Interactions Api
+
+const addInteraction = (data) => {
+  var options = {
+    method: 'post',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/interactions`,
+    headers: {
+      authorization: key
+    },
+    data: data
   }
 
   return axios(options);
@@ -173,5 +187,6 @@ module.exports = {
   markAsHelpful,
   reportReview,
   getCart,
-  addToCart
+  addToCart,
+  addInteraction
 }
