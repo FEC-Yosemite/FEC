@@ -13,8 +13,6 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: this.props.productId,
-      styles: this.props.styles,
       currentImages: [],
       currentImage: '',
       currentThumb: '',
@@ -34,9 +32,9 @@ class Gallery extends React.Component {
     if (this.props.currentStyle !== prevProps.currentStyle) {
       this.setState({
         currentStyle: this.props.currentStyle,
-        currentImages: this.state.styles[this.props.currentStyle].photos,
-        currentImage: this.state.styles[this.props.currentStyle].photos[0].url,
-        currentThumb: this.state.styles[this.props.currentStyle].photos[0].thumbnail_url,
+        currentImages: this.props.styles[this.props.currentStyle].photos,
+        currentImage: this.props.styles[this.props.currentStyle].photos[0].url,
+        currentThumb: this.props.styles[this.props.currentStyle].photos[0].thumbnail_url,
         currentIndex: 0,
         thumbIndex: 0,
       })
@@ -45,9 +43,9 @@ class Gallery extends React.Component {
 
   refreshProduct() {
     this.setState({
-      currentImages: this.state.styles[this.state.currentStyle].photos,
-      currentImage: this.state.styles[this.state.currentStyle].photos[0].url,
-      currentThumb: this.state.styles[this.state.currentStyle].photos[0].thumbnail_url,
+      currentImages: this.props.styles[this.state.currentStyle].photos,
+      currentImage: this.props.styles[this.state.currentStyle].photos[0].url,
+      currentThumb: this.props.styles[this.state.currentStyle].photos[0].thumbnail_url,
     })
   }
 

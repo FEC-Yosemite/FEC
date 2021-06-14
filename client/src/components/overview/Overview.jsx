@@ -33,6 +33,7 @@ class Overview extends React.Component {
         syncedStyles: false,
         syncedRatings: false,
         syncedReviewCount: false,
+        currentStyle: 0,
       })
       this.refreshProduct();
     }

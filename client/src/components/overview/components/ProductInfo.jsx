@@ -15,12 +15,7 @@ class ProductInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      product: this.props.product,
-      styles: this.props.styles,
-      currentStyle: this.props.currentStyle,
-      ratings: this.props.ratings,
       avg: 0,
-      reviewCount: this.props.reviewCount,
     };
   }
 
@@ -62,13 +57,13 @@ class ProductInfo extends React.Component {
   }
 
   getAvgRating() {
-    const keys = Object.keys(this.state.ratings);
+    const keys = Object.keys(this.props.ratings);
     if (keys.length === 0) return 'No reviews yet';
     let total = 0;
     let count = 0;
     keys.map((key) => {
-      total += Number(key) * Number(this.state.ratings[key]);
-      count += Number(this.state.ratings[key]);
+      total += Number(key) * Number(this.props.ratings[key]);
+      count += Number(this.props.ratings[key]);
     })
     let avg = (total / count).toFixed(1);
     return avg;
@@ -78,21 +73,21 @@ class ProductInfo extends React.Component {
     return(
       <div id="product-info">
          { <p>Average rating: { this.state.avg }</p>}
-         { (this.state.reviewCount !== 0) && <a href="#reviews" onClick={ this.props.interact } >See all { this.state.reviewCount } reviews</a>}
+         { (this.props.reviewCount !== 0) && <a href="#reviews" onClick={ this.props.interact } >See all { this.props.reviewCount } reviews</a>}
          { this.renderStars() }
-        <p>{ this.state.product.category }</p>
-        <h3>{ this.state.product.name }</h3>
+        <p>{ this.props.product.category }</p>
+        <h3>{ this.props.product.name }</h3>
 
-        { this.state.styles[this.state.currentStyle].sale_price ?
+        { this.props.styles[this.props.currentStyle].sale_price ?
         <>
-        <p className="original-price">{ this.state.styles[this.state.currentStyle].original_price }</p>
-        <p className="sale-price" >{ this.state.styles[this.state.currentStyle].sale_price }</p>
+        <p className="original-price">{ this.props.styles[this.props.currentStyle].original_price }</p>
+        <p className="sale-price" >{ this.props.styles[this.props.currentStyle].sale_price }</p>
         </> :
-        <p className="regular-price">{ this.state.styles[this.state.currentStyle].original_price }</p> }
+        <p className="regular-price">{ this.props.styles[this.props.currentStyle].original_price }</p> }
         <a href="/" className="brand"><FontAwesomeIcon icon={faFacebookSquare} onClick={ this.props.interact } /></a>
         <a href="/" className="brand"><FontAwesomeIcon icon={faTwitterSquare} onClick={ this.props.interact } /></a>
         <a href="/" className="brand"><FontAwesomeIcon icon={faPinterestSquare} onClick={ this.props.interact } /></a>
-        <p><strong>Style ></strong>{ this.state.styles[this.state.currentStyle].name }</p>
+        <p><strong>Style ></strong>{ this.props.styles[this.props.currentStyle].name }</p>
       </div>
     )
   }

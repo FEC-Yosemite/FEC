@@ -8,7 +8,7 @@ class AddToCart extends React.Component {
       selectedQuantity: '-',
       currentSku: '',
       sizeNotSelected: '',
-      noStock: true,
+      hasStock: true,
     };
   }
 
@@ -21,10 +21,10 @@ class AddToCart extends React.Component {
 
       for (let key in this.props.skus) {
         if (this.props.skus[key].quantity !== 0) {
-          this.setState({ noStock: true })
+          this.setState({ hasStock: true })
           break;
         } else {
-          this.setState({ noStock: false })
+          this.setState({ hasStock: false })
         }
       }
     }
@@ -124,7 +124,7 @@ class AddToCart extends React.Component {
           { this.state.sizeNotSelected && <span>Please select a size</span>}
             { this.renderSizes() }
             { this.renderQuantity() }
-          { this.state.noStock && <input type="submit" value="Add to Cart +" /> }
+          { this.state.hasStock && <input type="submit" value="Add to Cart +" /> }
         </form>
       </div>
     );
