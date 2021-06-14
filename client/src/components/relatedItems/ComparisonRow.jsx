@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons'
+// import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 class ComparisonRow extends Component {
     constructor(props) {

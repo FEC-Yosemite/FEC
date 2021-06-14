@@ -9,6 +9,7 @@ import threeQuarterStar from '../../../../pix/svgs/star3quarters.svg';
 import star from '../../../../pix/svgs/star.svg';
 import starEmpty from '../../../../pix/svgs/star-o.svg';
 import starHalf from '../../../../pix/svgs/star-half-empty.svg';
+import RatingChart from './RatingChart.jsx';
 
 // => DataUrl for file.svg
 
@@ -83,8 +84,30 @@ class RatingBreakdown extends React.Component {
 
   renderChart() {
     let ratings = this.state.ratings;
+    let charts = [];
 
-    console.log(ratings);
+    for (let key in ratings) {
+      charts.push(<RatingChart id={ 'chart' + key } rating={ Number(ratings[key]) }/>)
+    }
+
+    return charts;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      getReviewMeta(this.props.productId)
+        .then(res => {
+          let avg = this.getAvgRating(res.data.ratings);
+          let rec = this.getRecommended(res.data.recommended);
+
+          this.setState({
+            ratings: res.data.ratings,
+            avg: avg,
+            rec: rec
+          })
+        })
+        .catch(err => console.log('ERROR:', err))
+    }
   }
 
   componentDidMount() {
@@ -112,7 +135,7 @@ class RatingBreakdown extends React.Component {
               { this.renderStars() }
           </div>
           <div id='rating-chart'>
-            { this.renderChart() }
+            {/* { this.renderChart() } */}
           </div>
         </div>
         <p i='recommend-percent'>{ this.state.rec }% of reviews recommend this product</p>
