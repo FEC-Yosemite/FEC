@@ -5,14 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-class RelatedProductsList extends Component {
+class Carousel extends Component {
     constructor(props) {
         super(props);
         this.state = {
             page: 0,
             window: [],
-            window_size: 3,
-            related_products: this.props.productsList
+            window_size: 2
         };
         this.refreshCarousel = this.refreshCarousel.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
@@ -24,15 +23,17 @@ class RelatedProductsList extends Component {
 
     refreshCarousel() {
         let products_window = [];
-        
-        for (let i = this.state.page; i < this.state.page + this.state.window_size; i++) {
-            if (i < this.props.productsList.length) {
-                products_window.push(this.props.productsList[i]);
+        for (let i = this.state.page * this.state.window_size; i <= this.state.window_size * this.state.page + 1; i++) {
+            if (i < this.props.productsList.data.length) {
+                console.log(`i: ${i}`);
+                console.log(`Product IDs in carousel: ${this.props.productsList.data[i]}`);
+                products_window.push(this.props.productsList.data[i]);
             }
         }
         this.setState({
-            window: JSON.parse(JSON.stringify(products_window))
+            related_products: JSON.parse(JSON.stringify(products_window))
         });
+        setTimeout(console.log(`WHOLE LIST OF PRODUCTS: ${this.state.related_products}`), 1);
     }
 
     buttonClick(e) {
@@ -41,50 +42,62 @@ class RelatedProductsList extends Component {
       if (e.target.id === 'left-button') {
         this.setState({
           page: pageModifier - 1
-        }, () => {
-            this.refreshCarousel();
         });
+        this.refreshCarousel();
       }
       if (e.target.id === 'right-button') {
           this.setState({
             page: pageModifier + 1
-          }, () => {
-            this.refreshCarousel();
-        });
+          });
+          this.refreshCarousel();
       }
+      console.log(`PAGE: ${this.state.page}`);
+      console.log(`PAGE > LENGTH?: ${this.props.productsList.data.length}`);
     }
 
     render() {
         return (
             <div id="related-products-carousel">
             <div id="left-button-container">
-                {
+            {
                 this.state.page === 0 ?
                 <div id="left-button-placeholder"> </div>
                 :
                 <FontAwesomeIcon id="left-button" onClick={this.buttonClick} icon={faArrowLeft} />
-                }
+                // <img id="left-button" src="client/pix/left-button.jpg" alt="left carousel arrow" onClick={this.buttonClick} />
+            }
             </div>
-                {
-                this.state.window.length > 0 ?
-                this.state.window.map((productId, index) => (
+            {
+                this.state.related_products.length > 0 ?
+                this.state.related_products.map((productId, index) => (
                     <RelatedProductCard key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct}/>
                 ))
                 :
-                
                 <h3>Loading "Related Cards"...</h3>
-                }
+            }
             <div id="right-button-container">
-                {
-                (this.state.window_size * this.state.page) + (this.state.window_size - 1) >= this.props.productsList.length ?
+            {
+                this.state.page + this.state.window_size + 1 >= this.props.productsList.data.length ?
                 <div id="right-button-placeholder"> </div>
                 :
                 <FontAwesomeIcon id="right-button" onClick={this.buttonClick} icon={faArrowRight} />
-                }
+                // <img id="right-button" src="client/pix/right-button.jpg" alt="right carousel arrow" onClick={this.buttonClick} />
+            }
             </div>
+            {/* <div></div> */}
+            {/* <h1>BELOW IS WHOLE LIST</h1>
+            <br/>
+            {
+                this.state.related_products.length > 0 ?
+                this.state.related_products.map((productId, index) => (
+                    <RelatedProductCard key={index} productId={productId} />
+                ))
+                :
+                <h3>Loading "Related Cards"...</h3>
+            } */}
             </div>
         );
     }
 }
 
-export default RelatedProductsList;
+export default Carousel;
