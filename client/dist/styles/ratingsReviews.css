@@ -26,6 +26,42 @@
   width: 36px;
 }
 
+#ratings-reviews #rating-breakdown #recommend-percent {
+  font-size: 18px;
+}
+
+#ratings-reviews #product-breakdown .chart {
+  position: relative;
+}
+
+#ratings-reviews #product-breakdown .chart h3 {
+  font-size: 18px;
+  margin: 10px;
+  padding: 0;
+}
+
+#ratings-reviews #product-breakdown .chart canvas {
+  background: #CDCDCD;
+  height: 10px;
+  width: 100%;
+}
+
+#ratings-reviews #product-breakdown .chart div {
+  display: flex;
+  /* establish flex container */
+  flex-direction: row;
+  /* default value; can be omitted */
+  flex-wrap: nowrap;
+  /* default value; can be omitted */
+  justify-content: space-between;
+}
+
+#ratings-reviews #product-breakdown .chart div p {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
 #ratings-reviews .review .helpful {
   background: none;
   border: none;

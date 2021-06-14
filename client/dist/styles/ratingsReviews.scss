@@ -28,6 +28,43 @@
         }
       }
     }
+
+    #recommend-percent {
+      font-size: 18px;
+    }
+  }
+
+  #product-breakdown {
+    .chart {
+
+      position: relative;
+
+      h3 {
+        font-size: 18px;
+        margin: 10px;
+        padding: 0;
+      }
+
+      canvas {
+        background: #CDCDCD;
+        height: 10px;
+        width: 100%
+      }
+
+      div {
+        display: flex;                  /* establish flex container */
+        flex-direction: row;            /* default value; can be omitted */
+        flex-wrap: nowrap;              /* default value; can be omitted */
+        justify-content: space-between;
+
+        p {
+          margin: 0;
+          padding: 0;
+          display: inline;
+        }
+      }
+
+    }
   }
 
   .review {
