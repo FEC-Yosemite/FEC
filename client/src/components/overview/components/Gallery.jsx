@@ -89,7 +89,6 @@ class Gallery extends React.Component {
   }
 
   handleMouseMove(e) {
-    this.props.interact(e);
     const prodImage = e.target;
     const left = -(e.offsetX / e.target.width * 100);
     const top = e.offsetY / e.target.height * 100;
