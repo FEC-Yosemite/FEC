@@ -3,8 +3,8 @@
   padding: 15px;
   grid-column: 2;
   grid-row: 3;
-  height: 80vh;
-  max-height: 80vh;
+  height: 100vh;
+  max-height: 100vh;
   overflow: hidden;
   display: grid;
   grid-template-columns: 30% 35% 35%;
@@ -177,8 +177,8 @@
         margin-left: 10px;
         background: #eeecec;
         border: 1px solid #CDCDCD;
-        border-radius: 25px;
-        padding: 5px;
+        border-radius: 10px;
+        padding: 0px 5px 0px 5px;
         display: inline;
       }
 

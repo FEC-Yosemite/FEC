@@ -35,7 +35,7 @@ class RatingChart extends React.Component {
 
     return (
       <div className="content c-white">
-        <ResponsiveContainer height={ 150 } width={ "100%" }>
+        <ResponsiveContainer height={ 200 } width={ "100%" }>
           <BarChart
             layout="vertical"
             data={ data }
@@ -46,7 +46,7 @@ class RatingChart extends React.Component {
               type="category"
               dataKey="name"
               stroke="#000000"
-              fontSize="18"
+              fontSize="16"
               onClick={ this.handleClick }
             />
             <Bar dataKey="count" fill="#1A5F1C" stackId="a">
