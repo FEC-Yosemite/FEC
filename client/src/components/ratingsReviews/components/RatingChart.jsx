@@ -14,17 +14,19 @@ class RatingChart extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e) {
-    console.log(e)
+    let val = Number(e.value.slice(0, 1));
+    this.props.handleFilter(val);
   }
 
   render() {
     let data = this.props.data;
     return (
       <div className="content c-white">
-        <ResponsiveContainer height={ 150 } width={ "80%" }>
+        <ResponsiveContainer height={ 150 } width={ "100%" }>
           <BarChart
             layout="vertical"
             data={ data }

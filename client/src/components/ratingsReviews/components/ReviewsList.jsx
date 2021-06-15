@@ -9,12 +9,14 @@ class ReviewsList extends React.Component {
     this.state = {
       renderedReviews: 2,
       product: '',
-      write: false
+      write: false,
+      filterOn: false
     }
 
     this.handleMore = this.handleMore.bind(this);
     this.handleWrite = this.handleWrite.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.checkFilter = this.checkFilter.bind(this);
   }
 
   handleMore(rem) {
@@ -41,10 +43,28 @@ class ReviewsList extends React.Component {
     })
   }
 
-  componentDidUpdate() {
+  checkFilter() {
+    let on = false;
+
+    for (let key in this.props.filter) {
+      if (this.props.filter[key]) {
+        on = true;
+      }
+    }
+
+    this.setState({
+      filterOn: on
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.checkFilter();
+    }
   }
 
   componentDidMount() {
+    this.checkFilter();
     getProductById(this.props.productId)
       .then(res => this.setState({
         product: res.data.name
@@ -52,21 +72,36 @@ class ReviewsList extends React.Component {
   }
 
   render() {
-    var reviewArray = []
-    for (var i = 0; i < this.state.renderedReviews; i++) {
-      reviewArray.push(
-        <Review review={ this.props.reviews[this.props.sort][i] } interact={ this.props.interact } />
-      )
+    let reviewArray = [];
+    let count = 0;
+
+    if (this.props.reviews[this.props.sort].length > 0) {
+
+      while (reviewArray.length < this.state.renderedReviews) {
+        if (this.state.filterOn) {
+          if (this.props.filter[this.props.reviews[this.props.sort][count].rating]) {
+            reviewArray.push(
+              this.props.reviews[this.props.sort][count]
+            )
+          }
+          count++;
+        } else {
+          reviewArray.push(
+            this.props.reviews[this.props.sort][count]
+          )
+          count++;
+        }
+      }
     }
 
-    var remainingReviews = this.props.reviews[this.props.sort].length - this.state.renderedReviews;
+    let remainingReviews = this.props.reviews[this.props.sort].length - this.state.renderedReviews;
 
     return this.props.reviews[this.props.sort].length > 0
     ? (
       <div id='reviews'>
         <div id='reviews-list'>
           { reviewArray.map((review) => {
-            return review;
+            return <Review review={ review } interact={ this.props.interact } />
           }) }
 
         </div>
