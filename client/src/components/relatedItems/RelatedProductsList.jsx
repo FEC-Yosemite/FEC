@@ -11,7 +11,7 @@ class RelatedProductsList extends Component {
         this.state = {
             page: 0,
             window: [],
-            window_size: 3,
+            window_size: 4,
             related_products: this.props.productsList
         };
         this.refreshCarousel = this.refreshCarousel.bind(this);
@@ -30,7 +30,7 @@ class RelatedProductsList extends Component {
 
     refreshCarousel() {
         let products_window = [];
-        
+
         for (let i = this.state.page; i < this.state.page + this.state.window_size; i++) {
             if (i < this.props.productsList.length) {
                 products_window.push(this.props.productsList[i]);
@@ -77,7 +77,7 @@ class RelatedProductsList extends Component {
                     <RelatedProductCard key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct}/>
                 ))
                 :
-                
+
                 <h3>Loading "Related Cards"...</h3>
                 }
             <div id="right-button-container">

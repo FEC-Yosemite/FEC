@@ -33,6 +33,7 @@ class Overview extends React.Component {
         syncedStyles: false,
         syncedRatings: false,
         syncedReviewCount: false,
+        currentStyle: 0,
       })
       this.refreshProduct();
     }
@@ -72,7 +73,12 @@ class Overview extends React.Component {
     this.refreshProduct();
   }
 
+  handleClickTrack(e) {
+    this.props.interact(e.target.outerHTML, 'overview-gallery');
+  }
+
   handleStyleChange(e) {
+    this.handleClickTrack(e);
     const index = Number(e.target.getAttribute('data-index'));
     this.setState({ currentStyle: index });
   }
@@ -91,16 +97,16 @@ class Overview extends React.Component {
         <div id="container" className="collapsed">
 
           { this.state.syncedStyles ?
-          <Gallery productId={ this.props.productId } styles={ this.state.styles } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+          <Gallery productId={ this.props.productId } styles={ this.state.styles } currentStyle={ this.state.currentStyle } interact={ this.handleClickTrack.bind(this) } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
           <aside id="info-aside">
 
             { this.state.syncedStyles && this.state.syncedProduct && this.state.syncedRatings && this.state.syncedReviewCount ?
-            <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+            <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } currentStyle={ this.state.currentStyle } interact={ this.handleClickTrack.bind(this)  } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
             { this.state.syncedStyles ? <StylePicker styles={ this.state.styles } changeStyle={ this.handleStyleChange.bind(this) } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
-            { this.state.syncedStyles ? <AddToCart skus={ this.state.styles[this.state.currentStyle].skus } addToCart={ this.handleCartAdd.bind(this) } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+            { this.state.syncedStyles ? <AddToCart skus={ this.state.styles[this.state.currentStyle].skus } addToCart={ this.handleCartAdd.bind(this) } interact={ this.handleClickTrack.bind(this) } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
           </aside>
         </div>

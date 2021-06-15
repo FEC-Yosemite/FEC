@@ -51,7 +51,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="app-div">
-        <Overview productId={ this.state.currentProductId }/>
+        <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } />
         <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} />
         <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } />
       </div>
