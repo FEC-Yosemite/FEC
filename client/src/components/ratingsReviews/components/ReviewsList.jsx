@@ -9,14 +9,13 @@ class ReviewsList extends React.Component {
     this.state = {
       renderedReviews: 2,
       product: '',
-      write: false,
-      filterOn: false
+      write: false
     }
 
     this.handleMore = this.handleMore.bind(this);
     this.handleWrite = this.handleWrite.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.checkFilter = this.checkFilter.bind(this);
+    this.renderFilters = this.renderFilters.bind(this);
   }
 
   handleMore(rem) {
@@ -31,6 +30,29 @@ class ReviewsList extends React.Component {
     }
   }
 
+  renderFilters() {
+    let on = false;
+    let filters = [];
+    let result = [];
+
+    for (let key in this.props.filter) {
+      if (this.props.filter[key]) {
+        on = true;
+        filters.push(key)
+      }
+    }
+
+    if (on) {
+      result.push(<h3 id='filter-by'>Filtering by:</h3>)
+      for (let fil of filters) {
+        result.push(<p className='filter'>{fil + ' Stars'}</p>)
+      }
+      result.push(<button id='clear-filters' onClick={ this.props.clear }>Clear filters</button>)
+    }
+
+    return result;
+  }
+
   handleWrite() {
     this.setState({
       write: true
@@ -43,28 +65,12 @@ class ReviewsList extends React.Component {
     })
   }
 
-  checkFilter() {
-    let on = false;
-
-    for (let key in this.props.filter) {
-      if (this.props.filter[key]) {
-        on = true;
-      }
-    }
-
-    this.setState({
-      filterOn: on
-    })
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      this.checkFilter();
     }
   }
 
   componentDidMount() {
-    this.checkFilter();
     getProductById(this.props.productId)
       .then(res => this.setState({
         product: res.data.name
@@ -75,10 +81,18 @@ class ReviewsList extends React.Component {
     let reviewArray = [];
     let count = 0;
 
+    let on = false;
+
+    for (let key in this.props.filter) {
+      if (this.props.filter[key]) {
+        on = true;
+      }
+    }
+
     if (this.props.reviews[this.props.sort].length > 0) {
 
-      while (reviewArray.length < this.state.renderedReviews) {
-        if (this.state.filterOn) {
+      while (reviewArray.length < this.state.renderedReviews && this.props.reviews[this.props.sort][count]) {
+        if (on) {
           if (this.props.filter[this.props.reviews[this.props.sort][count].rating]) {
             reviewArray.push(
               this.props.reviews[this.props.sort][count]
@@ -99,6 +113,9 @@ class ReviewsList extends React.Component {
     return this.props.reviews[this.props.sort].length > 0
     ? (
       <div id='reviews'>
+        <div id='filters'>
+          { this.renderFilters() }
+        </div>
         <div id='reviews-list'>
           { reviewArray.map((review) => {
             return <Review review={ review } interact={ this.props.interact } />

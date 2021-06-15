@@ -8,7 +8,7 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: 30% 35% 35%;
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(25px, auto);
 
   #rating-breakdown {
     #breakdown-header {
@@ -160,6 +160,36 @@
     display: grid;
     grid-template-columns: 50% 50%;
 
+    #filters {
+      height: 50px;
+      width: 100%;
+      grid-column: 1 / 3;
+
+      #filter-by {
+        margin-left: 25px;
+        margin-top: 10px;
+        padding: 0;
+        display: inline;
+      }
+
+      p {
+        margin: 0;
+        margin-left: 10px;
+        background: #eeecec;
+        border: 1px solid #CDCDCD;
+        border-radius: 25px;
+        padding: 5px;
+        display: inline;
+      }
+
+      #clear-filters {
+        display: block;
+        margin: 10px;
+        margin-left: 25px;
+      }
+
+    }
+
     #reviews-list {
       max-height: 60vh;
       overflow: scroll;
@@ -295,9 +325,9 @@
         }
 
         img {
-          width: 100px;
-          height: 100px;
-          margin: 10px;
+          width: 80px;
+          height: 80px;
+          margin-top: 10px;
           border: solid 1px black;
         }
       }

@@ -14,6 +14,14 @@ class RatingChart extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      '5 stars': false,
+      '4 stars': false,
+      '3 stars': false,
+      '2 stars': false,
+      '1 stars': false
+    }
+
     this.handleClick = this.handleClick.bind(this);
   }
 
