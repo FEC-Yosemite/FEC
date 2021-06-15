@@ -67,6 +67,10 @@ class ReviewsList extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
+      getProductById(this.props.productId)
+      .then(res => this.setState({
+        product: res.data.name
+      }));
     }
   }
 
@@ -129,8 +133,11 @@ class ReviewsList extends React.Component {
     )
     : (
       <div id='reviews'>
-        <div id='reviews-list'>
-          <h2>loading...</h2>
+        <div id='no-reviews'>
+          <h2>There are currently no reviews</h2>
+          <p>Be the first to add one!</p>
+          <button id='write-review' onClick={ this.handleWrite }>ADD A REVIEW</button>
+          <WriteReview show={ this.state.write } requests={ this.props.requests } productId={ this.props.productId } chars={ this.props.chars } product={ this.state.product } close={ this.handleClose }/>
         </div>
       </div>
     )
