@@ -28,6 +28,49 @@
         }
       }
     }
+
+    #recommend-percent {
+      font-size: 18px;
+    }
+  }
+
+  #product-breakdown {
+    .chart {
+
+      position: relative;
+
+      h3 {
+        font-size: 18px;
+        margin: 10px;
+        padding: 0;
+      }
+
+      canvas {
+        background: #CDCDCD;
+        height: 10px;
+        width: 100%
+      }
+
+      .char-div {
+        background: #CDCDCD;
+        height: 10px;
+        width: 100%;
+      }
+
+      .char-wrapper {
+        display: flex;                  /* establish flex container */
+        flex-direction: row;            /* default value; can be omitted */
+        flex-wrap: nowrap;              /* default value; can be omitted */
+        justify-content: space-between;
+
+        p {
+          margin: 0;
+          padding: 0;
+          display: inline;
+        }
+      }
+
+    }
   }
 
   .review {
@@ -123,6 +166,10 @@
       margin: 10px;
       grid-column: 1 / 3;
 
+      h2 {
+        text-align: center;
+      }
+
       .review {
 
         border: 1px solid;
@@ -187,7 +234,10 @@
         }
 
         #review-response {
-          background: grey;
+          background: rgb(189, 186, 186);
+          margin: 10px;
+          padding: 10px;
+          border: solid 1px #CDCDCD
         }
 
         #review-photos {

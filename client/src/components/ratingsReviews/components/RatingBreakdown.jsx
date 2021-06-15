@@ -84,13 +84,24 @@ class RatingBreakdown extends React.Component {
 
   renderChart() {
     let ratings = this.state.ratings;
-    let charts = [];
+    let data = [];
+    let total = 0;
+    let newRatings = { 1: '0', 2: '0', 3: '0', 4: '0', 5: '0' }
 
     for (let key in ratings) {
-      charts.push(<RatingChart id={ 'chart' + key } rating={ Number(ratings[key]) }/>)
+      total += Number(ratings[key]);
+      newRatings[key] = ratings[key]
     }
 
-    return charts;
+    for (let key in newRatings) {
+      data.unshift({
+        name: key + ' Stars',
+        count: Number(ratings[key]) || 0,
+        total: total - Number(ratings[key]) || total
+      })
+    }
+
+    return <RatingChart id={ 'rating-chart' } data={ data }/>
   }
 
   componentDidUpdate(prevProps) {
@@ -134,11 +145,11 @@ class RatingBreakdown extends React.Component {
           <div id='stars'>
               { this.renderStars() }
           </div>
-          <div id='rating-chart'>
-            {/* { this.renderChart() } */}
-          </div>
         </div>
-        <p i='recommend-percent'>{ this.state.rec }% of reviews recommend this product</p>
+        <p id='recommend-percent'>{ this.state.rec }% of reviews recommend this product</p>
+          <div id='rating-chart'>
+            { this.renderChart() }
+          </div>
       </div>
     )
   }
