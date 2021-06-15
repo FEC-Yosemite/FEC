@@ -101,7 +101,7 @@ class RatingBreakdown extends React.Component {
       })
     }
 
-    return <RatingChart id={ 'rating-chart' } data={ data }/>
+    return <RatingChart id={ 'rating-chart' } handleFilter={this.props.handleFilter } data={ data }/>
   }
 
   componentDidUpdate(prevProps) {
