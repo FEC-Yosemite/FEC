@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as fasFaCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farFaCircle } from '@fortawesome/free-regular-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 class Gallery extends React.Component {
   constructor(props) {
@@ -59,8 +59,18 @@ class Gallery extends React.Component {
 
   handleNextImageClick(e) {
     this.props.interact(e);
+
     document.getElementById('product-image').classList.add('slide-left');
-    setTimeout(function(){ document.getElementById('product-image').classList.remove('slide-left'); }, 1000);
+
+    setTimeout(function(){
+      document.getElementById('product-image').classList.add('move-right');
+    }, 600);
+
+    setTimeout(function(){
+      document.getElementById('product-image').classList.remove('slide-left');
+      document.getElementById('product-image').classList.remove('move-right');
+    }, 1200);
+
     let index = this.state.currentIndex;
     if (index !== this.state.currentImages.length - 1) {
       index++;
@@ -70,8 +80,18 @@ class Gallery extends React.Component {
 
   handlePrevImageClick(e) {
     this.props.interact(e);
+
     document.getElementById('product-image').classList.add('slide-right');
-    setTimeout(function(){ document.getElementById('product-image').classList.remove('slide-right'); }, 1000);
+
+    setTimeout(function(){
+      document.getElementById('product-image').classList.add('move-left');
+    }, 400);
+
+    setTimeout(function(){
+      document.getElementById('product-image').classList.remove('slide-right');
+      document.getElementById('product-image').classList.remove('move-left');
+    }, 800);
+
     let index = this.state.currentIndex;
     if (index !== 0) {
       index--;
@@ -212,13 +232,13 @@ class Gallery extends React.Component {
 
   renderPrevArrow() {
     if (this.state.currentIndex !== 0) {
-      return <FontAwesomeIcon className="prev-arrow" onClick={this.handlePrevImageClick.bind(this)} icon={faArrowLeft} />;
+      return <FontAwesomeIcon className="prev-arrow" onClick={this.handlePrevImageClick.bind(this)} icon={faChevronLeft} />;
     }
   }
 
   renderNextArrow() {
     if (this.state.currentIndex !== this.state.currentImages.length - 1) {
-      return <FontAwesomeIcon className="next-arrow" onClick={this.handleNextImageClick.bind(this)} icon={faArrowRight} />;
+      return <FontAwesomeIcon className="next-arrow" onClick={this.handleNextImageClick.bind(this)} icon={faChevronRight} />;
     }
   }
 
@@ -231,6 +251,7 @@ class Gallery extends React.Component {
           {this.renderPrevArrow()}
 
           { this.state.currentImage !== null ? <img id="product-image" onClick={this.handleImageClick.bind(this)} src={this.state.currentImage} alt="" /> : <img id="product-image" onClick={this.handleImageClick.bind(this)} src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" alt="" /> }
+
           {this.renderNextArrow()}
           <div id="thumbnails">
             <div className="chevron-up-holder">{(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== 0) && <FontAwesomeIcon onClick={ this.scrollThumbnailsUp.bind(this) } className="chevron chevron-up" icon={ faChevronUp } />}</div>

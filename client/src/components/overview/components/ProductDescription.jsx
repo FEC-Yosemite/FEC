@@ -9,7 +9,7 @@ const ProductDescription = (props) => {
     return(
       <>
         <div id="description">
-          { slogan && <p>{ slogan }</p> }
+          { slogan && <h4>{ slogan }</h4> }
           { description && <p>{ description }</p> }
         </div>
         <div id="features">

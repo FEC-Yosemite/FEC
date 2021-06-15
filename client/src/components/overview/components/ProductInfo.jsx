@@ -72,22 +72,24 @@ class ProductInfo extends React.Component {
   render() {
     return(
       <div id="product-info">
-         { <p>Average rating: { this.state.avg }</p>}
-         { (this.props.reviewCount !== 0) && <a href="#reviews" onClick={ this.props.interact } >See all { this.props.reviewCount } reviews</a>}
+         { <p className="avg-rating">Average rating: { this.state.avg }</p>}
+         { (this.props.reviewCount !== 0) && <a className="reviews-link" href="#reviews" onClick={ this.props.interact } >See all { this.props.reviewCount } reviews</a>}
          { this.renderStars() }
-        <p>{ this.props.product.category }</p>
-        <h3>{ this.props.product.name }</h3>
+        <p className="category">{ this.props.product.category }</p>
+        <h3 className="product-name">{ this.props.product.name }</h3>
 
         { this.props.styles[this.props.currentStyle].sale_price ?
         <>
-        <p className="original-price">{ this.props.styles[this.props.currentStyle].original_price }</p>
-        <p className="sale-price" >{ this.props.styles[this.props.currentStyle].sale_price }</p>
+        <p className="original-price">{ '$' + this.props.styles[this.props.currentStyle].original_price }</p>
+        <p className="sale-price" >{ '$' + this.props.styles[this.props.currentStyle].sale_price }</p>
         </> :
-        <p className="regular-price">{ this.props.styles[this.props.currentStyle].original_price }</p> }
-        <a href="/" className="brand"><FontAwesomeIcon icon={faFacebookSquare} onClick={ this.props.interact } /></a>
-        <a href="/" className="brand"><FontAwesomeIcon icon={faTwitterSquare} onClick={ this.props.interact } /></a>
-        <a href="/" className="brand"><FontAwesomeIcon icon={faPinterestSquare} onClick={ this.props.interact } /></a>
-        <p><strong>Style ></strong>{ this.props.styles[this.props.currentStyle].name }</p>
+        <p className="regular-price">{ '$' + this.props.styles[this.props.currentStyle].original_price }</p> }
+        <div>
+          <a href="/" className="brand"><FontAwesomeIcon icon={faFacebookSquare} onClick={ this.props.interact } /></a>
+          <a href="/" className="brand"><FontAwesomeIcon icon={faTwitterSquare} onClick={ this.props.interact } /></a>
+          <a href="/" className="brand"><FontAwesomeIcon icon={faPinterestSquare} onClick={ this.props.interact } /></a>
+        </div>
+        <p><strong>Style > </strong>{ this.props.styles[this.props.currentStyle].name }</p>
       </div>
     )
   }

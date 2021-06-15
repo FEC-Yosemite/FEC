@@ -1,6 +1,31 @@
 #product-info {
+  grid-row: 1;
   text-align: left;
   padding-left: 5%;
+  border-radius: 1%;
+  padding: 10% 10% 0 10%;
+
+  .avg-rating, .reviews-link {
+    margin: 0;
+    font-size: .9em;
+  }
+
+  img {
+    height: 1em;
+    width: 1em;
+  }
+
+  .category {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+
+  .product-name {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: 600;
+  }
 
   .original-price {
     text-decoration: line-through;
@@ -8,13 +33,13 @@
     color: red;
   }
 
-  img {
-    height: 36px;
-    width: 36px;
+  .regular-price, .original-price {
+    font-size: 2em;
+    margin: 0;
   }
 
-
   .sale-price {
+    font-size: 2em;
     margin-left: 2%;
     display: inline;
   }
