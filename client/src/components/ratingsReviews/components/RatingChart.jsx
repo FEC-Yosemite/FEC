@@ -32,6 +32,7 @@ class RatingChart extends React.Component {
 
   render() {
     let data = this.props.data;
+
     return (
       <div className="content c-white">
         <ResponsiveContainer height={ 150 } width={ "100%" }>

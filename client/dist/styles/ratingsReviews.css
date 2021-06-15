@@ -175,6 +175,13 @@
   margin-left: 25px;
 }
 
+#ratings-reviews #reviews #no-reviews {
+  grid-column: 1 / 3;
+  max-height: 60vh;
+  margin: auto;
+  text-align: center;
+}
+
 #ratings-reviews #reviews #reviews-list {
   max-height: 60vh;
   overflow: scroll;

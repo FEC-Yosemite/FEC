@@ -190,6 +190,13 @@
 
     }
 
+    #no-reviews {
+      grid-column: 1 / 3;
+      max-height: 60vh;
+      margin: auto;
+      text-align: center;
+    }
+
     #reviews-list {
       max-height: 60vh;
       overflow: scroll;
