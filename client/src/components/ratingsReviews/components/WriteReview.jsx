@@ -634,7 +634,7 @@ class WriteReview extends React.Component {
                     <p id='p-body'>Body:</p>
                     <textarea id='form-body' type='text' name='body' onChange={ this.handleInputChange }></textarea>
 
-                    <p id='p-file'>Photos:</p>
+                    <p id='p-file'>(Optional) Photos:</p>
                     <input id={'form-file'} onChange={ this.setPics }type='file' name='photos' ref={ this.fileInput } multiple></input>
                     <div id='form-file-preview'>
                       { this.state.photoUrls }
