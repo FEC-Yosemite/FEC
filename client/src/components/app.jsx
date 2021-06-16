@@ -3,7 +3,7 @@ import Overview from './overview/Overview.jsx';
 import RatingsReviews from './ratingsReviews/RatingsReviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
 import moment from 'moment';
-import { getProducts, getProductById, addInteraction } from '../requests.js'
+import { getProducts, getProductById, addInteraction, getReviewMeta } from '../requests.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +11,11 @@ class App extends React.Component {
     this.state = {
       currentProductId: 19089,
       outfits_list: [],
-      meta: {}
+      meta: {
+        characteristics: {},
+        ratings: {},
+        recommended: {}
+      }
     }
     this.removeFromOutfit = this.removeFromOutfit.bind(this);
     this.addCurrentToOutfits = this.addCurrentToOutfits.bind(this);
@@ -56,7 +60,7 @@ class App extends React.Component {
 
   componentDidUpdate(prevprops) {
     if (this.props !== prevprops) {
-      getReviewMeta(this.props.productId)
+      getReviewMeta(this.state.currentProductId)
         .then(res => {
           this.setState({
             meta: res.data
@@ -67,8 +71,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    getReviewMeta(this.props.productId)
+    getReviewMeta(this.state.currentProductId)
       .then(res => {
+        console.log(res.data);
         this.setState({
           meta: res.data
         });
