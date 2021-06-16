@@ -9,6 +9,7 @@ import threeQuarterStar from '../../../../pix/svgs/star3quarters.svg';
 import star from '../../../../pix/svgs/star.svg';
 import starEmpty from '../../../../pix/svgs/star-o.svg';
 import starHalf from '../../../../pix/svgs/star-half-empty.svg';
+import RatingChart from './RatingChart.jsx';
 
 // => DataUrl for file.svg
 
@@ -83,8 +84,41 @@ class RatingBreakdown extends React.Component {
 
   renderChart() {
     let ratings = this.state.ratings;
+    let data = [];
+    let total = 0;
+    let newRatings = { 1: '0', 2: '0', 3: '0', 4: '0', 5: '0' }
 
-    console.log(ratings);
+    for (let key in ratings) {
+      total += Number(ratings[key]);
+      newRatings[key] = ratings[key]
+    }
+
+    for (let key in newRatings) {
+      data.unshift({
+        name: key + ' Stars',
+        count: Number(ratings[key]) || 0,
+        total: total - Number(ratings[key]) || total
+      })
+    }
+
+    return <RatingChart id={ 'rating-chart' } handleFilter={this.props.handleFilter } data={ data }/>
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      getReviewMeta(this.props.productId)
+        .then(res => {
+          let avg = this.getAvgRating(res.data.ratings);
+          let rec = this.getRecommended(res.data.recommended);
+
+          this.setState({
+            ratings: res.data.ratings,
+            avg: avg,
+            rec: rec
+          })
+        })
+        .catch(err => console.log('ERROR:', err))
+    }
   }
 
   componentDidMount() {
@@ -111,11 +145,11 @@ class RatingBreakdown extends React.Component {
           <div id='stars'>
               { this.renderStars() }
           </div>
+        </div>
+        <p id='recommend-percent'>{ this.state.rec }% of reviews recommend this product</p>
           <div id='rating-chart'>
             { this.renderChart() }
           </div>
-        </div>
-        <p i='recommend-percent'>{ this.state.rec }% of reviews recommend this product</p>
       </div>
     )
   }

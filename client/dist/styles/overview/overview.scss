@@ -1,14 +1,18 @@
 #overview {
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+  border-radius: 1%;
   grid-column: 2;
   grid-row: 1;
-  display: grid;
-  grid-template-rows: 10% 80% 10%;
-  border: 1px solid black;
-  padding: 15px;
+  margin: 3em 0 3em 0;
+  padding: 1em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(230, 57, 70, 0.5);
 
   h4 {
+    grid-column: 2;
     text-align: center;
-    grid-row: 1;
+    text-transform: uppercase;
   }
 
   .spinner {
@@ -17,8 +21,8 @@
   }
 
   #container {
-    grid-row: 2;
     display: grid;
+    grid-column: 2;
     background-size: 100%;
     background-repeat: no-repeat;
 
@@ -26,22 +30,6 @@
       display: grid;
       grid-column: 2;
       text-align: center;
-
-      #product-info {
-        grid-row: 1;
-        border: 1px dotted black;
-      }
-
-      #style-picker {
-        grid-row: 2;
-        border: 1px dotted black;
-      }
-
-      #add-to-cart {
-        grid-row: 3;
-        border: 1px dotted black;
-      }
-
     }
 
     .collapsed {

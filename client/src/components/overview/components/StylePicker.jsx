@@ -18,7 +18,7 @@ const StylePicker = (props) => {
 
       } else {
 
-        return <img key={index} onClick={changeStyle} data-index={index} className="style-thumbnail" src={ style.photos[0].thumbnail_url }></img>
+        return <div><img key={index} onClick={changeStyle} data-index={index} className="style-thumbnail" src={ style.photos[0].thumbnail_url }></img></div>
 
       }
     })

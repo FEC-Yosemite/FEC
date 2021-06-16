@@ -1,13 +1,30 @@
 #product-description {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-column: 2;
+  grid-template-columns: 2fr 1fr;
+  margin: 2%;
 
   #description {
     grid-column: 1;
+    padding: 0 10%;
+
+    p {
+      font-size: 1.4em;
+    }
   }
 
   #features {
+    border-left: 1px solid rgba(0, 0, 0, .5);
     grid-column: 2;
+    margin: auto 0;
+
+    ul {
+      list-style: none;
+    }
+
+    ul li:before {
+      content: '✓ ';
+    }
   }
 
 }

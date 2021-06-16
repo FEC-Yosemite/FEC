@@ -1,3 +1,7 @@
+@import 'mixins/colors';
+
+@import 'mixins/fonts';
+
 @import 'general';
 
 @import 'overview/overview';
@@ -9,6 +13,8 @@
 @import 'overview/style-picker';
 
 @import 'overview/product-description';
+
+@import 'overview/add-to-cart';
 
 @import 'relatedItems';
 

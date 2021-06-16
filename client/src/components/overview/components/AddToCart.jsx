@@ -4,30 +4,49 @@ class AddToCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      skus: this.props.skus,
       selectedSize: 'Select size',
       selectedQuantity: '-',
       currentSku: '',
       sizeNotSelected: '',
+      hasStock: true,
     };
+  }
+
+  componentDidMount() {
+    this.checkforStock();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.skus !== prevProps.skus) {
       this.setState({
-        skus: this.props.skus,
         selectedSize: 'Select size',
         currentSku: '',
       })
+
+      this.checkforStock();
+    }
+  }
+
+  checkforStock() {
+    for (let key in this.props.skus) {
+      if (key === 'null') {
+        this.setState({ hasStock: false });
+        break;
+      } else if (this.props.skus[key].quantity !== 0) {
+        this.setState({ hasStock: true });
+        break;
+      } else {
+        this.setState({ hasStock: false });
+      }
     }
   }
 
   renderSizes() {
     let optionArray = [];
-    for (let key in this.state.skus) {
-      if ( this.state.skus[key].quantity ) {
+    for (let key in this.props.skus) {
+      if ( this.props.skus[key].quantity ) {
         let skuNum = key;
-        let option = <option data-sku={ skuNum } key={ this.state.skus[key].size } value={ this.state.skus[key].size }>{ this.state.skus[key].size }</option>
+        let option = <option data-sku={ skuNum } key={ this.props.skus[key].size } value={ this.props.skus[key].size }>{ this.props.skus[key].size }</option>
         optionArray.push(option);
       }
     }
@@ -45,15 +64,15 @@ class AddToCart extends React.Component {
 
   renderQuantity() {
     let optionArray = [];
-    for (let key in this.state.skus) {
+    for (let key in this.props.skus) {
       if (key === this.state.currentSku) {
-        if (this.state.skus[key].quantity > 15) {
+        if (this.props.skus[key].quantity > 15) {
           for (let i = 1; i <= 15; i++) {
             let option = <option value={i}>{i}</option>
             optionArray.push(option);
           }
         } else {
-          for (let i = 1; i <= this.state.skus[key].quantity; i++) {
+          for (let i = 1; i <= this.props.skus[key].quantity; i++) {
             let option = <option value={i}>{i}</option>
             optionArray.push(option);
           }
@@ -65,13 +84,14 @@ class AddToCart extends React.Component {
         <option value="-">-</option>
       </select>
     } else {
-      return <select onChange={ this.handleQuantityChange.bind(this) } id="quantity-picker" name="quantity-picker" value={ this.state.selectedQuantity } defaultValue={'1'}>
+      return <select onChange={ this.handleQuantityChange.bind(this) } id="quantity-picker" name="quantity-picker" value={ this.state.selectedQuantity } defaultValue={'1'} >
              { optionArray.map((option) => { return option }) }
            </select>
     }
   }
 
   handleSizeChange(e) {
+    this.props.interact(e);
     if (e.target.value !== 'Select size') this.setState({ sizeNotSelected: false })
     let sizes = e.target.children;
     let sku;
@@ -89,12 +109,14 @@ class AddToCart extends React.Component {
   }
 
   handleQuantityChange(e) {
+    this.props.interact(e);
     this.setState({
       selectedQuantity: e.target.value,
     })
   }
 
   handleAddToCart(e) {
+    this.props.interact(e);
     e.preventDefault();
     if (this.state.selectedSize === 'Select size') {
       this.setState({ sizeNotSelected: true })
@@ -113,8 +135,7 @@ class AddToCart extends React.Component {
           { this.state.sizeNotSelected && <span>Please select a size</span>}
             { this.renderSizes() }
             { this.renderQuantity() }
-            {/* FIX */}
-          { !(document.getElementById('size-picker-disabled')) && <input type="submit" value="Add to Cart +" /> }
+          { this.state.hasStock && <input type="submit" value="Add to Cart +" /> }
         </form>
       </div>
     );

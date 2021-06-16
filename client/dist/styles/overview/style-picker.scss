@@ -1,27 +1,48 @@
 #style-picker {
   display: grid;
-  margin: auto;
+  grid-row: 2;
+  margin: 0;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 0 2em;
 
   .style-thumbnail {
     cursor: pointer;
-    height: 60px;
-    width: 60px;
+    height: 4em;
+    width: 4em;
     object-fit: cover;
     border-radius: 100%;
-    margin: 5px;
+    padding: .1em;
   }
 
   .selected-style {
     position: relative;
+
+    img {
+      border: 5px solid green;
+    }
+  }
+
+  div:not(.selected-style) {
+
+    img {
+      transition: .2s;
+      border: 5px solid grey;
+    }
+
+    img:hover {
+      border-color: green;
+    }
   }
 
   .checked {
-    font-size: 25px;
+    font-size: 2em;
+    color: green;
+    filter: drop-shadow( 1px 1px 2px rgba(0, 0, 0, .7));
     position: absolute;
-    bottom: 5%;
-    left: 5%;
+    bottom: 33%;
+    left: 2%;
     z-index: 1;
+    margin: 0;
   }
 
 }
