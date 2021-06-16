@@ -58,8 +58,8 @@ class App extends React.Component {
       .catch(err => console.log('ERROR:', err));
   }
 
-  componentDidUpdate(prevprops) {
-    if (this.props !== prevprops) {
+  componentDidUpdate(prevprops, prevState) {
+    if (this.state.currentProductId !== prevState.currentProductId) {
       getReviewMeta(this.state.currentProductId)
         .then(res => {
           this.setState({

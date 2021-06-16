@@ -106,34 +106,26 @@ class RatingBreakdown extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
-      getReviewMeta(this.props.productId)
-        .then(res => {
-          let avg = this.getAvgRating(res.data.ratings);
-          let rec = this.getRecommended(res.data.recommended);
+      let avg = this.getAvgRating(this.props.meta.ratings);
+      let rec = this.getRecommended(this.props.meta.recommended);
 
-          this.setState({
-            ratings: res.data.ratings,
-            avg: avg,
-            rec: rec
-          })
-        })
-        .catch(err => console.log('ERROR:', err))
+      this.setState({
+        ratings: this.props.meta.ratings,
+        avg: avg,
+        rec: rec
+      })
     }
   }
 
   componentDidMount() {
-    getReviewMeta(this.props.productId)
-      .then(res => {
-        let avg = this.getAvgRating(res.data.ratings);
-        let rec = this.getRecommended(res.data.recommended);
+    let avg = this.getAvgRating(this.props.meta.ratings);
+    let rec = this.getRecommended(this.props.meta.recommended);
 
-        this.setState({
-          ratings: res.data.ratings,
-          avg: avg,
-          rec: rec
-        })
-      })
-      .catch(err => console.log('ERROR:', err))
+    this.setState({
+      ratings: this.props.meta.ratings,
+      avg: avg,
+      rec: rec
+    })
   }
 
   render() {
