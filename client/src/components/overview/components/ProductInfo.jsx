@@ -15,17 +15,32 @@ class ProductInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      avg: 0,
+      ratingAvg: 0,
+      ratingTotal: 0,
     };
   }
 
   componentDidMount() {
-    this.setState({ avg: this.getAvgRating() })
+    this.getRatings();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.ratings !== prevProps.ratings) {
+
+      if (Object.keys(this.props.ratings).length === 0) {
+        this.setState({
+          ratingAvg: 0,
+          ratingTotal: 0,
+        })
+      } else {
+        this.getRatings();
+      }
+    }
   }
 
   renderStars() {
     let stars = [];
-    let avg = this.state.avg;
+    let avg = this.state.ratingAvg;
     let whole = Math.floor(avg);
     let float = avg % 1;
 
@@ -48,7 +63,7 @@ class ProductInfo extends React.Component {
     return stars;
   }
 
-  getAvgRating() {
+  getRatings() {
     const keys = Object.keys(this.props.ratings);
     if (keys.length === 0) return 'No reviews yet';
     let total = 0;
@@ -58,23 +73,17 @@ class ProductInfo extends React.Component {
       count += Number(this.props.ratings[key]);
     })
     let avg = (total / count).toFixed(1);
-    return avg;
-  }
-
-  getReviewCount() {
-    let totalReviews = 0;
-    for (let key in this.props.ratings) {
-      totalReviews += Number(this.props.ratings[key]);
-    }
-    return totalReviews;
+    this.setState({
+      ratingAvg: avg,
+      ratingTotal: count,
+    })
   }
 
   render() {
-    let reviewCount = this.getReviewCount();
     return(
       <div id="product-info">
-         { <p className="avg-rating">Average rating: { this.state.avg }</p>}
-         { reviewCount !== 0 && <a className="reviews-link" href="#reviews" onClick={ this.props.interact } >See all { reviewCount } reviews</a>}
+         { this.state.ratingAvg !== 0 ? <p className="avg-rating">Average rating: { this.state.ratingAvg }</p> : <p className="avg-rating">Average rating: No reviews yet</p>}
+         { this.state.ratingTotal !== 0 && <a className="reviews-link" href="#reviews" onClick={ this.props.interact } >See all { this.state.ratingTotal } reviews</a>}
          { this.renderStars() }
         <p className="category">{ this.props.product.category }</p>
         <h3 className="product-name">{ this.props.product.name }</h3>
