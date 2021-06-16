@@ -1,0 +1,14 @@
+.dark-mode {
+  background-color: $dark;
+  color: white;
+
+  #dark-mode {
+    background-color: $dark;
+    border: 3px solid #fff;
+  }
+
+  #dark-mode:hover {
+    background-color: #fff;
+    color: $dark;
+  }
+}
