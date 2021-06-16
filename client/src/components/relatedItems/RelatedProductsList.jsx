@@ -11,7 +11,7 @@ class RelatedProductsList extends Component {
         this.state = {
             page: 0,
             window: [],
-            window_size: 4,
+            window_size: 3,
             related_products: this.props.productsList
         };
         this.refreshCarousel = this.refreshCarousel.bind(this);

@@ -24,11 +24,13 @@ class App extends React.Component {
   }
 
   removeFromOutfit(id) {
-    const index = this.state.outfits_list.indexOf(5);
+    const index = this.state.outfits_list.indexOf(id);
+    let newList = this.state.outfits_list.slice();
+    newList.splice(index, 1);
     if (index > -1) {
-      this.setStatearray({
-        outfits_list: this.state.outfits_list.splice(index, 1)
-      });
+      this.setState({
+        outfits_list: newList
+      })
     }
   }
 
@@ -36,9 +38,8 @@ class App extends React.Component {
     if (!this.state.outfits_list.includes(this.state.currentProductId)) {
       this.setState({
         outfits_list: this.state.outfits_list.concat(this.state.currentProductId)
-      }, () => console.log(this.state.outfits_list)
-    )}
-    console.log('outfitlist---------------', this.state.outfits_list)
+      })
+    }
   }
 
   updateCurrentProduct(e) {

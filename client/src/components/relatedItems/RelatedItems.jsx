@@ -65,7 +65,6 @@ class RelatedItems extends Component {
 
     componentDidMount() {
         this.refreshProductsList();
-        console.log(`state: ${this.state.productsList}`);
     }
 
     render() {
