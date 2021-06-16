@@ -29,7 +29,7 @@ class SortReviews extends React.Component {
     return (
       <div id='sort-review'>
 
-        <h3>{ this.props.reviews[this.props.sort].length } reviews, sorted by { this.renderSelect() }</h3>
+        <h3>{ this.props.total } reviews, sorted by { this.renderSelect() }</h3>
 
         </div>
     )
