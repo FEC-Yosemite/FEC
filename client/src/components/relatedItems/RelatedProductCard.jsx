@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { getProductById, getProductStyles } from  '../../requests.js';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWindowClose as fasWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose as farWindowClose } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 
@@ -12,7 +14,8 @@ class RelatedProductCard extends Component {
             product: null,
             styles: null,
             star: farStar,
-            star_state: false
+            star_state: false,
+            type: null
         };
         this.refreshProduct = this.refreshProduct.bind(this);
         this.productClickHandler = this.productClickHandler.bind(this);
@@ -21,6 +24,7 @@ class RelatedProductCard extends Component {
     }
 
     refreshProduct() {
+        if (this.props.productId !== 0) {
         getProductById(this.props.productId)
         .then(product => {
             this.setState({
@@ -33,34 +37,45 @@ class RelatedProductCard extends Component {
                 styles: styles.data.results
             });
         });
+        }
     }
     
     productClickHandler(e) {
-        if (this.state.star_state) {
-            this.props.showModal(this.state.product);
-            this.props.interact(e.target.outerHTML);
+        if (this.props.productId === 0) {
+            this.props.addCurrentToOutfits()
         } else {
-            this.props.updateCurrentProduct(this.props.productId);
-            this.props.interact(e.target.outerHTML);
+            if (this.state.star_state) {
+                if (this.state.type === 'related') {
+                    this.props.showModal(this.state.product);
+                } else {
+                    this.props.removeFromOutfit(this.props.productId);
+                }
+            } else  {
+                this.props.updateCurrentProduct(this.props.productId);
+            }
         }
+        this.props.interact(e.target.outerHTML);
     }
 
     starEnter() {
         this.setState({
-            star: fasStar,
+            star: (this.state.type === 'related' ? fasStar : fasWindowClose),
             star_state: true
         });
     }
 
     starLeave() {
         this.setState({
-            star: farStar,
+            star: (this.state.type === 'related' ? farStar : farWindowClose),
             star_state: false
         });
     }
 
     componentDidMount() {
-        this.refreshProduct();
+        this.setState({
+            star: (this.props.className === "outfit-item-card" ? farWindowClose : farStar),
+            type: (this.props.className === "outfit-item-card" ? 'outfit' : 'related')
+        }, () => this.refreshProduct());
     }
 
     componentDidUpdate(prevProps) {
@@ -73,11 +88,14 @@ class RelatedProductCard extends Component {
         return (
             <div id="carousel-item" onClick={(e) => this.productClickHandler(e)} >
                 {
+                    this.state.type === 'outfit' && this.props.productId === 0 ?
+                    <div id="product-card">+</div>
+                    :
                     this.state.styles === null || this.state.product === null ?
                     <h3>Loading...</h3>
                     :
                     <div id="product-card">
-                        <FontAwesomeIcon id="modal-star" icon={this.state.star} onMouseEnter={this.starEnter} onMouseLeave={this.starLeave} />
+                        <FontAwesomeIcon id={this.state.type === "related" ? "modal-star" : "close-x"} icon={this.state.star} onMouseEnter={this.starEnter} onMouseLeave={this.starLeave} />
 
                         {
                         this.state.styles[0].photos[0].thumbnail_url !== null ?

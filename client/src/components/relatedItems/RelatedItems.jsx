@@ -33,8 +33,7 @@ class RelatedItems extends Component {
                 this.setState({
                     finished: true
                 });
-            });
-            console.log(`idsArray.data: ${idsArray.data}`);
+            });4
         });
     }
 
@@ -80,8 +79,14 @@ class RelatedItems extends Component {
                 }
                 {
                 this.state.finished ?
+                <div>
+                <h2 id="carousel-header">Related Products</h2>
+                <br/>
                 <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} />
-                // <Carousel productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} />
+                <h2 id="carousel-header">My Outfit</h2>
+                <br/>
+                <Carousel productId={this.props.productId} interact={this.props.interact} updateCurrentProduct={this.props.updateCurrentProduct} addCurrentToOutfits={this.props.addCurrentToOutfits} removeFromOutfit={this.props.removeFromOutfit} outfits_list={[0, ...this.props.outfits_list]} />
+                </div>
                 :
                 <h1>Loading</h1>
                 }
