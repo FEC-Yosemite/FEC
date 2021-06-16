@@ -23,14 +23,6 @@ class ProductInfo extends React.Component {
     this.setState({ avg: this.getAvgRating() })
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.currentStyle !== prevProps.currentStyle) {
-      this.setState({
-        currentStyle: this.props.currentStyle,
-      })
-    }
-  }
-
   renderStars() {
     let stars = [];
     let avg = this.state.avg;

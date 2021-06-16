@@ -3,10 +3,7 @@ import Overview from './overview/Overview.jsx';
 import RatingsReviews from './ratingsReviews/RatingsReviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
 import moment from 'moment';
-import { getProducts, getProductById, addInteraction } from '../requests.js'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { getProducts, getProductById, addInteraction, getReviewMeta } from '../requests.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -70,7 +67,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    getReviewMeta(this.props.productId)
+    getReviewMeta(this.state.currentProductId)
       .then(res => {
         this.setState({
           meta: res.data
@@ -81,15 +78,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
       <div id="app-div">
-        <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } />
+        <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } ratings={ this.state.meta.ratings } />
         <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} interact={ target => this.handleInteraction(target, 'Related Items') } outfits_list={this.state.outfits_list} addCurrentToOutfits={this.addCurrentToOutfits} removeFromOutfit={this.removeFromOutfit} />
         <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } meta={ this.state.meta }/>
       </div>
-
-      <FontAwesomeIcon className="dark-mode" icon={ faEye } />
-      </>
     )
   }
 }
