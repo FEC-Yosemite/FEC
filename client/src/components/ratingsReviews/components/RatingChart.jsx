@@ -51,7 +51,7 @@ class RatingChart extends React.Component {
             />
             <Bar dataKey="count" fill="#008000" stackId="a">
             </Bar>
-            <Bar isAnimationActive={false} dataKey="total" fill="#acacac" stackId="a">
+            <Bar isAnimationActive={false} dataKey="total" fill="#000000" fillOpacity="0.3" stackId="a">
               <LabelList dataKey='count' position='insideRight'/>
             </Bar>
           </BarChart>
