@@ -43,15 +43,16 @@ class RelatedProductsList extends Component {
 
     buttonClick(e) {
       e.preventDefault();
+      this.props.interact(e.target.outerHTML);
       let pageModifier = this.state.page;
-      if (e.target.id === 'left-button') {
+      if (e.currentTarget.id === 'left-button') {
         this.setState({
           page: pageModifier - 1
         }, () => {
             this.refreshCarousel();
         });
       }
-      if (e.target.id === 'right-button') {
+      if (e.currentTarget.id === 'right-button') {
           this.setState({
             page: pageModifier + 1
           }, () => {
@@ -74,7 +75,7 @@ class RelatedProductsList extends Component {
                 {
                 this.state.window.length > 0 ?
                 this.state.window.map((productId, index) => (
-                    <RelatedProductCard key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct}/>
+                    <RelatedProductCard className="related-item-card" key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} />
                 ))
                 :
 
@@ -82,7 +83,7 @@ class RelatedProductsList extends Component {
                 }
             <div id="right-button-container">
                 {
-                (this.state.window_size * this.state.page) + (this.state.window_size - 1) >= this.props.productsList.length ?
+                (this.state.window_size * this.state.page) + (this.state.window_size) >= this.props.productsList.length ?
                 <div id="right-button-placeholder"> </div>
                 :
                 <FontAwesomeIcon id="right-button" onClick={this.buttonClick} icon={faArrowRight} />

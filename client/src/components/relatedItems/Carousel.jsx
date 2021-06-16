@@ -11,90 +11,83 @@ class Carousel extends Component {
         this.state = {
             page: 0,
             window: [],
-            window_size: 2
+            window_size: 3
         };
         this.refreshCarousel = this.refreshCarousel.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
     }
 
-    componentDidMount() {
-        this.refreshCarousel()
-    }
-
     refreshCarousel() {
         let products_window = [];
-        for (let i = this.state.page * this.state.window_size; i <= this.state.window_size * this.state.page + 1; i++) {
-            if (i < this.props.productsList.data.length) {
-                console.log(`i: ${i}`);
-                console.log(`Product IDs in carousel: ${this.props.productsList.data[i]}`);
-                products_window.push(this.props.productsList.data[i]);
+        
+        for (let i = this.state.page; i < this.state.page + this.state.window_size; i++) {
+            if (i < this.props.outfits_list.length) {
+                products_window.push(this.props.outfits_list[i]);
             }
         }
         this.setState({
-            related_products: JSON.parse(JSON.stringify(products_window))
+            window: JSON.parse(JSON.stringify(products_window))
         });
-        setTimeout(console.log(`WHOLE LIST OF PRODUCTS: ${this.state.related_products}`), 1);
     }
 
     buttonClick(e) {
       e.preventDefault();
+      this.props.interact(e.target.outerHTML);
       let pageModifier = this.state.page;
-      if (e.target.id === 'left-button') {
+      if (e.currentTarget.id === 'left-button') {
         this.setState({
           page: pageModifier - 1
+        }, () => {
+            this.refreshCarousel();
         });
-        this.refreshCarousel();
       }
-      if (e.target.id === 'right-button') {
+      if (e.currentTarget.id === 'right-button') {
           this.setState({
             page: pageModifier + 1
-          });
-          this.refreshCarousel();
+          }, () => {
+            this.refreshCarousel();
+        });
       }
-      console.log(`PAGE: ${this.state.page}`);
-      console.log(`PAGE > LENGTH?: ${this.props.productsList.data.length}`);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (JSON.stringify(prevProps.outfits_list) !== JSON.stringify(this.props.outfits_list)) {
+            this.refreshCarousel();
+        }
+      }
+
+    componentDidMount() {
+        this.refreshCarousel();
     }
 
     render() {
         return (
             <div id="related-products-carousel">
             <div id="left-button-container">
-            {
+                {
                 this.state.page === 0 ?
                 <div id="left-button-placeholder"> </div>
                 :
                 <FontAwesomeIcon id="left-button" onClick={this.buttonClick} icon={faArrowLeft} />
-                // <img id="left-button" src="client/pix/left-button.jpg" alt="left carousel arrow" onClick={this.buttonClick} />
-            }
+                }
             </div>
-            {
-                this.state.related_products.length > 0 ?
-                this.state.related_products.map((productId, index) => (
-                    <RelatedProductCard key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct}/>
+                {
+                this.state.window.length > 0 ?
+                this.state.window.map((productId, index) => (
+                    <RelatedProductCard className="outfit-item-card" key={productId} productId={productId} currentProductId={this.props.productId} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} removeFromOutfit={this.props.removeFromOutfit} addCurrentToOutfits={this.props.addCurrentToOutfits} />
                 ))
                 :
+                
                 <h3>Loading "Related Cards"...</h3>
-            }
+                }
             <div id="right-button-container">
-            {
-                this.state.page + this.state.window_size + 1 >= this.props.productsList.data.length ?
+                {
+                (this.state.window_size * this.state.page) + (this.state.window_size) >= this.props.outfits_list.length ?
                 <div id="right-button-placeholder"> </div>
                 :
                 <FontAwesomeIcon id="right-button" onClick={this.buttonClick} icon={faArrowRight} />
-                // <img id="right-button" src="client/pix/right-button.jpg" alt="right carousel arrow" onClick={this.buttonClick} />
-            }
+                }
             </div>
-            {/* <div></div> */}
-            {/* <h1>BELOW IS WHOLE LIST</h1>
-            <br/>
-            {
-                this.state.related_products.length > 0 ?
-                this.state.related_products.map((productId, index) => (
-                    <RelatedProductCard key={index} productId={productId} />
-                ))
-                :
-                <h3>Loading "Related Cards"...</h3>
-            } */}
             </div>
         );
     }

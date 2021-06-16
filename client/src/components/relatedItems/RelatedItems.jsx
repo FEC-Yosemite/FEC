@@ -33,8 +33,7 @@ class RelatedItems extends Component {
                 this.setState({
                     finished: true
                 });
-            });
-            console.log(`idsArray.data: ${idsArray.data}`);
+            });4
         });
     }
 
@@ -42,8 +41,9 @@ class RelatedItems extends Component {
         this.getCurrentProduct(product);
     }
 
-    hideModal() {
+    hideModal(e) {
         this.setState({ show: false });
+        this.props.interact(e.target.outerHTML);
     }
 
     getCurrentProduct(product) {
@@ -73,14 +73,20 @@ class RelatedItems extends Component {
             <div id="related-items">
                 {
                 this.state.show ?
-                <Comparison modal_product={JSON.stringify(this.state.modal_product)} current_product={JSON.stringify(this.state.current_product)} hideModal={this.hideModal} />
+                <Comparison modal_product={JSON.stringify(this.state.modal_product)} current_product={JSON.stringify(this.state.current_product)} hideModal={this.hideModal} interact={this.props.interact} />
                 :
                 null
                 }
                 {
                 this.state.finished ?
-                <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} />
-                // <Carousel productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} />
+                <div>
+                <h2 id="carousel-header">Related Products</h2>
+                <br/>
+                <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} />
+                <h2 id="carousel-header">My Outfit</h2>
+                <br/>
+                <Carousel productId={this.props.productId} interact={this.props.interact} updateCurrentProduct={this.props.updateCurrentProduct} addCurrentToOutfits={this.props.addCurrentToOutfits} removeFromOutfit={this.props.removeFromOutfit} outfits_list={[0, ...this.props.outfits_list]} />
+                </div>
                 :
                 <h1>Loading</h1>
                 }
