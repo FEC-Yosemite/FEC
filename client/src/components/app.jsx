@@ -5,6 +5,9 @@ import RelatedItems from './relatedItems/RelatedItems.jsx';
 import moment from 'moment';
 import { getProducts, getProductById, addInteraction } from '../requests.js'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -50,11 +53,15 @@ class App extends React.Component {
 
   render() {
     return (
+      <>
       <div id="app-div">
         <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } />
         <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} />
         <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } />
       </div>
+
+      <FontAwesomeIcon className="dark-mode" icon={ faEye } />
+      </>
     )
   }
 }
