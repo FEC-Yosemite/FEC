@@ -40,7 +40,7 @@ body {
       input[type="text"] {
         margin: 1em 1em 1em 0;
         border: none;
-        border-bottom: 2px solid white;
+        border-bottom: 2px solid #fff;
         background-color: rgba(0, 0, 0, 0);
         color: white;
         font-size: 1em;
@@ -51,6 +51,24 @@ body {
         outline: none;
       }
     }
+  }
+
+  .dark-mode {
+    cursor: pointer;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    font-size: 1.7em;
+    background-color: #fff;
+    border-radius: 100%;
+    border: 3px solid $main;
+    padding: .2em;
+    transition: .5s;
+  }
+
+  .dark-mode:hover {
+    background-color: #000;
+    color: #fff;
   }
 
   footer {

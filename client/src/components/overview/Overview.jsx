@@ -17,10 +17,6 @@ class Overview extends React.Component {
       syncedProduct: false,
       styles: [],
       syncedStyles: false,
-      ratings: {},
-      syncedRatings: false,
-      reviewCount: 0,
-      syncedReviewCount: false,
       currentStyle: 0,
       cart: '',
     };
@@ -31,8 +27,6 @@ class Overview extends React.Component {
       this.setState({
         syncedProduct: false,
         syncedStyles: false,
-        syncedRatings: false,
-        syncedReviewCount: false,
         currentStyle: 0,
       })
       this.refreshProduct();
@@ -54,19 +48,6 @@ class Overview extends React.Component {
     }))
     .catch((err) => console.log('ERROR:', err));
 
-  getReviewMeta(this.props.productId)
-    .then((res) => this.setState({
-      ratings: res.data.ratings,
-      syncedRatings: true,
-    }))
-    .catch((err) => console.log('ERROR:', err));
-
-  getReviews(this.props.productId, null, 100, 'newest')
-    .then((res) => this.setState({
-        reviewCount: res.data.results.length,
-        syncedReviewCount: true,
-    }))
-    .catch((err) => console.log('ERROR:', err));
   }
 
   componentDidMount() {
@@ -101,8 +82,8 @@ class Overview extends React.Component {
 
           <aside id="info-aside">
 
-            { this.state.syncedStyles && this.state.syncedProduct && this.state.syncedRatings && this.state.syncedReviewCount ?
-            <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.state.ratings } reviewCount={ this.state.reviewCount } currentStyle={ this.state.currentStyle } interact={ this.handleClickTrack.bind(this)  } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
+            { this.state.syncedStyles && this.state.syncedProduct ?
+            <ProductInfo product={ this.state.product } styles={ this.state.styles } ratings={ this.props.ratings } currentStyle={ this.state.currentStyle } interact={ this.handleClickTrack.bind(this)  } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
             { this.state.syncedStyles ? <StylePicker styles={ this.state.styles } changeStyle={ this.handleStyleChange.bind(this) } currentStyle={ this.state.currentStyle } /> : <FontAwesomeIcon className="spinner" icon={faSpinner} spin /> }
 
