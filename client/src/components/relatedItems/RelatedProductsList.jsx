@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 class RelatedProductsList extends Component {
     constructor(props) {
@@ -69,7 +69,7 @@ class RelatedProductsList extends Component {
                 this.state.page === 0 ?
                 <div id="left-button-placeholder"> </div>
                 :
-                <FontAwesomeIcon id="left-button" onClick={this.buttonClick} icon={faArrowLeft} />
+                <FontAwesomeIcon id="left-button" onClick={this.buttonClick} icon={faChevronLeft} />
                 }
             </div>
                 {
@@ -86,7 +86,7 @@ class RelatedProductsList extends Component {
                 (this.state.window_size * this.state.page) + (this.state.window_size) >= this.props.productsList.length ?
                 <div id="right-button-placeholder"> </div>
                 :
-                <FontAwesomeIcon id="right-button" onClick={this.buttonClick} icon={faArrowRight} />
+                <FontAwesomeIcon id="right-button" onClick={this.buttonClick} icon={faChevronRight} />
                 }
             </div>
             </div>
