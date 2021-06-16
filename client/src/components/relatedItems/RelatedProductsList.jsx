@@ -63,7 +63,7 @@ class RelatedProductsList extends Component {
 
     render() {
         return (
-            <div id="related-products-carousel">
+            <div id="carousel">
             <div id="left-button-container">
                 {
                 this.state.page === 0 ?

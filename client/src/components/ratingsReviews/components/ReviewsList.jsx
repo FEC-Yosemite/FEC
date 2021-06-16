@@ -47,7 +47,7 @@ class ReviewsList extends React.Component {
       for (let fil of filters) {
         result.push(<p className='filter'>{fil + ' Stars'}</p>)
       }
-      result.push(<button id='clear-filters' onClick={ this.props.clear }>Clear filters</button>)
+      result.push(<button id='clear-filters' onClick={ this.props.clear }>CLEAR FILTERS</button>)
     }
 
     return result;

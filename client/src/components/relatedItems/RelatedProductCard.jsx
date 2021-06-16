@@ -99,9 +99,9 @@ class RelatedProductCard extends Component {
 
                         {
                         this.state.styles[0].photos[0].thumbnail_url !== null ?
-                        <img src={this.state.styles[0].photos[0].thumbnail_url} key={this.props.productId} />
+                        <img id="product-preview" src={this.state.styles[0].photos[0].thumbnail_url} key={this.props.productId} />
                         :
-                        <img src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" key={this.props.productId} />
+                        <img id="product-preview" src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" key={this.props.productId} />
                         }
 
                         <p>{this.state.product.category}</p>
