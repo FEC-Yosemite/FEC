@@ -10,8 +10,30 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProductId: 19089,
+      outfits_list: []
     }
+    this.removeFromOutfit = this.removeFromOutfit.bind(this);
+    this.addCurrentToOutfits = this.addCurrentToOutfits.bind(this);
     this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
+    this.handleInteraction = this.handleInteraction.bind(this);
+  }
+
+  removeFromOutfit(id) {
+    const index = this.state.outfits_list.indexOf(5);
+    if (index > -1) {
+      this.setStatearray({
+        outfits_list: this.state.outfits_list.splice(index, 1)
+      });
+    }
+  }
+
+  addCurrentToOutfits() {
+    if (!this.state.outfits_list.includes(this.state.currentProductId)) {
+      this.setState({
+        outfits_list: this.state.outfits_list.concat(this.state.currentProductId)
+      }, () => console.log(this.state.outfits_list)
+    )}
+    console.log('outfitlist---------------', this.state.outfits_list)
   }
 
   updateCurrentProduct(e) {
@@ -52,7 +74,7 @@ class App extends React.Component {
     return (
       <div id="app-div">
         <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } />
-        <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} />
+        <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} interact={ target => this.handleInteraction(target, 'Related Items') } outfits_list={this.state.outfits_list} addCurrentToOutfits={this.addCurrentToOutfits} removeFromOutfit={this.removeFromOutfit} />
         <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } />
       </div>
     )
