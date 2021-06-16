@@ -91,35 +91,20 @@ class RatingsReviews extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       this.reviewRequests();
-
-      getReviewMeta(this.props.productId)
-        .then(res => {
-          console.log(res.data);
-          this.setState({
-            characteristics: res.data.characteristics
-          });
-        })
-        .catch(err => console.log('ERROR:', err))
     }
   }
 
   componentDidMount() {
     this.reviewRequests();
-
-    getReviewMeta(this.props.productId)
-      .then(res => this.setState({
-        characteristics: res.data.characteristics
-      }))
-      .catch(err => console.log('ERROR:', err))
   }
 
   render() {
     return (
       <div id='ratings-reviews'>
-        <RatingBreakdown reviews={ this.state.reviews } handleFilter={ this.handleFilter }productId={ this.props.productId }/>
-        <ProductBreakdown reviews={ this.state.reviews } chars={ this.state.characteristics }/>
+        <RatingBreakdown reviews={ this.state.reviews } handleFilter={ this.handleFilter }productId={ this.props.productId } meta={ this.props.meta }/>
+        <ProductBreakdown reviews={ this.state.reviews } chars={ this.props.meta.characteristics }/>
         <SortReviews reviews={ this.state.reviews } sort={ this.state.sort } handleSort={ this.handleSort }/>
-        <ReviewsList reviews={ this.state.reviews } sort={ this.state.sort } requests={ this.reviewRequests } chars={ this.state.characteristics } productId={ this.props.productId } interact={ this.props.interact } filter={ this.state.filter } clear={ this.handleClear }/>
+        <ReviewsList reviews={ this.state.reviews } sort={ this.state.sort } requests={ this.reviewRequests } chars={ this.props.meta.characteristics } productId={ this.props.productId } interact={ this.props.interact } filter={ this.state.filter } clear={ this.handleClear }/>
       </div>
     )
   }

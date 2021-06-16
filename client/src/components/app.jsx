@@ -11,7 +11,11 @@ class App extends React.Component {
     this.state = {
       currentProductId: 19089,
       outfits_list: [],
-      meta: {}
+      meta: {
+        characteristics: {},
+        ratings: {},
+        recommended: {}
+      }
     }
     this.removeFromOutfit = this.removeFromOutfit.bind(this);
     this.addCurrentToOutfits = this.addCurrentToOutfits.bind(this);
@@ -20,11 +24,13 @@ class App extends React.Component {
   }
 
   removeFromOutfit(id) {
-    const index = this.state.outfits_list.indexOf(5);
+    const index = this.state.outfits_list.indexOf(id);
+    let newList = this.state.outfits_list.slice();
+    newList.splice(index, 1);
     if (index > -1) {
-      this.setStatearray({
-        outfits_list: this.state.outfits_list.splice(index, 1)
-      });
+      this.setState({
+        outfits_list: newList
+      })
     }
   }
 
@@ -32,9 +38,8 @@ class App extends React.Component {
     if (!this.state.outfits_list.includes(this.state.currentProductId)) {
       this.setState({
         outfits_list: this.state.outfits_list.concat(this.state.currentProductId)
-      }, () => console.log(this.state.outfits_list)
-    )}
-    console.log('outfitlist---------------', this.state.outfits_list)
+      })
+    }
   }
 
   updateCurrentProduct(e) {
@@ -54,9 +59,9 @@ class App extends React.Component {
       .catch(err => console.log('ERROR:', err));
   }
 
-  componentDidUpdate(prevprops) {
-    if (this.props !== prevprops) {
-      getReviewMeta(this.props.productId)
+  componentDidUpdate(prevprops, prevState) {
+    if (this.state.currentProductId !== prevState.currentProductId) {
+      getReviewMeta(this.state.currentProductId)
         .then(res => {
           this.setState({
             meta: res.data
@@ -69,6 +74,7 @@ class App extends React.Component {
   componentDidMount() {
     getReviewMeta(this.state.currentProductId)
       .then(res => {
+        console.log(res.data);
         this.setState({
           meta: res.data
         });
