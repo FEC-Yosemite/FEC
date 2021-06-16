@@ -152,7 +152,7 @@ class Review extends React.Component {
           <p id='review-date'>{ moment(review.date).format('MM / DD / YYYY') }</p>
         </div>
 
-        <h3 id='review-summary'>{ review.summary }</h3> <br/>
+        <h3 id='review-summary'>{ review.summary }</h3>
 
         <p id='review-body'>{ this.renderBody() }</p>
 
@@ -164,7 +164,7 @@ class Review extends React.Component {
 
         <div id='review-photos'>{ review.photos.map((photo) => {
           return <img onClick={ this.handleExpand } src={ photo.url }></img>
-        })} </div><br/>
+        })} </div>
 
         <p id='review-helpful'>Was this review helpful?
         <button className='helpful' onClick={ this.handleHelpful }>Yes</button>({ review.helpfulness })

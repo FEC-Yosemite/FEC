@@ -104,7 +104,7 @@ class RatingsReviews extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.sort !== prevState.sort) {
+    if (this.state.sort !== prevState.sort || this.props.productId !== prevProps.productId) {
       this.reviewRequests();
     }
     if (this.props !== prevProps) {
