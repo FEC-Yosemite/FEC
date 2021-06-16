@@ -17,6 +17,7 @@ class RatingsReviews extends React.Component {
         relevant: []
       },
       sort: 'relevant',
+      total: 0,
       characteristics: {},
       filter: {
         1: false,
@@ -39,6 +40,18 @@ class RatingsReviews extends React.Component {
         [val]: !prevState.filter[val]
       }
     }))
+  }
+
+  getTotal() {
+    let ratings = this.props.meta.ratings;
+    let result = 0;
+    for (let key in ratings) {
+      result += Number(ratings[key])
+    }
+
+    this.setState({
+      total: result
+    })
   }
 
   handleClear() {
@@ -88,18 +101,20 @@ class RatingsReviews extends React.Component {
         })))
         .catch((err) => console.log('ERROR:', err));
     }
-
-
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.sort !== prevState.sort) {
       this.reviewRequests();
     }
+    if (this.props !== prevProps) {
+      this.getTotal();
+    }
   }
 
   componentDidMount() {
     this.reviewRequests();
+    this.getTotal();
   }
 
   render() {
@@ -107,7 +122,7 @@ class RatingsReviews extends React.Component {
       <div id='ratings-reviews'>
         <RatingBreakdown reviews={ this.state.reviews } handleFilter={ this.handleFilter }productId={ this.props.productId } meta={ this.props.meta }/>
         <ProductBreakdown reviews={ this.state.reviews } chars={ this.props.meta.characteristics }/>
-        <SortReviews reviews={ this.state.reviews } sort={ this.state.sort } handleSort={ this.handleSort }/>
+        <SortReviews total={ this.state.total } sort={ this.state.sort } handleSort={ this.handleSort }/>
         <ReviewsList reviews={ this.state.reviews } sort={ this.state.sort } requests={ this.reviewRequests } chars={ this.props.meta.characteristics } productId={ this.props.productId } interact={ this.props.interact } filter={ this.state.filter } clear={ this.handleClear }/>
       </div>
     )
