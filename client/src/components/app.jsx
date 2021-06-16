@@ -5,6 +5,9 @@ import RelatedItems from './relatedItems/RelatedItems.jsx';
 import moment from 'moment';
 import { getProducts, getProductById, addInteraction, getReviewMeta } from '../requests.js'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +18,8 @@ class App extends React.Component {
         characteristics: {},
         ratings: {},
         recommended: {}
-      }
+      },
+      darkMode: false,
     }
     this.removeFromOutfit = this.removeFromOutfit.bind(this);
     this.addCurrentToOutfits = this.addCurrentToOutfits.bind(this);
@@ -82,13 +86,29 @@ class App extends React.Component {
       .catch(err => console.log('ERROR:', err))
   }
 
+  darkMode() {
+    if (!this.state.darkMode) {
+      document.getElementsByTagName("body")[0].classList.add("dark-mode");
+      this.setState({ darkMode: true });
+    } else {
+      document.getElementsByTagName("body")[0].classList.remove("dark-mode");
+      this.setState({ darkMode: false });
+    }
+  }
+
   render() {
     return (
-      <div id="app-div">
-        <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } ratings={ this.state.meta.ratings } />
-        <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} interact={ target => this.handleInteraction(target, 'Related Items') } outfits_list={this.state.outfits_list} addCurrentToOutfits={this.addCurrentToOutfits} removeFromOutfit={this.removeFromOutfit} />
-        <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } meta={ this.state.meta }/>
-      </div>
+      <>
+        <div id="app-div">
+          <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } ratings={ this.state.meta.ratings } />
+          <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} interact={ target => this.handleInteraction(target, 'Related Items') } outfits_list={this.state.outfits_list} addCurrentToOutfits={this.addCurrentToOutfits} removeFromOutfit={this.removeFromOutfit} />
+          <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } meta={ this.state.meta }/>
+        </div>
+
+        <div id="dark-mode">
+          <FontAwesomeIcon onClick={ this.darkMode.bind(this) } icon={ faEye } />
+        </div>
+      </>
     )
   }
 }
