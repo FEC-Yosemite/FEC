@@ -93,9 +93,12 @@ class RatingsReviews extends React.Component {
       this.reviewRequests();
 
       getReviewMeta(this.props.productId)
-        .then(res => this.setState({
-          characteristics: res.data.characteristics
-        }))
+        .then(res => {
+          console.log(res.data);
+          this.setState({
+            characteristics: res.data.characteristics
+          });
+        })
         .catch(err => console.log('ERROR:', err))
     }
   }
