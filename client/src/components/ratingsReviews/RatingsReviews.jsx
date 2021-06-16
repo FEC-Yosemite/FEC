@@ -60,36 +60,40 @@ class RatingsReviews extends React.Component {
   }
 
   reviewRequests() {
-    getReviews(this.props.productId, null, 100, 'newest')
-      .then((res) => this.setState(prevState => ({
-        reviews: {
-          ...prevState.reviews,
-          newest: res.data.results
-        }
-      })))
-      .catch((err) => console.log('ERROR:', err));
+    if (this.state.sort === 'newest') {
+      getReviews(this.props.productId, null, 100, 'newest')
+        .then((res) => this.setState(prevState => ({
+          reviews: {
+            ...prevState.reviews,
+            newest: res.data.results
+          }
+        })))
+        .catch((err) => console.log('ERROR:', err));
+    } else if (this.state.sort === 'helpful') {
+      getReviews(this.props.productId, null, 100, 'helpful')
+        .then((res) => this.setState(prevState => ({
+          reviews: {
+            ...prevState.reviews,
+            helpful: res.data.results
+          }
+        })))
+        .catch((err) => console.log('ERROR:', err));
+    } else if (this.state.sort ==='relevant') {
+      getReviews(this.props.productId, null, 100, 'relevant')
+        .then((res) => this.setState(prevState => ({
+          reviews: {
+            ...prevState.reviews,
+            relevant: res.data.results
+          }
+        })))
+        .catch((err) => console.log('ERROR:', err));
+    }
 
-    getReviews(this.props.productId, null, 100, 'helpful')
-      .then((res) => this.setState(prevState => ({
-        reviews: {
-          ...prevState.reviews,
-          helpful: res.data.results
-        }
-      })))
-      .catch((err) => console.log('ERROR:', err));
 
-    getReviews(this.props.productId, null, 100, 'relevant')
-      .then((res) => this.setState(prevState => ({
-        reviews: {
-          ...prevState.reviews,
-          relevant: res.data.results
-        }
-      })))
-      .catch((err) => console.log('ERROR:', err));
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.sort !== prevState.sort) {
       this.reviewRequests();
     }
   }
