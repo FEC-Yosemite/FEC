@@ -256,7 +256,7 @@ class Gallery extends React.Component {
           <div id="thumbnails">
             <div className="chevron-up-holder">{(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== 0) && <FontAwesomeIcon onClick={ this.scrollThumbnailsUp.bind(this) } className="chevron chevron-up" icon={ faChevronUp } />}</div>
 
-            <div className="thumb-holder">{ this.renderThumbnails(this.state.thumbIndex) }</div>
+            <div className="thumb-holder">{ this.state.currentImage && this.renderThumbnails(this.state.thumbIndex) }</div>
 
             <div className="chevron-down-holder">{(this.state.currentImages.length > 7 && this.state.collapsed && this.state.thumbIndex !== this.state.currentImages.length - 7) && <FontAwesomeIcon onClick={ this.scrollThumbnailsDown.bind(this) } className="chevron chevron-down" icon={ faChevronDown } />}</div>
           </div>

@@ -135,7 +135,7 @@ class AddToCart extends React.Component {
           { this.state.sizeNotSelected && <span>Please select a size</span>}
             { this.renderSizes() }
             { this.renderQuantity() }
-          { this.state.hasStock && <input type="submit" value="Add to Cart +" /> }
+          { this.state.hasStock ? <input type="submit" value="Add to Cart +" /> : <div className="button-replace"></div> }
         </form>
       </div>
     );
