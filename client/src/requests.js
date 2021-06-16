@@ -1,4 +1,5 @@
 const axios = require('axios');
+const _ = require('underscore');
 
 /*
 
@@ -17,7 +18,7 @@ All functions return a promise:
 
 // Products Api
 
-export function getProducts(page, count) {
+function originalGetProducts(page, count) {
   var options = {
     method: 'get',
     url: 'http://localhost:3000/products',
@@ -30,16 +31,23 @@ export function getProducts(page, count) {
   return axios(options);
 }
 
-export function getProductById(id) {
+export var getProducts = _.memoize(originalGetProducts);
+
+
+function originalGetProductById(id) {
   var options = {
     method: 'get',
     url: `http://localhost:3000/products/${id}`,
   }
 
+
   return axios(options);
 }
 
-export function getProductStyles(id) {
+export var getProductById = _.memoize(originalGetProductById);
+
+
+function originalGetProductStyles(id) {
   var options = {
     method: 'get',
     url: `http://localhost:3000/products/${id}/styles`,
@@ -48,7 +56,10 @@ export function getProductStyles(id) {
   return axios(options);
 }
 
-export function getRelatedProducts(id) {
+export var getProductStyles = _.memoize(originalGetProductStyles);
+
+
+function originalGetRelatedProducts(id) {
   var options = {
     method: 'get',
     url: `http://localhost:3000/products/${id}/related`,
@@ -56,6 +67,8 @@ export function getRelatedProducts(id) {
 
   return axios(options);
 }
+
+export var getRelatedProducts = _.memoize(originalGetRelatedProducts);
 
 // Reviews Api
 
