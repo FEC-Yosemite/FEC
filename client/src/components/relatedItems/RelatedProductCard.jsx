@@ -6,6 +6,8 @@ import { faWindowClose as fasWindowClose } from '@fortawesome/free-solid-svg-ico
 import { faWindowClose as farWindowClose } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faTshirt } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 class RelatedProductCard extends Component {
     constructor(props) {
@@ -89,7 +91,10 @@ class RelatedProductCard extends Component {
             <div id="carousel-item" onClick={(e) => this.productClickHandler(e)} >
                 {
                     this.state.type === 'outfit' && this.props.productId === 0 ?
-                    <div id="product-card">+</div>
+                    <div id="product-card" className="add-outfit">
+                    <FontAwesomeIcon icon={faTshirt} className="faTshirt" />
+                    <FontAwesomeIcon icon={faPlus} className="faPlus" />
+                    </div>
                     :
                     this.state.styles === null || this.state.product === null ?
                     <h3>Loading...</h3>
