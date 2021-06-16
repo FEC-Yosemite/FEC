@@ -10,7 +10,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProductId: 19089,
-      outfits_list: []
+      outfits_list: [],
+      meta: {}
     }
     this.removeFromOutfit = this.removeFromOutfit.bind(this);
     this.addCurrentToOutfits = this.addCurrentToOutfits.bind(this);
@@ -54,12 +55,34 @@ class App extends React.Component {
       .catch(err => console.log('ERROR:', err));
   }
 
+  componentDidUpdate(prevprops) {
+    if (this.props !== prevprops) {
+      getReviewMeta(this.props.productId)
+        .then(res => {
+          this.setState({
+            meta: res.data
+          });
+        })
+        .catch(err => console.log('ERROR:', err))
+    }
+  }
+
+  componentDidMount() {
+    getReviewMeta(this.props.productId)
+      .then(res => {
+        this.setState({
+          meta: res.data
+        });
+      })
+      .catch(err => console.log('ERROR:', err))
+  }
+
   render() {
     return (
       <div id="app-div">
         <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } />
         <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} interact={ target => this.handleInteraction(target, 'Related Items') } outfits_list={this.state.outfits_list} addCurrentToOutfits={this.addCurrentToOutfits} removeFromOutfit={this.removeFromOutfit} />
-        <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } />
+        <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } meta={ this.state.meta }/>
       </div>
     )
   }
