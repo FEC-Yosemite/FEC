@@ -73,7 +73,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="app-div">
-        <Overview productId={ this.state.currentProductId }/>
+        <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } />
         <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} interact={ target => this.handleInteraction(target, 'Related Items') } outfits_list={this.state.outfits_list} addCurrentToOutfits={this.addCurrentToOutfits} removeFromOutfit={this.removeFromOutfit} />
         <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } />
       </div>

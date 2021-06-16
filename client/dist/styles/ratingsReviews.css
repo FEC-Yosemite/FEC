@@ -3,12 +3,12 @@
   padding: 15px;
   grid-column: 2;
   grid-row: 3;
-  height: 80vh;
-  max-height: 80vh;
+  height: 100vh;
+  max-height: 100vh;
   overflow: hidden;
   display: grid;
   grid-template-columns: 30% 35% 35%;
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(25px, auto);
 }
 
 #ratings-reviews #rating-breakdown #breakdown-header h1 {
@@ -24,6 +24,48 @@
 #ratings-reviews #rating-breakdown #breakdown-header #stars img {
   height: 36px;
   width: 36px;
+}
+
+#ratings-reviews #rating-breakdown #recommend-percent {
+  font-size: 18px;
+}
+
+#ratings-reviews #product-breakdown .chart {
+  position: relative;
+}
+
+#ratings-reviews #product-breakdown .chart h3 {
+  font-size: 18px;
+  margin: 10px;
+  padding: 0;
+}
+
+#ratings-reviews #product-breakdown .chart canvas {
+  background: #CDCDCD;
+  height: 10px;
+  width: 100%;
+}
+
+#ratings-reviews #product-breakdown .chart .char-div {
+  background: #CDCDCD;
+  height: 10px;
+  width: 100%;
+}
+
+#ratings-reviews #product-breakdown .chart .char-wrapper {
+  display: flex;
+  /* establish flex container */
+  flex-direction: row;
+  /* default value; can be omitted */
+  flex-wrap: nowrap;
+  /* default value; can be omitted */
+  justify-content: space-between;
+}
+
+#ratings-reviews #product-breakdown .chart .char-wrapper p {
+  margin: 0;
+  padding: 0;
+  display: inline;
 }
 
 #ratings-reviews .review .helpful {
@@ -104,11 +146,51 @@
   grid-template-columns: 50% 50%;
 }
 
+#ratings-reviews #reviews #filters {
+  height: 50px;
+  width: 100%;
+  grid-column: 1 / 3;
+}
+
+#ratings-reviews #reviews #filters #filter-by {
+  margin-left: 25px;
+  margin-top: 10px;
+  padding: 0;
+  display: inline;
+}
+
+#ratings-reviews #reviews #filters p {
+  margin: 0;
+  margin-left: 10px;
+  background: #eeecec;
+  border: 1px solid #CDCDCD;
+  border-radius: 10px;
+  padding: 0px 5px 0px 5px;
+  display: inline;
+}
+
+#ratings-reviews #reviews #filters #clear-filters {
+  display: block;
+  margin: 10px;
+  margin-left: 25px;
+}
+
+#ratings-reviews #reviews #no-reviews {
+  grid-column: 1 / 3;
+  max-height: 60vh;
+  margin: auto;
+  text-align: center;
+}
+
 #ratings-reviews #reviews #reviews-list {
   max-height: 60vh;
   overflow: scroll;
   margin: 10px;
   grid-column: 1 / 3;
+}
+
+#ratings-reviews #reviews #reviews-list h2 {
+  text-align: center;
 }
 
 #ratings-reviews #reviews #reviews-list .review {
@@ -171,7 +253,10 @@
 }
 
 #ratings-reviews #reviews #reviews-list .review #review-response {
-  background: grey;
+  background: #bdbaba;
+  margin: 10px;
+  padding: 10px;
+  border: solid 1px #CDCDCD;
 }
 
 #ratings-reviews #reviews #reviews-list .review #review-photos img {
@@ -225,9 +310,9 @@
 }
 
 #ratings-reviews #reviews #reviews-list .review img {
-  width: 100px;
-  height: 100px;
-  margin: 10px;
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
   border: solid 1px black;
 }
 

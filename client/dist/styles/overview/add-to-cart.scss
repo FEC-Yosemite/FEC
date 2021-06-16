@@ -1,0 +1,40 @@
+#add-to-cart {
+  grid-row: 3;
+
+  form {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas: "a c" "b b";
+
+    #size-picker {
+      grid-area: a;
+      margin-right: 1%;
+      border: 3px solid $secondary;
+      padding: 5%;
+    }
+
+    #quantity-picker {
+      grid-area: c;
+      margin-left: 1%;
+      border: 3px solid $secondary;
+    }
+
+    input[type="submit"] {
+      margin-top: 1%;
+      transition: .5s;
+      cursor: pointer;
+      grid-area: b;
+      font-size: 1em;
+      font-weight: 600;
+      height: 4em;
+      background-color: rgba(0, 0, 0, 0);
+      border: 3px solid $secondary;
+    }
+
+    input[type="submit"]:hover {
+      color: white;
+      background-color: green;
+    }
+  }
+}

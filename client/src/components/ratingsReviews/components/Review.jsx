@@ -91,7 +91,7 @@ class Review extends React.Component {
     if (review.response) {
       return (
         <div id='review-response'>
-          Response: <br/>
+          <b>Response:</b> <br/>
           { review.response } <br/>
         </div>
       )
