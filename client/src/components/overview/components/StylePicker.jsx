@@ -26,7 +26,7 @@ const StylePicker = (props) => {
 
   return(
     <div id="style-picker">
-      { renderStyles() }
+      { props.styles[0].photos[0].url && renderStyles() }
     </div>
   )
 }
