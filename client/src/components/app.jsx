@@ -10,7 +10,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProductId: 19089,
-      outfits_list: []
+      outfits_list: [],
+      meta: {}
     }
     this.removeFromOutfit = this.removeFromOutfit.bind(this);
     this.addCurrentToOutfits = this.addCurrentToOutfits.bind(this);
@@ -39,15 +40,7 @@ class App extends React.Component {
   updateCurrentProduct(e) {
     this.setState({
       currentProductId: e
-    }, () => {
-    getProducts()
-      .then(data => console.log('Products:', data))
-      .catch(err => console.log('ERROR:', err));
-    getProductById(this.state.currentProductId)
-      .then(data => console.log('Current Product:', data))
-      .catch(err => console.log('ERROR:', err));
-    });
-    console.log(e);
+    })
   }
 
   handleInteraction(target, widget) {
@@ -61,13 +54,26 @@ class App extends React.Component {
       .catch(err => console.log('ERROR:', err));
   }
 
+  componentDidUpdate(prevprops) {
+    if (this.props !== prevprops) {
+      getReviewMeta(this.props.productId)
+        .then(res => {
+          this.setState({
+            meta: res.data
+          });
+        })
+        .catch(err => console.log('ERROR:', err))
+    }
+  }
+
   componentDidMount() {
-    getProducts()
-      .then(data => console.log('Products:', data))
-      .catch(err => console.log('ERROR:', err));
-    getProductById(this.state.currentProductId)
-      .then(data => console.log('Current Product:', data))
-      .catch(err => console.log('ERROR:', err));
+    getReviewMeta(this.props.productId)
+      .then(res => {
+        this.setState({
+          meta: res.data
+        });
+      })
+      .catch(err => console.log('ERROR:', err))
   }
 
   render() {
@@ -75,7 +81,7 @@ class App extends React.Component {
       <div id="app-div">
         <Overview productId={ this.state.currentProductId } interact={ this.handleInteraction } />
         <RelatedItems productId={ this.state.currentProductId } updateCurrentProduct={this.updateCurrentProduct} interact={ target => this.handleInteraction(target, 'Related Items') } outfits_list={this.state.outfits_list} addCurrentToOutfits={this.addCurrentToOutfits} removeFromOutfit={this.removeFromOutfit} />
-        <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } />
+        <RatingsReviews productId={ this.state.currentProductId } interact={ this.handleInteraction } meta={ this.state.meta }/>
       </div>
     )
   }
