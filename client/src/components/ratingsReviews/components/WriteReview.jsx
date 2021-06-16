@@ -587,82 +587,66 @@ class WriteReview extends React.Component {
   render() {
     if (this.props.show) {
       return (
-        <div id='modal'>
-          <div id='modal-head'>
-          <h2>Write Your Review</h2>
-          About the { this.props.product }
-          </div>
-            <div id='modal-stars' onMouseLeave={ this.unhoverStar }>
-              { this.renderStars() } <h3>{ this.state.stars ? this.state.stars + ' stars - ' + this.getRating(this.state.stars) : null}</h3>
+        <div id='modal-wrapper'>
+          <div id='modal'>
+            <div id='modal-head'>
+            <h2>Write Your Review</h2>
+            About the { this.props.product }
             </div>
-
-          <hr></hr>
-
-          <form id='review-form'>
-            <div id='form-recommend'>
-              <h3>Do you recommend this product?</h3>
-                <label>
-                  Yes
-                  <input type='radio' id='recommend-yes' name='recommend' value='yes' onChange={ this.handleRecommendChange }></input>
-                </label>
-                <label>
-                  No
-                  <input type='radio' id='recommend-no' name='recommend' value='no' onChange={ this.handleRecommendChange }></input>
-                </label>
-            </div>
-            <div className='row'>
-              <div id='form-characteristics'>
-                <h3>Characteristics</h3>
-
-                { this.renderCharacteristics() }
-
+              <div id='modal-stars' onMouseLeave={ this.unhoverStar }>
+                { this.renderStars() } <h3>{ this.state.stars ? this.state.stars + ' stars - ' + this.getRating(this.state.stars) : null}</h3>
               </div>
-              <div id='form-content'>
-                <h3>Review</h3>
-                <p>
-                <label>
-                  Name:
-                  <input id='form-name' type='text' name='name' onChange={ this.handleInputChange }></input>
-                </label>
-                </p>
 
-                <p>
-                <label>
-                  Email:
-                  <input id='form-email' type='email' name='email' onChange={ this.handleInputChange }></input> { this.emailCheck() }
-                </label>
-                </p>
+            <hr></hr>
 
-                <p>
-                <label>
-                  Summary:
-                  <input id='form-summary' type='text' name='summary' onChange={ this.handleInputChange }></input>
-                </label>
-                </p>
-
-                <p id='textarea-p'>
+            <form id='review-form'>
+              <div id='form-recommend'>
+                <h3>Do you recommend this product?</h3>
                   <label>
-                    Body:
+                    Yes
+                    <input type='radio' id='recommend-yes' name='recommend' value='yes' onChange={ this.handleRecommendChange }></input>
+                  </label>
+                  <label>
+                    No
+                    <input type='radio' id='recommend-no' name='recommend' value='no' onChange={ this.handleRecommendChange }></input>
+                  </label>
+              </div>
+              <div className='row'>
+                <div id='form-characteristics'>
+                  <h3>Characteristics</h3>
+
+                  { this.renderCharacteristics() }
+
+                </div>
+                <div id='form-content'>
+                  <h3>Review</h3>
+
+                    <p id='p-name'>Name:</p>
+                    <input id='form-name' type='text' name='name' onChange={ this.handleInputChange }></input>
+
+                    <p id='p-email'>Email:</p>
+                    <input id='form-email' type='email' name='email' onChange={ this.handleInputChange }></input> { this.emailCheck() }
+
+
+                    <p id='p-summary'>Summary:</p>
+                    <input id='form-summary' type='text' name='summary' onChange={ this.handleInputChange }></input>
+
+                    <p id='p-body'>Body:</p>
                     <textarea id='form-body' type='text' name='body' onChange={ this.handleInputChange }></textarea>
-                  </label>
-                </p>
 
-                <div id='file-p'>
-                  <label>
-                    Photos:
+                    <p id='p-file'>Photos:</p>
                     <input id={'form-file'} onChange={ this.setPics }type='file' name='photos' ref={ this.fileInput } multiple></input>
-                  </label>
-                  <div id='form-file-preview'>
-                    { this.state.photoUrls }
-                  </div>
+                    <div id='form-file-preview'>
+                      { this.state.photoUrls }
+                    </div>
                 </div>
               </div>
-            </div>
 
-            { this.completeCheck() }
-          <button id='form-submit' onClick={ this.handleSubmit }>Submit</button>
-          </form>
-          <button id='close-modal' onClick={ this.handleClose }>X</button>
+              { this.completeCheck() }
+            <button id='form-submit' onClick={ this.handleSubmit }>Submit</button>
+            </form>
+            <button id='close-modal' onClick={ this.handleClose }>X</button>
+          </div>
         </div>
       )
     } else {
