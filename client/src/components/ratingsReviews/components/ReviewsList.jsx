@@ -121,8 +121,8 @@ class ReviewsList extends React.Component {
           { this.renderFilters() }
         </div>
         <div id='reviews-list'>
-          { reviewArray.map((review) => {
-            return <Review review={ review } interact={ this.props.interact } />
+          { reviewArray.map((review, i) => {
+            return <Review review={ review } key={ 'review' + i } interact={ this.props.interact } />
           }) }
 
         </div>

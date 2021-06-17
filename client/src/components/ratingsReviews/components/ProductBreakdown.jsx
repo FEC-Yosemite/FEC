@@ -21,7 +21,7 @@ class ProductBreakdown extends React.Component {
       transform: 'translate(-50%, -50%)'
     }
     return (
-      <div className='chart'>
+      <div className='chart' key={ 'size' + pct }>
         <h3>Size</h3>
         <div id='size-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
         <div className='char-wrapper'>
@@ -42,7 +42,7 @@ class ProductBreakdown extends React.Component {
       transform: 'translate(-50%, -50%)'
     }
     return (
-      <div className='chart'>
+      <div className='chart' key={ 'width' + pct }>
         <h3>Width</h3>
         <div id='width-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
         <div className='char-wrapper'>
@@ -64,7 +64,7 @@ class ProductBreakdown extends React.Component {
       transform: 'translate(-50%, -50%)'
     }
     return (
-      <div className='chart'>
+      <div className='chart' key={ 'comfort' + pct }>
         <h3>Comfort</h3>
         <div id='comfort-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
         <div className='char-wrapper'>
@@ -85,7 +85,7 @@ class ProductBreakdown extends React.Component {
       transform: 'translate(-50%, -50%)'
     }
     return (
-      <div className='chart'>
+      <div className='chart' key={ 'quality' + pct }>
         <h3>Quality</h3>
         <div id='quality-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
         <div className='char-wrapper'>
@@ -106,7 +106,7 @@ class ProductBreakdown extends React.Component {
       transform: 'translate(-50%, -50%)'
     }
     return (
-      <div className='chart'>
+      <div className='chart' key={ 'length' + pct }>
         <h3>Length</h3>
         <div id='length-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
         <div className='char-wrapper'>
@@ -128,7 +128,7 @@ class ProductBreakdown extends React.Component {
       transform: 'translate(-50%, -50%)'
     }
     return (
-      <div className='chart'>
+      <div className='chart' key={ 'fit' + pct }>
         <h3>Fit</h3>
         <div id='fit-chart' className='char-div'><FontAwesomeIcon style={ style } icon={ faCaretDown } size='2x'/></div>
         <div className='char-wrapper'>
