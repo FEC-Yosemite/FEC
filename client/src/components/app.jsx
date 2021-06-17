@@ -118,7 +118,7 @@ class App extends React.Component {
         <FontAwesomeIcon onClick={ this.toTop.bind(this) } icon={ faChevronUp } />
         </div>
       </>
-    )
+    );
   }
 }
 

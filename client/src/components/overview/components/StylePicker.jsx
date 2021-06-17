@@ -14,11 +14,11 @@ const StylePicker = (props) => {
       const index = styles.indexOf(style);
       if (index === currentStyle) {
 
-        return <div key={index} className="selected-style"><FontAwesomeIcon className="checked" icon={faCheck} /> <img onClick={changeStyle} data-index={index} className="style-thumbnail selected-style" src={ style.photos[0].thumbnail_url }></img></div>
+        return <div key={index} className="selected-style"><FontAwesomeIcon className="checked" icon={faCheck} /> <img onClick={changeStyle} data-index={index} className="style-thumbnail selected-style" src={ style.photos[0].thumbnail_url } alt={ `Thumbnail style picker image ${index} for ${props.styles[props.currentStyle].name}` } ></img></div>
 
       } else {
 
-        return <div><img key={index} onClick={changeStyle} data-index={index} className="style-thumbnail" src={ style.photos[0].thumbnail_url }></img></div>
+        return <div><img key={index} onClick={changeStyle} data-index={index} className="style-thumbnail" src={ style.photos[0].thumbnail_url } alt={ `Thumbnail style picker image ${index} for ${props.styles[props.currentStyle].name}` } ></img></div>
 
       }
     })

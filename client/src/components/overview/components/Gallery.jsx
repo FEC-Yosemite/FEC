@@ -37,7 +37,7 @@ class Gallery extends React.Component {
         currentThumb: this.props.styles[this.props.currentStyle].photos[0].thumbnail_url,
         currentIndex: 0,
         thumbIndex: 0,
-      })
+      });
     }
   }
 
@@ -46,7 +46,7 @@ class Gallery extends React.Component {
       currentImages: this.props.styles[this.state.currentStyle].photos,
       currentImage: this.props.styles[this.state.currentStyle].photos[0].url,
       currentThumb: this.props.styles[this.state.currentStyle].photos[0].thumbnail_url,
-    })
+    });
   }
 
   handleImageChange(index) {
@@ -189,10 +189,10 @@ class Gallery extends React.Component {
 
       if (count <= 7) {
         if (index === this.state.currentIndex) {
-          let thumb = <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+          let thumb = <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt={ `Thumbnail image ${index} for ${this.props.styles[this.state.currentStyle].name}` } />;
           renderArray.push(thumb);
         } else {
-          let thumb = <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+          let thumb = <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt={ `Thumbnail image ${index} for ${this.props.styles[this.state.currentStyle].name}` } />;
           renderArray.push(thumb);
         }
       }
@@ -211,9 +211,9 @@ class Gallery extends React.Component {
         return this.state.currentImages.map((photo) => {
           const index = this.state.currentImages.indexOf(photo);
           if (index === this.state.currentIndex) {
-            return <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt="" />;
+            return <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail current-thumb" src={photo.thumbnail_url} alt={ `Thumbnail image ${index} for ${this.props.styles[this.state.currentStyle].name}` } />;
           }
-          return <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt="" />;
+          return <img key={index} data-url={photo.url} data-index={index} onClick={this.handleThumbnailClick.bind(this)} className="thumbnail" src={photo.thumbnail_url} alt={ `Thumbnail image ${index} for ${this.props.styles[this.state.currentStyle].name}` } />;
         });
       }
       return this.renderThumbnailIcons();
@@ -250,7 +250,7 @@ class Gallery extends React.Component {
         <div id="jumbotron">
           {this.renderPrevArrow()}
 
-          { this.state.currentImage !== null ? <img id="product-image" onClick={this.handleImageClick.bind(this)} src={this.state.currentImage} alt="" /> : <img id="product-image" onClick={this.handleImageClick.bind(this)} src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" alt="" /> }
+          { this.state.currentImage !== null ? <img id="product-image" onClick={this.handleImageClick.bind(this)} src={this.state.currentImage} alt={ `Main image for ${this.props.styles[this.state.currentStyle].name}` } /> : <img id="product-image" onClick={this.handleImageClick.bind(this)} src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" alt={ 'Image failed to load' } /> }
 
           {this.renderNextArrow()}
           <div id="thumbnails">

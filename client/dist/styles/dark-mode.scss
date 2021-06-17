@@ -2,7 +2,7 @@
   background-color: $dark;
   color: white;
 
-  #dark-mode {
+  #dark-mode, #to-top {
     background-color: $dark;
     border: 3px solid #fff;
   }
@@ -12,12 +12,12 @@
     color: $dark;
   }
 
-  #product-card, .review {
-    background-color: $dark !important;
-  }
+  #gallery {
 
-  .helpful, .unhelpful, .report {
-    color: gold;
+    .next-arrow, .prev-arrow {
+      color: #fff !important;
+    }
+
   }
 
   #add-to-cart {
@@ -37,6 +37,18 @@
 
     div:not(.selected-style) img {
       border-color: #fff !important;
+    }
+
+  }
+
+  #ratings-reviews {
+
+    #product-card, .review {
+      background-color: $dark !important;
+    }
+
+    .helpful, .unhelpful, .report {
+      color: gold;
     }
 
   }
