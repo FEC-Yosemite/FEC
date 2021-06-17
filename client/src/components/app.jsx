@@ -7,6 +7,7 @@ import { getProducts, getProductById, addInteraction, getReviewMeta } from '../r
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 class App extends React.Component {
   constructor(props) {
@@ -96,6 +97,10 @@ class App extends React.Component {
     }
   }
 
+  toTop() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       <>
@@ -107,6 +112,10 @@ class App extends React.Component {
 
         <div id="dark-mode">
           <FontAwesomeIcon onClick={ this.darkMode.bind(this) } icon={ faEye } />
+        </div>
+
+        <div id="to-top">
+        <FontAwesomeIcon onClick={ this.toTop.bind(this) } icon={ faChevronUp } />
         </div>
       </>
     )
