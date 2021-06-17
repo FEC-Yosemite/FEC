@@ -1,6 +1,10 @@
-@import 'mixins/colors';
+@import 'variables/colors';
 
-@import 'mixins/fonts';
+@import 'variables/fonts';
+
+@import 'mixins/mixins';
+
+@import 'dark-mode';
 
 @import 'general';
 

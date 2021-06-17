@@ -65,11 +65,11 @@ class Review extends React.Component {
     var review = this.props.review;
     var stars = [];
     for (var i = 0; i < review.rating; i++) {
-      stars.push(<FontAwesomeIcon icon={ fasStar } />);
+      stars.push(<FontAwesomeIcon key={ 'star' + stars.length } icon={ fasStar } />);
     }
 
     while (stars.length < 5) {
-      stars.push(<FontAwesomeIcon icon={farStar } />);
+      stars.push(<FontAwesomeIcon key={ 'star' + stars.length } icon={farStar } />);
     }
 
     return stars;

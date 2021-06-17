@@ -7,9 +7,15 @@ body {
   margin: 0;
   font-size: 16px;
   font-family: $body;
+  transition: 1s;
 
   h1 {
     font-family: $header;
+
+    @include mobile {
+      font-size: 3em !important;
+      text-align: center;
+    }
   }
 
   h2, h3, h4, h5, h6 {
@@ -32,6 +38,11 @@ body {
       grid-column: 2;
       justify-content: space-between;
 
+      @include mobile {
+        align-content: center;
+        justify-content: center;
+      }
+
       a {
         text-decoration: none;
       }
@@ -52,6 +63,10 @@ body {
         color: white;
         font-size: 1em;
         width: 8em;
+
+        @include mobile {
+          display: none;
+        }
       }
 
       input[type="text"]:focus-visible {
@@ -60,22 +75,39 @@ body {
     }
   }
 
-  .dark-mode {
+  #dark-mode, #to-top {
+    display: flex;
     cursor: pointer;
     position: fixed;
     bottom: 5%;
     right: 5%;
+    width: 1.5em;
+    height: 1.5em;
     font-size: 1.7em;
     background-color: #fff;
     border-radius: 100%;
     border: 3px solid $main;
-    padding: .2em;
     transition: .5s;
+
+    svg {
+      margin: auto;
+    }
   }
 
-  .dark-mode:hover {
-    background-color: #000;
+  #dark-mode:hover {
+    background-color: $dark;
     color: #fff;
+  }
+
+  #to-top {
+    font-size: 1.7em;
+    right: 1.5%;
+  }
+
+  #to-top:hover {
+    background-color: green;
+    color: #fff;
+    transform: translateY(-5%);
   }
 
   footer {

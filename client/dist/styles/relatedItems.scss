@@ -8,15 +8,15 @@ $carousel-height: 550px;
   grid-column: 2;
   grid-row: 2;
   background-color: rgba(255, 255, 255, 0.5);
-  
+
     #carousel-header {
     text-align: center;
   }
 
   #carousel {
       display: grid;
-      grid-template-rows: 100%; 
-      grid-template-columns: 5% 30% 30% 30% 5%;
+      grid-template-rows: 100%;
+      grid-template-columns: 17% 22% 22% 22% 17%;
       align-items: center;
 
     img {
@@ -24,8 +24,8 @@ $carousel-height: 550px;
         width: 100%;
         object-fit: cover;
         object-position: bottom;
-    } 
-    
+    }
+
     div {
       cursor: pointer;
       transition: 0.2s;
@@ -64,7 +64,7 @@ $carousel-height: 550px;
     .add-outfit:hover {
       border: solid 5px green;
       box-sizing: border-box;
-      
+
     }
 
     .faPlus, .faTshirt {
@@ -89,18 +89,17 @@ $carousel-height: 550px;
     }
 
   }
-  
+
   #left-button-container {
-    // grid-column: 1;
-    // grid-row: 1;
     height: 80px;
     width: 80px;
+    justify-self: end;
 
     #left-button-placeholder {
       height: 80px;
-      width: 80px; 
+      width: 80px;
     }
-    
+
     #left-button {
       cursor: pointer;
       height: 80px;
@@ -127,7 +126,7 @@ $carousel-height: 550px;
 
     #right-button-placeholder {
       height: 80px;
-      width: 80px; 
+      width: 80px;
     }
 
     #right-button {
@@ -160,7 +159,7 @@ $carousel-height: 550px;
         // grid-row: 1 / span 3;
         // width: 80%;
         // height: 480px;
-        
+
         #product-card {
         border-radius: 8px;
         list-style: none;
@@ -211,14 +210,14 @@ table {
   padding: 8px;
   width: 100%;
   text-align: center;
-  
+
   tr:nth-child(even) {
     background: #CCC;
   }
-  
+
   tr {
     width: 100%;
-    
+
     td {
       width: 33%;
     }
