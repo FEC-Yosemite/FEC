@@ -79,10 +79,10 @@ class RelatedItems extends Component {
                 {
                 this.state.finished ?
                 <div>
-                <h1 id="carousel-header">Related Products</h1>
-                <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} toTop={this.props.toTop} />
-                <h1 id="carousel-header">My Outfit</h1>
-                <Carousel productId={this.props.productId} interact={this.props.interact} updateCurrentProduct={this.props.updateCurrentProduct} addCurrentToOutfits={this.props.addCurrentToOutfits} removeFromOutfit={this.props.removeFromOutfit} outfits_list={[0, ...this.props.outfits_list]} toTop={this.props.toTop} />
+                <h2 id="carousel-header">Related Products</h2>
+                <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} />
+                <h2 id="carousel-header">My Outfit</h2>
+                <Carousel productId={this.props.productId} interact={this.props.interact} updateCurrentProduct={this.props.updateCurrentProduct} addCurrentToOutfits={this.props.addCurrentToOutfits} removeFromOutfit={this.props.removeFromOutfit} outfits_list={[0, ...this.props.outfits_list]} />
                 </div>
                 :
                 <h1>Loading</h1>

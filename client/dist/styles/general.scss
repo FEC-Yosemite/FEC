@@ -79,8 +79,8 @@ body {
     display: flex;
     cursor: pointer;
     position: fixed;
-    bottom: 5%;
-    right: 5%;
+    bottom: 2em;
+    right: 3em;
     width: 1.5em;
     height: 1.5em;
     font-size: 1.7em;
@@ -101,7 +101,7 @@ body {
 
   #to-top {
     font-size: 1.7em;
-    right: 2.5%;
+    right: 1.2em;
   }
 
   #to-top:hover {
@@ -136,7 +136,6 @@ body {
   #app-div {
     display: grid;
     grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 1fr 1fr 1fr;
 
     img {
       -khtml-user-select: none;
