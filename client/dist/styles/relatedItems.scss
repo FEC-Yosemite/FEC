@@ -30,6 +30,24 @@ $carousel-height: 550px;
       cursor: pointer;
       transition: 0.2s;
       transform: translateY(0px);
+
+      p {
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+      }
+
+      h4 {
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+      }
+
+      .star-rating {
+        img {
+          height: 1.5em;
+          width: 1.5em;
+        }
+      }
+
     }
 
     div:hover {
@@ -142,15 +160,15 @@ $carousel-height: 550px;
         // width: 80%;
         // height: 480px;
 
-        #product-card {
-        border-radius: 8px;
-        list-style: none;
-        background-color: #fbfbf8;
-        text-align: center;
-        // padding-top: 40px;
-        width: 100%;
-        height: 30em;
-        }
+      #product-card {
+      border-radius: 8px;
+      list-style: none;
+      background-color: #fbfbf8;
+      text-align: center;
+      // padding-top: 40px;
+      width: 100%;
+      height: 30em;
+      }
 
       #modal-star {
         padding: 4px;
@@ -162,6 +180,16 @@ $carousel-height: 550px;
         padding: 4px;
         cursor: pointer;
         z-index: 1;
+      }
+
+      .price {
+        margin: 0em;
+        display: inline;
+        font-size: 1em;
+      }
+      .original-price {
+        text-decoration: line-through;
+        color: red;
       }
 
     }
@@ -183,18 +211,22 @@ $carousel-height: 550px;
     z-index: 10;
 
     #related-products-modal-head {
-      background: lightgray;
+      background: $main;
       text-align: center;
       padding: 10px;
+      color: white;
     }
 }
+
 table {
   padding: 8px;
   width: 100%;
   text-align: center;
+  border-spacing: 0;
 
   tr:nth-child(even) {
-    background: #CCC;
+    background: $secondary;
+    color: white;
   }
 
   tr {
@@ -202,6 +234,9 @@ table {
 
     td {
       width: 33%;
+    }
+    td:nth-child(2) {
+      font-weight: bold;
     }
   }
 }
