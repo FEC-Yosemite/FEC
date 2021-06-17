@@ -30,6 +30,24 @@ $carousel-height: 550px;
       cursor: pointer;
       transition: 0.2s;
       transform: translateY(0px);
+
+      p {
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+      }
+
+      h4 {
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+      }
+
+      .star-rating {
+        img {
+          height: 1.5em;
+          width: 1.5em;
+        }
+      }
+
     }
 
     div:hover {
