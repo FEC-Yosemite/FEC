@@ -74,7 +74,7 @@ class Carousel extends Component {
                 {
                 this.state.window.length > 0 ?
                 this.state.window.map((productId, index) => (
-                    <RelatedProductCard className="outfit-item-card" key={productId} productId={productId} currentProductId={this.props.productId} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} removeFromOutfit={this.props.removeFromOutfit} addCurrentToOutfits={this.props.addCurrentToOutfits} />
+                    <RelatedProductCard className="outfit-item-card" key={"outfit-" + productId} productId={productId} currentProductId={this.props.productId} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} removeFromOutfit={this.props.removeFromOutfit} addCurrentToOutfits={this.props.addCurrentToOutfits} toTop={this.props.toTop} />
                 ))
                 :
                 

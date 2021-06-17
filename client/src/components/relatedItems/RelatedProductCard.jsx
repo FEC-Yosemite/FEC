@@ -109,6 +109,7 @@ class RelatedProductCard extends Component {
                 }
             } else  {
                 this.props.updateCurrentProduct(this.props.productId);
+                this.props.toTop();
             }
         }
         this.props.interact(e.target.outerHTML);
@@ -177,8 +178,15 @@ class RelatedProductCard extends Component {
                         }
 
                         <p>{this.state.product.category}</p>
+                        { this.state.styles[2].sale_price ?
+                            <>
+                            <p className="original-price price">{ '$' + this.state.styles[2].original_price }</p>
+                            <p className="sale-price price" >{ ' $' + this.state.styles[2].sale_price }</p>
+                            </> :
+                            <p className="regular-price price">{ '$' + this.state.styles[2].original_price }</p> }
                         <h4>{this.state.product.name}</h4>
                         <span className="star-rating">{ this.renderStars() }</span>
+                        
                     </div>
                 }
             </div>
