@@ -17,8 +17,8 @@ class SortReviews extends React.Component {
 
   renderSelect() {
     return (
-      <select id='sort-select' onChange={ this.handleChange }>
-        <option value='relevant' selected>relevance</option>
+      <select id='sort-select' defaultValue='relevant' onChange={ this.handleChange }>
+        <option value='relevant' >relevance</option>
         <option value='newest'>newest</option>
         <option value='helpful'>helpfulness</option>
        </select>
