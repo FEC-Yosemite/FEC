@@ -75,24 +75,39 @@ body {
     }
   }
 
-  #dark-mode {
+  #dark-mode, #to-top {
     display: flex;
-    margin: auto;
     cursor: pointer;
     position: fixed;
     bottom: 5%;
     right: 5%;
+    width: 1.5em;
+    height: 1.5em;
     font-size: 1.7em;
     background-color: #fff;
     border-radius: 100%;
     border: 3px solid $main;
-    padding: .2em;
     transition: .5s;
+
+    svg {
+      margin: auto;
+    }
   }
 
   #dark-mode:hover {
     background-color: $dark;
     color: #fff;
+  }
+
+  #to-top {
+    font-size: 1.7em;
+    right: 1.5%;
+  }
+
+  #to-top:hover {
+    background-color: green;
+    color: #fff;
+    transform: translateY(-5%);
   }
 
   footer {

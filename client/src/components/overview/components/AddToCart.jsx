@@ -43,10 +43,12 @@ class AddToCart extends React.Component {
 
   renderSizes() {
     let optionArray = [];
+    let i = 0;
     for (let key in this.props.skus) {
       if ( this.props.skus[key].quantity ) {
+        i++;
         let skuNum = key;
-        let option = <option data-sku={ skuNum } key={ this.props.skus[key].size } value={ this.props.skus[key].size }>{ this.props.skus[key].size }</option>
+        let option = <option data-sku={ skuNum } key={ this.props.skus[key].size + i } value={ this.props.skus[key].size }>{ this.props.skus[key].size }</option>
         optionArray.push(option);
       }
     }
@@ -68,12 +70,12 @@ class AddToCart extends React.Component {
       if (key === this.state.currentSku) {
         if (this.props.skus[key].quantity > 15) {
           for (let i = 1; i <= 15; i++) {
-            let option = <option value={i}>{i}</option>
+            let option = <option key={i} value={i}>{i}</option>
             optionArray.push(option);
           }
         } else {
           for (let i = 1; i <= this.props.skus[key].quantity; i++) {
-            let option = <option value={i}>{i}</option>
+            let option = <option key={i} value={i}>{i}</option>
             optionArray.push(option);
           }
         }
