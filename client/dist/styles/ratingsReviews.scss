@@ -300,7 +300,10 @@
         }
 
         #review-summary {
-          font-size: 3em;
+
+          @include mobile{
+            font-size: 3em;
+          }
         }
 
         #review-body {
