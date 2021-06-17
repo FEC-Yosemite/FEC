@@ -5,6 +5,7 @@
   #dark-mode, #to-top {
     background-color: $dark;
     border: 3px solid #fff;
+    color: #fff;
   }
 
   #dark-mode:hover {
@@ -41,16 +42,16 @@
 
   }
 
-  #ratings-reviews {
 
-    #product-card, .review {
-      background-color: $dark !important;
-    }
 
-    .helpful, .unhelpful, .report {
-      color: gold;
-    }
-
+  #product-card, .review {
+    background-color: $dark !important;
   }
+
+  .helpful, .unhelpful, .report {
+    color: gold;
+  }
+
+
 
 }
