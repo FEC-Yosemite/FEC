@@ -4,12 +4,20 @@
   grid-template-columns: 2fr 1fr;
   margin: 2%;
 
+  @include mobile {
+    grid-template-columns: 100%;
+  }
+
   #description {
     grid-column: 1;
     padding: 0 10%;
 
     p {
       font-size: 1.4em;
+
+      @include mobile {
+        font-size: 1em;
+      }
     }
   }
 
@@ -17,6 +25,11 @@
     border-left: 1px solid rgba(0, 0, 0, .5);
     grid-column: 2;
     margin: auto 0;
+
+    @include mobile {
+      grid-column: 1;
+      border: none;
+    }
 
     ul {
       list-style: none;

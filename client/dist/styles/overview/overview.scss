@@ -12,6 +12,11 @@
     grid-column: 2;
     text-align: center;
     text-transform: uppercase;
+
+    @include mobile {
+      grid-row: 1;
+      font-size:.8em;
+    }
   }
 
   .spinner {
@@ -25,10 +30,19 @@
     background-size: 100%;
     background-repeat: no-repeat;
 
+    @include mobile {
+      grid-row: 2;
+    }
+
     aside {
       display: grid;
       grid-column: 2;
       text-align: center;
+
+      @include mobile {
+        grid-column: 1;
+        grid-row: 2;
+      }
     }
 
     .collapsed {
@@ -43,6 +57,10 @@
 
   .collapsed {
     grid-template-columns: 2fr 1fr;
+
+    @include mobile {
+      grid-template-columns: 100%;
+    }
   }
 
 

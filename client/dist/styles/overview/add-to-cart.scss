@@ -1,15 +1,24 @@
 #add-to-cart {
   grid-row: 3;
 
+
   form {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
     grid-template-areas: "a c" "b b";
 
+    @include mobile {
+      margin: 8em 0;
+    }
+
     select {
       border: 3px solid $secondary;
       font-size: 1.1em;
+
+      @include mobile {
+        font-size: 1.5em;
+      }
     }
 
     #size-picker {
@@ -33,6 +42,14 @@
       background-color: rgba(0, 0, 0, 0);
       border: 3px solid $secondary;
       text-transform: uppercase;
+
+      @include mobile {
+        height: 3em;
+        font-size: 3em;
+        color: white;
+        background-color: green;
+        border-color: green;
+      }
     }
 
     .button-replace {

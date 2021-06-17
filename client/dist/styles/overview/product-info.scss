@@ -45,7 +45,11 @@
   }
 
   .brand {
-    font-size: 2rem;
+    font-size: 2em;
     margin-right: 2%;
+
+    @include mobile {
+      font-size: 4em;
+    }
   }
 }

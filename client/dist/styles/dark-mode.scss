@@ -11,4 +11,34 @@
     background-color: #fff;
     color: $dark;
   }
+
+  #product-card, .review {
+    background-color: $dark !important;
+  }
+
+  .helpful, .unhelpful, .report {
+    color: gold;
+  }
+
+  #add-to-cart {
+
+    input[type="submit"] {
+      border-color: #fff !important;
+      color: white !important;
+    }
+
+  }
+
+  #style-picker {
+
+    select {
+      border-color: #fff !important;
+    }
+
+    div:not(.selected-style) img {
+      border-color: #fff !important;
+    }
+
+  }
+
 }

@@ -6,6 +6,10 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   padding: 0 2em;
 
+  @include mobile {
+    margin: 2em 0;
+  }
+
   .style-thumbnail {
     cursor: pointer;
     height: 4em;
@@ -13,6 +17,11 @@
     object-fit: cover;
     border-radius: 100%;
     padding: .1em;
+
+    @include mobile {
+      height: 8em;
+      width: 8em;
+    }
   }
 
   .selected-style {
@@ -31,7 +40,7 @@
     }
 
     img:hover {
-      border-color: green;
+      border-color: green !important;
     }
   }
 
