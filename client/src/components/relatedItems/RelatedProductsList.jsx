@@ -75,7 +75,7 @@ class RelatedProductsList extends Component {
                 {
                 this.state.window.length > 0 ?
                 this.state.window.map((productId, index) => (
-                    <RelatedProductCard className="related-item-card" key={productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} />
+                    <RelatedProductCard className="related-item-card" key={"related-" + productId} productId={productId} currentProductId={this.props.productId} showModal={this.props.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} toTop={this.props.toTop} />
                 ))
                 :
 

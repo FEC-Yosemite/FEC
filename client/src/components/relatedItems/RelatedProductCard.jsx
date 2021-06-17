@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getProductById, getProductStyles } from  '../../requests.js';
+import { getProductById, getProductStyles, getReviewMeta } from  '../../requests.js';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWindowClose as fasWindowClose } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,12 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faTshirt } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import quarterStar from '../../../pix/svgs/starquarter.svg';
+import threeQuarterStar from '../../../pix/svgs/star3quarters.svg';
+import star from '../../../pix/svgs/star.svg';
+import starEmpty from '../../../pix/svgs/star-o.svg';
+import starHalf from '../../../pix/svgs/star-half-empty.svg';
+
 class RelatedProductCard extends Component {
     constructor(props) {
         super(props);
@@ -17,12 +23,61 @@ class RelatedProductCard extends Component {
             styles: null,
             star: farStar,
             star_state: false,
-            type: null
+            type: null,
+            ratingAvg: 0,
+            ratingTotal: 0,
+            meta: {
+              characteristics: {},
+              ratings: {},
+              recommended: {}
+            }
         };
+        this.renderStars = this.renderStars.bind(this);
+        this.getRatings = this.getRatings.bind(this);
         this.refreshProduct = this.refreshProduct.bind(this);
         this.productClickHandler = this.productClickHandler.bind(this);
         this.starEnter = this.starEnter.bind(this);
         this.starLeave = this.starLeave.bind(this);
+    }
+
+    renderStars() {
+        let stars = [];
+        let avg = this.state.ratingAvg;
+        let whole = Math.floor(avg);
+        let float = avg % 1;
+
+        while (stars.length < whole) {
+            stars.push(<img src={ star }/>)
+        }
+
+        if (float > 0 && float <= 0.33) {
+            stars.push(<img src={ quarterStar }/>)
+        } else if (float > 0.33 && float <= 0.67) {
+            stars.push(<img src={ starHalf }/>)
+        } else if (float > 0.67 && float < 1) {
+            stars.push(<img src={ threeQuarterStar }/>)
+        }
+
+        while (stars.length < 5) {
+            stars.push(<img src={ starEmpty }/>)
+        }
+        return stars;
+    }
+
+    getRatings() {
+        const keys = Object.keys(this.state.meta.ratings);
+        if (keys.length === 0) return 'No reviews yet';
+        let total = 0;
+        let count = 0;
+        keys.map((key) => {
+            total += Number(key) * Number(this.state.meta.ratings[key]);
+            count += Number(this.state.meta.ratings[key]);
+        })
+        let avg = (total / count).toFixed(1);
+        this.setState({
+            ratingAvg: avg,
+            ratingTotal: count
+        })
     }
 
     refreshProduct() {
@@ -54,6 +109,7 @@ class RelatedProductCard extends Component {
                 }
             } else  {
                 this.props.updateCurrentProduct(this.props.productId);
+                this.props.toTop();
             }
         }
         this.props.interact(e.target.outerHTML);
@@ -74,6 +130,18 @@ class RelatedProductCard extends Component {
     }
 
     componentDidMount() {
+        if (this.props.productId !== 0) {
+            getReviewMeta(this.props.productId)
+            .then(res => {
+            this.setState({
+                meta: res.data
+            });
+            })
+            .then( () => {
+                this.getRatings();
+            })
+            .catch(err => console.log('ERROR:', err))
+        }
         this.setState({
             star: (this.props.className === "outfit-item-card" ? farWindowClose : farStar),
             type: (this.props.className === "outfit-item-card" ? 'outfit' : 'related')
@@ -110,7 +178,15 @@ class RelatedProductCard extends Component {
                         }
 
                         <p>{this.state.product.category}</p>
+                        { this.state.styles[2].sale_price ?
+                            <>
+                            <p className="original-price price">{ '$' + this.state.styles[2].original_price }</p>
+                            <p className="sale-price price" >{ ' $' + this.state.styles[2].sale_price }</p>
+                            </> :
+                            <p className="regular-price price">{ '$' + this.state.styles[2].original_price }</p> }
                         <h4>{this.state.product.name}</h4>
+                        <span className="star-rating">{ this.renderStars() }</span>
+                        
                     </div>
                 }
             </div>
