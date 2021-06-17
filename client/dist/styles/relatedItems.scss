@@ -4,7 +4,7 @@ $carousel-height: 550px;
 #related-items {
   // font-family: sans-serif;
   border-radius: 1%;
-  padding: 15px;
+  padding: 1em;
   grid-column: 2;
   grid-row: 2;
   background-color: rgba(255, 255, 255, 0.5);
@@ -73,18 +73,18 @@ $carousel-height: 550px;
   }
 
   #left-button-container {
-    height: 80px;
-    width: 80px;
+    height: 5em;
+    width: 5em;
     justify-self: end;
 
     #left-button-placeholder {
-      height: 80px;
-      width: 80px;
+      height: 5em;
+      width: 5em;
     }
 
     #left-button {
       cursor: pointer;
-      height: 80px;
+      height: 5em;
       width: auto;
       filter: drop-shadow( 1px 1px 2px rgba(0, 0, 0, .7));
     }
@@ -103,17 +103,17 @@ $carousel-height: 550px;
   }
 
   #right-button-container {
-    height: 80px;
-    width: 80px;
+    height: 5em;
+    width: 5em;
 
     #right-button-placeholder {
-      height: 80px;
-      width: 80px;
+      height: 5em;
+      width: 5em;
     }
 
     #right-button {
       cursor: pointer;
-      height: 80px;
+      height: 5em;
       width: auto;
       filter: drop-shadow( 1px 1px 2px rgba(0, 0, 0, .7));
     }
@@ -136,18 +136,13 @@ $carousel-height: 550px;
         list-style: none;
         background-color: #fbfbf8;
         text-align: center;
-        // padding-top: 40px;
         margin: 12px;
-        // grid-row: 1 / span 3;
-        // width: 80%;
-        // height: 480px;
 
         #product-card {
         border-radius: 8px;
         list-style: none;
         background-color: #fbfbf8;
         text-align: center;
-        // padding-top: 40px;
         width: 100%;
         height: 30em;
         }
