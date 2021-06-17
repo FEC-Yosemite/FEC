@@ -122,12 +122,14 @@ class Gallery extends React.Component {
       if (this.state.zoomed === false) {
         prodImage.classList.add('zoomed');
         prodImage.addEventListener('mousemove', this.handleMouseMove);
+        prodImage.style.transition = `none`;
         this.setState({ zoomed: true });
       } else {
         prodImage.classList.remove('zoomed');
         prodImage.removeEventListener('mousemove', this.handleMouseMove);
         this.setState({ zoomed: false });
         prodImage.style.objectPosition = 'center center';
+        prodImage.style.transition = `.6s`;
       }
     }
   }
