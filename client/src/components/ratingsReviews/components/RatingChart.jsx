@@ -34,7 +34,7 @@ class RatingChart extends React.Component {
     let data = this.props.data;
 
     return (
-      <div className="content c-white">
+      <div className="content c-white" role='chart'>
         <ResponsiveContainer height={ 200 } width={ "100%" }>
           <BarChart
             layout="vertical"

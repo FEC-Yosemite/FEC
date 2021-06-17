@@ -588,7 +588,7 @@ class WriteReview extends React.Component {
     if (this.props.show) {
       return (
         <div id='modal-wrapper'>
-          <div id='modal'>
+          <div id='modal' role='modal'>
             <div id='modal-head'>
             <h2>Write Your Review</h2>
             About the { this.props.product }

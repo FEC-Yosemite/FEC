@@ -120,7 +120,7 @@ class ReviewsList extends React.Component {
         <div id='filters'>
           { this.renderFilters() }
         </div>
-        <div id='reviews-list'>
+        <div id='reviews-list' role='reviews-list'>
           { reviewArray.map((review, i) => {
             return <Review review={ review } key={ 'review' + i } interact={ this.props.interact } />
           }) }
