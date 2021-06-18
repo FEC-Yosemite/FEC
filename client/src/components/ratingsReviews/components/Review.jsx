@@ -167,7 +167,7 @@ class Review extends React.Component {
         })} </div>
 
         <p id='review-helpful'>Was this review helpful?
-        <button className='helpful' onClick={ this.handleHelpful }>Yes</button>({ review.helpfulness })
+        <button className='helpful' onClick={ this.handleHelpful }>Yes</button><span>{ review.helpfulness }</span>
         <button className='unhelpful' onClick={ this.handleUnhelpful }>No</button> |
         <button className='report' onClick={ this.handleReport }>Report</button></p>
       </div>
