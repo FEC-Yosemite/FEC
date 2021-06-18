@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon ./server.js",
     "build": "npx webpack -w",
+    "build-prod": "npx webpack --mode=production -w",
     "lint": "./node_modules/.bin/eslint"
   },
   "repository": {
