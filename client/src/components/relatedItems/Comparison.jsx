@@ -14,7 +14,6 @@ class Comparison extends Component {
 
     componentDidMount() {
         this.updateProductFeatures();
-        console.log(`state of features: ${JSON.stringify(this.state.characteristics)}`);
     }
 
     updateProductFeatures() {
@@ -32,7 +31,6 @@ class Comparison extends Component {
             }
             temp[feature][1] = modal_product.features[i].value;
         }
-        console.log('TEMP: ', JSON.stringify(temp));
         this.setState({
             characteristics: JSON.stringify(temp)
         });

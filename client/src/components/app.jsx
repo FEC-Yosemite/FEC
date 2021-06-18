@@ -79,7 +79,6 @@ class App extends React.Component {
   componentDidMount() {
     getReviewMeta(this.state.currentProductId)
       .then(res => {
-        console.log(res.data);
         this.setState({
           meta: res.data
         });
@@ -99,7 +98,6 @@ class App extends React.Component {
 
   toTop() {
     window.scrollTo(0, 0);
-    console.log(`TO TOP`);
   }
 
   render() {
