@@ -8,7 +8,7 @@ const PhotoView = ({ url, close }) => {
       <button id='close-expanded' onClick={ close }><FontAwesomeIcon id='close-expanded' icon={ faArrowLeft } size='2x'></FontAwesomeIcon></button>
       <div id='photo-container'>
         <span className='helper'></span>
-        <img id='expanded-image' src={ url }></img>
+        <img id='expanded-image' alt='user submitted image' src={ url }></img>
       </div>
     </div>
   )

@@ -167,7 +167,7 @@ class Review extends React.Component {
         { this.renderExpanded() }
 
         <div id='review-photos'>{ review.photos.map((photo) => {
-          return <img onClick={ this.handleExpand } src={ photo.url }></img>
+          return <img onClick={ this.handleExpand } alt='user submitted image' src={ photo.url }></img>
         })} </div>
 
         <p id='review-helpful'>Was this review helpful?

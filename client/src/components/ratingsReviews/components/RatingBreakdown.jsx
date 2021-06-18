@@ -33,19 +33,19 @@ class RatingBreakdown extends React.Component {
     let float = avg % 1;
 
     while (stars.length < whole) {
-      stars.push(<img key={ stars.length + 'stars' } src={ star }/>)
+      stars.push(<img key={ stars.length + 'stars' } alt='solid star' src={ star }/>)
     }
 
     if (float > 0 && float <= 0.33) {
-      stars.push(<img key={ stars.length + 'stars' } src={ quarterStar }/>)
+      stars.push(<img key={ stars.length + 'stars' } alt='quarter star' src={ quarterStar }/>)
     } else if (float > 0.33 && float <= 0.67) {
-      stars.push(<img key={ stars.length + 'stars' } src={ starHalf }/>)
+      stars.push(<img key={ stars.length + 'stars' } alt='half star' src={ starHalf }/>)
     } else if (float > 0.67 && float < 1) {
-      stars.push(<img key={ stars.length + 'stars' } src={ threeQuarterStar }/>)
+      stars.push(<img key={ stars.length + 'stars' } alt='three quarter star' src={ threeQuarterStar }/>)
     }
 
     while (stars.length < 5) {
-      stars.push(<img key={ stars.length + 'stars' } src={ starEmpty }/>)
+      stars.push(<img key={ stars.length + 'stars' } alt='star outline' src={ starEmpty }/>)
     }
 
 
