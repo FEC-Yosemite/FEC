@@ -18,7 +18,7 @@ class Overview extends React.Component {
       styles: [],
       syncedStyles: false,
       currentStyle: 0,
-      cart: '',
+      cart: ''
     };
   }
 
