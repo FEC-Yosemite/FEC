@@ -13,6 +13,7 @@ class SortReviews extends React.Component {
 
   handleChange(e) {
     this.props.handleSort(e.target.value);
+    this.props.interact(e.target.outerHTML, 'ratings&reviews')
   }
 
   renderSelect() {
