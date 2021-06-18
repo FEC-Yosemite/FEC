@@ -18,7 +18,7 @@ class Overview extends React.Component {
       styles: [],
       syncedStyles: false,
       currentStyle: 0,
-      cart: '',
+      cart: ''
     };
   }
 
@@ -65,9 +65,7 @@ class Overview extends React.Component {
   }
 
   handleCartAdd(id) {
-    console.log(id)
     addToCart({sku_id: id})
-    .then((res) => console.log(res))
     .catch((err) => console.log('ERROR:', err));
   }
 

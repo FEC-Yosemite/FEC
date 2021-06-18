@@ -47,19 +47,19 @@ class RelatedProductCard extends Component {
         let float = avg % 1;
 
         while (stars.length < whole) {
-            stars.push(<img src={ star }/>)
+            stars.push(<img src={ star } alt="star"/>)
         }
 
         if (float > 0 && float <= 0.33) {
-            stars.push(<img src={ quarterStar }/>)
+            stars.push(<img src={ quarterStar } alt="quarterStar"/>)
         } else if (float > 0.33 && float <= 0.67) {
-            stars.push(<img src={ starHalf }/>)
+            stars.push(<img src={ starHalf } alt="halfStar"/>)
         } else if (float > 0.67 && float < 1) {
-            stars.push(<img src={ threeQuarterStar }/>)
+            stars.push(<img src={ threeQuarterStar } alt="threeQuarterStar"/>)
         }
 
         while (stars.length < 5) {
-            stars.push(<img src={ starEmpty }/>)
+            stars.push(<img src={ starEmpty } alt="emptyStar"/>)
         }
         return stars;
     }
@@ -172,9 +172,9 @@ class RelatedProductCard extends Component {
 
                         {
                         this.state.styles[0].photos[0].thumbnail_url !== null ?
-                        <img id="product-preview" src={this.state.styles[0].photos[0].thumbnail_url} key={this.props.productId} />
+                        <img id="product-preview" alt={this.state.product.name} src={this.state.styles[0].photos[0].thumbnail_url} key={this.props.productId} />
                         :
-                        <img id="product-preview" src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" key={this.props.productId} />
+                        <img id="product-preview" alt={this.state.product.name} src="https://nelowvision.com/wp-content/uploads/2018/11/Picture-Unavailable.jpg" key={this.props.productId} />
                         }
 
                         <p>{this.state.product.category}</p>

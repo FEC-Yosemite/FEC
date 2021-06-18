@@ -43,6 +43,8 @@ class Review extends React.Component {
   }
 
   handleUnhelpful(e) {
+    this.props.interact(e.target.outerHTML, 'ratings&reviews')
+
     if (!this.state.helpful) {
       this.setState({
         helpful: true
@@ -52,6 +54,8 @@ class Review extends React.Component {
   }
 
   handleReport(e) {
+    this.props.interact(e.target.outerHTML, 'ratings&reviews')
+
     if (!this.state.report) {
       reportReview(this.props.review.review_id)
       this.setState({
@@ -163,7 +167,7 @@ class Review extends React.Component {
         { this.renderExpanded() }
 
         <div id='review-photos'>{ review.photos.map((photo) => {
-          return <img onClick={ this.handleExpand } src={ photo.url }></img>
+          return <img onClick={ this.handleExpand } alt='user submitted image' src={ photo.url }></img>
         })} </div>
 
         <p id='review-helpful'>Was this review helpful?

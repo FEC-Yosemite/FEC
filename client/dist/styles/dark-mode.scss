@@ -42,14 +42,18 @@
 
   }
 
-
-
   #product-card, .review {
     background-color: $dark !important;
   }
 
   .helpful, .unhelpful, .report {
     color: gold;
+  }
+
+  #related-items .star-rating img {
+    background-color: #fff;
+    border-radius: 100%;
+    padding: 1px;
   }
 
 

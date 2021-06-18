@@ -79,7 +79,6 @@ class App extends React.Component {
   componentDidMount() {
     getReviewMeta(this.state.currentProductId)
       .then(res => {
-        console.log(res.data);
         this.setState({
           meta: res.data
         });

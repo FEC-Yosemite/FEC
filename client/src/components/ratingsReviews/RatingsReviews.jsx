@@ -120,9 +120,9 @@ class RatingsReviews extends React.Component {
   render() {
     return (
       <div id='ratings-reviews'>
-        <RatingBreakdown reviews={ this.state.reviews } handleFilter={ this.handleFilter }productId={ this.props.productId } meta={ this.props.meta }/>
-        <ProductBreakdown reviews={ this.state.reviews } chars={ this.props.meta.characteristics }/>
-        <SortReviews total={ this.state.total } sort={ this.state.sort } handleSort={ this.handleSort }/>
+        <RatingBreakdown reviews={ this.state.reviews } handleFilter={ this.handleFilter }productId={ this.props.productId } meta={ this.props.meta } interact={ this.props.interact }/>
+        <ProductBreakdown reviews={ this.state.reviews } chars={ this.props.meta.characteristics } interact={ this.props.interact }/>
+        <SortReviews total={ this.state.total } sort={ this.state.sort } handleSort={ this.handleSort } interact={ this.props.interact }/>
         <ReviewsList reviews={ this.state.reviews } sort={ this.state.sort } requests={ this.reviewRequests } chars={ this.props.meta.characteristics } productId={ this.props.productId } interact={ this.props.interact } filter={ this.state.filter } clear={ this.handleClear }/>
       </div>
     )

@@ -16,6 +16,16 @@
     display: block;
   }
 
+  textarea {
+    resize: none;
+    font-family: $body;
+  }
+
+  input {
+    font-family: $body;
+    margin: 2px;
+  }
+
   #rating-breakdown {
 
     h3 {
@@ -659,17 +669,17 @@
           }
         }
 
-        #textarea-p * {
-          vertical-align: middle;
+        // #textarea-p * {
+        //   vertical-align: middle;
 
-          #form-body {
-            margin: 10px;
-            resize: none;
-            min-width: 75%;
-            width: 75%;
-            height: 5em;
-          }
-        }
+        //   #form-body {
+        //     margin: 10px;
+        //     resize: none;
+        //     min-width: 75%;
+        //     width: 75%;
+        //     height: 5em;
+        //   }
+        // }
 
       }
 
