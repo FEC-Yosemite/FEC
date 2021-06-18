@@ -8,10 +8,6 @@ class ComparisonRow extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        console.log('PROPS: ', JSON.stringify(this.props));
-    }
-
     render() {
         return(
             <tr>

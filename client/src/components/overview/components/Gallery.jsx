@@ -112,8 +112,6 @@ class Gallery extends React.Component {
     const prodImage = e.target;
     const left = -(e.offsetX / e.target.width * 100);
     const top = e.offsetY / e.target.height * 100;
-    console.log('LEFT: ', left);
-    console.log('TOP: ', top);
     prodImage.style.objectPosition = `${left}px ${top}%`;
   }
 

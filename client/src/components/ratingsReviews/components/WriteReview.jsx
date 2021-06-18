@@ -103,7 +103,6 @@ class WriteReview extends React.Component {
     }
 
     if (data.photos.length > 5) {
-      console.log('Too many Photos!')
       photoLimit = false
     }
 
@@ -131,7 +130,6 @@ class WriteReview extends React.Component {
       })
 
       addReview(data)
-        .then(res => console.log('Posted!'))
         .then(() => this.props.requests())
         .then(() => this.handleClose())
         .catch(err => {
