@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-class Carousel extends Component {
+class Outfit extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -93,4 +93,4 @@ class Carousel extends Component {
     }
 }
 
-export default Carousel;
+export default Outfit;
