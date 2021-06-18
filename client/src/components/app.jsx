@@ -99,6 +99,7 @@ class App extends React.Component {
 
   toTop() {
     window.scrollTo(0, 0);
+    console.log(`TO TOP`);
   }
 
   render() {

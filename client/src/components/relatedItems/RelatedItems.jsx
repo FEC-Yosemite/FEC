@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import RelatedProductsList from './RelatedProductsList.jsx';
 import Comparison from './Comparison.jsx';
-import Carousel from './Carousel.jsx';
+import Outfit from './Outfit.jsx';
 
 import { getRelatedProducts } from  '../../requests.js';
 import { getProductById } from  '../../requests.js';
@@ -80,9 +80,9 @@ class RelatedItems extends Component {
                 this.state.finished ?
                 <div>
                 <h2 id="carousel-header">Related Products</h2>
-                <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} />
+                <RelatedProductsList productId={this.props.productId} productsList={this.state.productsList} showModal={this.showModal} updateCurrentProduct={this.props.updateCurrentProduct} interact={this.props.interact} toTop={this.props.toTop} />
                 <h2 id="carousel-header">My Outfit</h2>
-                <Carousel productId={this.props.productId} interact={this.props.interact} updateCurrentProduct={this.props.updateCurrentProduct} addCurrentToOutfits={this.props.addCurrentToOutfits} removeFromOutfit={this.props.removeFromOutfit} outfits_list={[0, ...this.props.outfits_list]} />
+                <Outfit productId={this.props.productId} interact={this.props.interact} updateCurrentProduct={this.props.updateCurrentProduct} addCurrentToOutfits={this.props.addCurrentToOutfits} removeFromOutfit={this.props.removeFromOutfit} outfits_list={[0, ...this.props.outfits_list]} toTop={this.props.toTop} />
                 </div>
                 :
                 <h1>Loading</h1>
