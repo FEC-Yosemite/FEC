@@ -43,6 +43,8 @@ class Review extends React.Component {
   }
 
   handleUnhelpful(e) {
+    this.props.interact(e.target.outerHTML, 'ratings&reviews')
+
     if (!this.state.helpful) {
       this.setState({
         helpful: true
@@ -52,6 +54,8 @@ class Review extends React.Component {
   }
 
   handleReport(e) {
+    this.props.interact(e.target.outerHTML, 'ratings&reviews')
+
     if (!this.state.report) {
       reportReview(this.props.review.review_id)
       this.setState({

@@ -19,6 +19,8 @@ class ReviewsList extends React.Component {
   }
 
   handleMore(rem) {
+    this.props.interact(e.target.outerHTML, 'ratings&reviews')
+
     if (rem === 1) {
       this.setState({
         renderedReviews: this.state.renderedReviews + 1
@@ -54,6 +56,8 @@ class ReviewsList extends React.Component {
   }
 
   handleWrite() {
+    this.props.interact(e.target.outerHTML, 'ratings&reviews')
+
     this.setState({
       write: true
     })
@@ -128,7 +132,7 @@ class ReviewsList extends React.Component {
         </div>
           { remainingReviews > 0 ? <button id='more-reviews' onClick={ () => {this.handleMore(remainingReviews)} }>MORE REVIEWS</button> : null }
           <button id='write-review' onClick={ this.handleWrite }>ADD A REVIEW</button>
-          <WriteReview show={ this.state.write } requests={ this.props.requests } productId={ this.props.productId } chars={ this.props.chars } product={ this.state.product } close={ this.handleClose }/>
+          <WriteReview show={ this.state.write } requests={ this.props.requests } productId={ this.props.productId } chars={ this.props.chars } product={ this.state.product } close={ this.handleClose } />
       </div>
     )
     : (
