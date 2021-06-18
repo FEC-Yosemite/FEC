@@ -107,7 +107,6 @@ class WriteReview extends React.Component {
     }
 
     if (!this.validateEmail(data.email) && data.email.length > 0) {
-      complete = false;
       this.setState({
         badEmail: true
       })
@@ -125,8 +124,8 @@ class WriteReview extends React.Component {
 
     if (complete && photoLimit) {
       this.setState({
-        incomplete: false,
-        badEmail: false
+        incomplete: false
+        // badEmail: false
       })
 
       addReview(data)
@@ -552,6 +551,8 @@ class WriteReview extends React.Component {
   completeCheck() {
     if (this.state.incomplete) {
       return <p id='form-incomplete'>Please fill out all fields</p>
+    } else if (this.state.badEmail) {
+      return <p id='form-incomplete'>Please enter a valid email address</p>
     } else if (this.state.maxPhotos) {
       return <p id='form-incomplete'>Photo limit exceeded (5)</p>
     } else {
@@ -561,7 +562,7 @@ class WriteReview extends React.Component {
 
   emailCheck() {
     if (this.state.badEmail) {
-      return <p id='form-bad-email'>Please enter a valid email address</p>
+
     } else {
       return null;
     }
@@ -623,7 +624,7 @@ class WriteReview extends React.Component {
                     <input id='form-name' type='text' name='name' onChange={ this.handleInputChange }></input>
 
                     <p id='p-email'>Email:</p>
-                    <input id='form-email' type='email' name='email' onChange={ this.handleInputChange }></input> { this.emailCheck() }
+                    <input id='form-email' type='email' name='email' onChange={ this.handleInputChange }></input>
 
 
                     <p id='p-summary'>Summary:</p>
@@ -639,7 +640,7 @@ class WriteReview extends React.Component {
                     </div>
                 </div>
               </div>
-
+              {/* { this.emailCheck() } */}
               { this.completeCheck() }
             <button id='form-submit' onClick={ this.handleSubmit }>Submit</button>
             </form>
