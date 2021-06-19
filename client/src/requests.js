@@ -1,5 +1,7 @@
 const axios = require('axios');
 const _ = require('underscore');
+const { protocol, hostname, port } = require('../../config.js');
+const url = `${protocol}://${hostname}:${port}`;
 
 /*
 
@@ -21,7 +23,7 @@ All functions return a promise:
 function originalGetProducts(page, count) {
   var options = {
     method: 'get',
-    url: 'http://localhost:3000/products',
+    url: `${url}/products`,
     params: {
       page: page,
       count: count
@@ -37,7 +39,7 @@ export var getProducts = _.memoize(originalGetProducts);
 function originalGetProductById(id) {
   var options = {
     method: 'get',
-    url: `http://localhost:3000/products/${id}`,
+    url: `${url}/products/${id}`,
   }
 
 
@@ -50,7 +52,7 @@ export var getProductById = _.memoize(originalGetProductById);
 function originalGetProductStyles(id) {
   var options = {
     method: 'get',
-    url: `http://localhost:3000/products/${id}/styles`,
+    url: `${url}/products/${id}/styles`
   }
 
   return axios(options);
@@ -62,7 +64,7 @@ export var getProductStyles = _.memoize(originalGetProductStyles);
 function originalGetRelatedProducts(id) {
   var options = {
     method: 'get',
-    url: `http://localhost:3000/products/${id}/related`,
+    url: `${url}/products/${id}/related`,
   }
 
   return axios(options);
@@ -75,7 +77,7 @@ export var getRelatedProducts = _.memoize(originalGetRelatedProducts);
 export function getReviews(id, page, count, sort) {
   var options = {
     method: 'get',
-    url: `http://localhost:3000/reviews`,
+    url: `${url}/reviews`,
     params: {
       product_id: id,
       page: page,
@@ -90,7 +92,7 @@ export function getReviews(id, page, count, sort) {
 export function getReviewMeta(id) {
   var options = {
     method: 'get',
-    url: `http://localhost:3000/reviews/meta`,
+    url: `${url}/reviews/meta`,
     params: {
       product_id: id,
     }
@@ -104,7 +106,7 @@ export function getReviewMeta(id) {
 export function addReview(data) {
   var options = {
     method: 'post',
-    url: `http://localhost:3000/reviews`,
+    url: `${url}/reviews`,
     data: data
   }
 
@@ -114,7 +116,7 @@ export function addReview(data) {
 export function markAsHelpful(reviewid) {
   var options = {
     method: 'put',
-    url: `http://localhost:3000/reviews/${reviewid}/helpful`,
+    url: `${url}/reviews/${reviewid}/helpful`,
   }
 
   return axios(options);
@@ -123,7 +125,7 @@ export function markAsHelpful(reviewid) {
 export function reportReview(reviewid) {
   var options = {
     method: 'put',
-    url: `http://localhost:3000/reviews/${reviewid}/report`,
+    url: `${url}/reviews/${reviewid}/report`,
   }
 
   return axios(options);
@@ -134,7 +136,7 @@ export function reportReview(reviewid) {
 export function getCart() {
   var options = {
     method: 'get',
-    url: `http://localhost:3000/cart`,
+    url: `${url}/cart`,
   }
 
   return axios(options);
@@ -145,7 +147,7 @@ export function getCart() {
 export function addToCart(data) {
   var options = {
     method: 'post',
-    url: `http://localhost:3000/cart`,
+    url: `${url}/cart`,
     data: data
   }
 
@@ -157,7 +159,7 @@ export function addToCart(data) {
 export function addInteraction(data) {
   var options = {
     method: 'post',
-    url: 'http://localhost:3000/interactions',
+    url: `${url}/interactions`,
     data: data
   }
 

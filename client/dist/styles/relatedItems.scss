@@ -191,6 +191,7 @@ $carousel-height: 550px;
 }
 
 .modal {
+    overflow-y: auto;
     position: fixed;
     left: 35vw;
     top: 10vh;

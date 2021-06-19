@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const { port } = require('./config.js')
 const api = require('./apiRequests.js');
 
 app.use(express.static('client/dist'));
