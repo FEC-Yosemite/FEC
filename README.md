@@ -13,7 +13,7 @@ To make use of this repository on your localhost or deployed server you must tak
           const port = '****'; // add host port here
           module.exports = { key, protocol, hostname, port };
           
-4. Run: npx webpack --mode=production -w
+4. Run: npx webpack --mode=production
 5. Run: npm start
 6. Navigate to IP to visit your site
 7. Enjoy, flourish and prosper
