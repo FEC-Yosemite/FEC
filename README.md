@@ -1,4 +1,4 @@
-# FEC
+# Yosemite Outfitters
 This is the repository for the FEC project by team Yosemite
 
 To make use of this repository on your localhost or deployed server you must take the following steps:
